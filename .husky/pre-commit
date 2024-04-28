@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-
 echo "Ejecutando Prettier ..."
 if ! npx prettier --check "**/*.{js,jsx,ts,tsx,json,md,vue}" ; then
   echo "Error: El código no está formateado correctamente. Por favor, ejecuta 'npm run format' para corregirlo antes de realizar un commit."

@@ -1,13 +1,8 @@
 {
-  "extends": [
-    "stylelint-config-recommended-vue/scss"
-  ],
+  "extends": ["stylelint-config-recommended-vue/scss"],
   "overrides": [
     {
-      "files": [
-        "*.vue",
-        "**/*.vue"
-      ],
+      "files": ["*.vue", "**/*.vue"],
       "customSyntax": "postcss-html",
       "rules": {
         "unit-allowed-list": [
@@ -29,7 +24,6 @@
         "scss/no-global-function-names": null,
         "scss/at-extend-no-missing-placeholder": null,
         "rule-empty-line-before": null,
-        "block-opening-brace-space-before": "always",
         "font-family-no-missing-generic-family-keyword": null,
         "declaration-no-important": true
       }

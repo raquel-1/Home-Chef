@@ -7,10 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint **/*.{js,vue}",
+    "lint": "eslint **/*.{js,vue} --fix",
     "scss": "sass --watch assets/styles/scss/:assets/styles/css",
     "format": "prettier --write \"**/*.{js,ts,vue,json,css,md}\"",
-    "prepare": "husky i",
+    "prepare": "husky",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
     "pre-commit": "npm run commitmsg",
     "styles": "stylelint \"**/*.vue\" --fix"
@@ -20,6 +20,8 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@rushstack/eslint-patch": "^1.8.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",

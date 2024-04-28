@@ -9,5 +9,6 @@
 <style lang="scss" scoped>
 .header {
   line-height: 1.5;
+  background-color: aqua;
 }
 </style>
