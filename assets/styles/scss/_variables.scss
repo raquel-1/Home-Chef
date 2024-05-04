@@ -6,10 +6,11 @@ $colors: (
   'c-medium-grey': #869fb2,
   'c-form-grey': #616161,
   'c-light-blue': #d2e3fc,
+  'c-back': rgb(48, 48, 48),
   'c-black': #000000,
   'c-red': red,
   'c-graphite': #1a1a1a,
-  'c-principal-color': #009ba2,
+  'c-principal-color': rgb(141, 37, 141),
   'c-transparent': #00000000,
   'c-facebook': #1877f2,
   'c-linkedin': #0077b5,
@@ -40,10 +41,15 @@ $font-size: (
   'fs-titular-big': 4rem,
 );
 
+$heights: (
+  'h-navbar': 5rem,
+);
+
 $sizes: (
   's-navbar': 120rem,
   's-body': 120rem,
   's-general-padding': 0 8rem,
+  's-padding-nav': 0 3rem,
   's-general-padding-mobile': 0 1rem,
   's-margin-top': 10rem 0 0 0,
   's-margin-top-banner': 5rem 0 0 0,

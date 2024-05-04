@@ -166,7 +166,7 @@ body {
   overflow-x: hidden;
   max-width: map-get($map: $sizes, $key: s-body);
   margin: auto;
-  background-color: map-get($map: $colors, $key: c-black);
+  background-color: map-get($map: $colors, $key: c-back);
   font-family: map-get($map: $fonts, $key: f-font-book);
   color: map-get($map: $colors, $key: c-white);
   min-height: 100vh;
