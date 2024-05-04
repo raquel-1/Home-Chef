@@ -10,10 +10,8 @@
     "lint": "eslint **/*.{js,vue} --fix",
     "scss": "sass --watch assets/styles/scss/:assets/styles/css",
     "format": "prettier --write \"**/*.{js,ts,vue,json,css,md}\"",
-    "prepare": "husky",
-    "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
-    "pre-commit": "npm run commitmsg",
-    "styles": "stylelint \"**/*.vue\" --fix"
+    "styles": "stylelint \"**/*.vue\" --fix",
+    "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
     "pinia": "^2.1.7",
@@ -29,6 +27,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-vue": "^9.25.0",
     "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "postcss-html": "^1.6.0",
     "postcss-sass": "^0.5.0",
     "prettier": "^3.2.5",

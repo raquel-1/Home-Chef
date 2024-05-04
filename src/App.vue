@@ -1,7 +1,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 
-const RecipeInfo = defineAsyncComponent(() => import('@/components/RecipeInfo.vue'))
+const RecipeInfo = defineAsyncComponent(() => import('@/src/components/RecipeInfo.vue'))
 </script>
 
 <template>
