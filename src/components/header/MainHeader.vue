@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref, computed } from 'vue'
 const Logo = defineAsyncComponent(() => import('@/assets/svgs/Logo.vue'))
 const MainHeaderNav = defineAsyncComponent(
   () => import('@/src/components/header/MainHeaderNav.vue'),
@@ -37,12 +37,30 @@ const activeItem = ref('home')
   background-color: map-get($map: $colors, $key: c-back);
   border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
   padding: map-get($map: $sizes, $key: s-padding-nav);
+  @include responsive(64em) {
+    padding: 0 1em;
+  }
+  @include responsive(43em) {
+    padding: 2em;
+  }
   &__logo {
     @include flex(row, center, center);
     cursor: pointer;
     .name-app {
       font-size: map-get($map: $font-size, $key: fs-extra-big);
       margin-left: 0.5em;
+      @include responsive(64em) {
+        font-size: map-get($map: $font-size, $key: fs-big);
+      }
+      @include responsive(50em) {
+        width: 3.5em;
+        margin-left: 0.3em;
+        text-align: start;
+        font-size: 1.5rem;
+      }
+      @include responsive(43em) {
+        width: 6em;
+      }
     }
   }
 }

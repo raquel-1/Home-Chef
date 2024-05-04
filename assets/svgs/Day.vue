@@ -14,9 +14,9 @@
 
 <style scoped lang="scss">
 .icon {
-  width: 3em; /* Tamaño del icono */
-  height: 3em;
-  stroke: map-get($map: $colors, $key: c-principal-color);
-  fill: map-get($map: $colors, $key: c-principal-color);
+  width: 2.5em; /* Tamaño del icono */
+  height: 2.5em;
+  stroke: map-get($map: $colors, $key: c-white);
+  fill: map-get($map: $colors, $key: c-white);
 }
 </style>

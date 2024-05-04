@@ -8,11 +8,11 @@
 
 <style scoped lang="scss">
 .icon {
-  width: 2.5em; /* Tamaño del icono */
-  height: 2.5em;
-  stroke: map-get($map: $colors, $key: c-principal-color);
+  width: 2em; /* Tamaño del icono */
+  height: 2em;
+  stroke: map-get($map: $colors, $key: c-white);
   path {
-    fill: map-get($map: $colors, $key: c-principal-color);
+    fill: map-get($map: $colors, $key: c-white);
   }
 }
 </style>

@@ -42,6 +42,13 @@ const handleClick = (item) => {
   &__nav {
     width: 15em;
     height: 100%;
+    @include responsive(64em) {
+      width: 11em;
+      height: 100%;
+    }
+    @include responsive(43em) {
+      display: none;
+    }
     .nav-list {
       @include flex(row, center, space-between);
       height: 100%;
