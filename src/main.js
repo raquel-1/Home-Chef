@@ -10,12 +10,11 @@ const app = createApp(App)
 app.use(createPinia())
 
 app.mount('#app')
-
 /*
 const recipeStore = useRecipeStore()
 
 watchEffect(() => {
   fetchRecipes(recipeStore)
 })
-console.log(recipeStore.data)
+console.log(recipeStore)
 */

@@ -8,9 +8,12 @@ const MainHeader = defineAsyncComponent(
 </script>
 
 <template>
+  <!--
   <MainHeader></MainHeader>
+
+  -->
   <section>
-    <h1>hello</h1>
+    <RecipeInfo />
   </section>
 </template>
 

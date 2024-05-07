@@ -1,25 +1,25 @@
-// fetchRecipes.js
 import { watchEffect } from 'vue'
 
 export function fetchRecipes(store) {
   const fetchData = async () => {
     try {
-      const API_KEY = 'eb620343b4bb4607a9669db3bcbb609d'
-      const response = await fetch(
-        `https://api.spoonacular.com/recipes/random?apiKey=${API_KEY}&number=1`,
-      )
+      const APP_ID = 'cc8cc6be'
+      const APP_KEY = '4780bae104c5949415d89b10128fa192'
+      const query = 'cake'
+      const apiUrl = `https://api.edamam.com/search?q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}`
+
+      const response = await fetch(apiUrl)
+
       if (!response.ok) {
         throw new Error('Hubo un problema al solicitar los datos')
       }
+
       const data = await response.json()
-      store.setData(data)
-      console.log(data) // si veo datos
+      store.setData(data.hits)
     } catch (error) {
       store.setError(error)
-      throw new Error(`Error al obtener recetas: ${error}`)
     }
   }
-  watchEffect(() => {
-    fetchData()
-  })
+
+  fetchData()
 }
