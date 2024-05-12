@@ -1,6 +1,5 @@
 <script setup>
 import { defineAsyncComponent, ref, computed } from 'vue'
-import { useThemeStore } from '@/stores/theme'
 import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 
 const InsideNav = defineAsyncComponent(() => import('@/components/navBar/InsideNav.vue'))
@@ -27,11 +26,6 @@ const changeResponsiveNav = () => {
 const closeResponsiveNav = () => {
   showResponsiveNav.value = false
 }
-
-const themeStore = useThemeStore()
-
-// animation
-const itemsState = ref(Array(4).fill(false))
 </script>
 
 <template>
@@ -53,6 +47,7 @@ const itemsState = ref(Array(4).fill(false))
 
 <style lang="scss" scoped>
 /** 50em aparecera el hamburguesa */
+/** 500px el nav abajo falta nav a la izquierda cuando movil horizontal */
 .list-enter-active,
 .list-leave-active {
   transition:
@@ -82,6 +77,14 @@ const itemsState = ref(Array(4).fill(false))
   }
   @include responsive(43em) {
     padding: 2em;
+  }
+  @include responsive(31.25em) {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+    border-bottom: none;
   }
   &__logo {
     @include flex(row, center, center);

@@ -10,25 +10,16 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 <template>
   <article class="nav__responsive">
     <ul class="nav-responsive">
-      <li
-        class="nav-responsive__item nav-responsive__item--direction animate-item"
-        style="animation-delay: 0s"
-      >
+      <li class="nav-responsive__item nav-responsive__item--direction animate-item">
         <a><h2>Home</h2></a>
       </li>
-      <li
-        class="nav-responsive__item nav-responsive__item--direction animate-item"
-        style="animation-delay: 0.3s"
-      >
+      <li class="nav-responsive__item nav-responsive__item--direction animate-item">
         <a><h2>Recipes</h2></a>
       </li>
-      <li class="nav-responsive__item animate-item" style="animation-delay: 0.6s">
+      <li class="nav-responsive__item animate-item">
         <ThemeButtons />
       </li>
-      <li
-        class="nav-responsive__item nav-responsive__item--direction animate-item"
-        style="animation-delay: 0.9s"
-      >
+      <li class="nav-responsive__item nav-responsive__item--direction animate-item">
         <Saved />
         <h2>Saved</h2>
       </li>
@@ -50,17 +41,6 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
   }
 }
 
-@keyframes slideUpAndFadeOut {
-  0% {
-    transform: translateY(100%);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 0;
-  }
-}
-
 .nav {
   &__responsive {
     visibility: hidden;
@@ -70,18 +50,22 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       top: map-get($map: $heights, $key: h-navbar);
       right: 0;
     }
-    .disappear {
-      animation: slideUpAndFadeOut 0.3s ease-out forwards;
+    @include responsive(31.25em) {
+      bottom: map-get($map: $heights, $key: h-navbar);
+      top: auto;
+      right: 0;
     }
     .nav-responsive {
       width: 10em;
       @include flex(column);
+
+      @include responsive(31.25em) {
+        @include flex(column-reverse);
+      }
       .animate-item {
         visibility: hidden;
         opacity: 0;
-        // Aparición
         animation: slideInFromRight 0.3s ease-out forwards;
-        // Desaparición
       }
 
       .animate-item:nth-child(2) {
@@ -103,6 +87,12 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         width: 100%;
         @include flex(row, center, space-evenly);
         min-height: 4em;
+        @include responsive(31.25em) {
+          border-left: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+          border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+          border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+          border-bottom: none;
+        }
         &--direction {
           cursor: pointer;
         }
