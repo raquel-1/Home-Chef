@@ -10,7 +10,6 @@
 .icon {
   width: 2em; /* Tamaño del icono */
   height: 2em;
-
   path {
     fill: map-get($map: $colors, $key: c-white);
   }

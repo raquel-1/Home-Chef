@@ -15,8 +15,8 @@
 
 <style scoped lang="scss">
 .icon {
-  width: 3.5em; /* Tamaño del icono */
-  height: 3.5em;
+  width: 3.9em; /* Tamaño del icono */
+  height: 3.9em;
 
   path {
     fill: map-get($map: $colors, $key: c-principal-color);

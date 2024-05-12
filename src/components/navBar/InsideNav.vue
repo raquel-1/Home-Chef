@@ -17,7 +17,7 @@ const handleClick = (item) => {
 </script>
 
 <template>
-  <nav class="header__nav">
+  <div class="nav__nav">
     <ul class="nav-list">
       <li
         class="nav-list__item"
@@ -34,19 +34,24 @@ const handleClick = (item) => {
         <a class="nav-list__item--recipes"><h2>Recipes</h2></a>
       </li>
     </ul>
-  </nav>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.header {
+.nav {
   &__nav {
-    width: 15em;
+    width: 17em;
     height: 100%;
-    @include responsive(64em) {
-      width: 11em;
-      height: 100%;
+    @include responsive(71.87em) {
+      width: 14.5em;
     }
-    @include responsive(43em) {
+    @include responsive() {
+      width: 13em;
+    }
+    @include responsive(56.25em) {
+      width: 11em;
+    }
+    @include responsive(50em) {
       display: none;
     }
     .nav-list {

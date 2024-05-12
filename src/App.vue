@@ -1,28 +1,24 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
+import { useThemeStore } from '@/stores/theme'
 
-const RecipeInfo = defineAsyncComponent(() => import('@/src/components/RecipeInfo.vue'))
-const MainHeader = defineAsyncComponent(
-  () => import('@/src/components/header/MainHeader.vue'),
+const RecipeInfo = defineAsyncComponent(() => import('@/components/RecipeInfo.vue'))
+const MainNavBar = defineAsyncComponent(
+  () => import('@/components/navBar/MainNavBar.vue'),
 )
+
+const themeStore = useThemeStore()
 </script>
 
 <template>
-  <!--
-  <MainHeader></MainHeader>
+  <MainNavBar></MainNavBar>
 
-  -->
-  <section>
-    <RecipeInfo />
-  </section>
+  <section>{{ themeStore.theme }}</section>
 </template>
 
 <style lang="scss" scoped>
-.header {
-  line-height: 1.5;
-}
 section {
-  height: 100vh;
+  height: 200vh;
   margin-top: map-get($map: $heights, $key: h-navbar);
 }
 </style>
