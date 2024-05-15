@@ -4,6 +4,12 @@
   }
 }
 
+@mixin responsiveH($medida: 64em) {
+  @media screen and (max-height: $medida) {
+    @content;
+  }
+}
+
 @mixin flex($direction: row, $align_items: center, $justify_content: center) {
   display: flex;
   flex-direction: $direction;

@@ -1,5 +1,34 @@
+<script setup>
+const props = defineProps({
+  fill: {
+    type: String,
+    default: '#ffffff',
+  },
+  stroke: {
+    type: String,
+    default: '#ffffff',
+  },
+  height: {
+    type: String,
+    default: '2.5em',
+  },
+  width: {
+    type: String,
+    default: '2.5em',
+  },
+})
+</script>
+
 <template>
-  <svg class="icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    class="icon"
+    :fill="fill"
+    :stroke="stroke"
+    :height="height"
+    :width="width"
+    viewBox="0 0 64 64"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <circle cx="32" cy="32" r="15" />
     <line x1="32" y1="8" x2="32" y2="16" />
     <line x1="32" y1="56" x2="32" y2="48" />
@@ -12,11 +41,4 @@
   </svg>
 </template>
 
-<style scoped lang="scss">
-.icon {
-  width: 2.5em; /* Tamaño del icono */
-  height: 2.5em;
-  stroke: map-get($map: $colors, $key: c-white);
-  fill: map-get($map: $colors, $key: c-white);
-}
-</style>
+<style scoped lang="scss"></style>

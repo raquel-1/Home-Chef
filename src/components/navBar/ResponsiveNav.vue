@@ -19,8 +19,10 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       <li class="nav-responsive__item animate-item">
         <ThemeButtons />
       </li>
-      <li class="nav-responsive__item nav-responsive__item--direction animate-item">
-        <Saved />
+      <li
+        class="nav-responsive__item nav-responsive__item--direction nav-responsive__item--last animate-item"
+      >
+        <Saved :width="'2em'" :height="'2em'" />
         <h2>Saved</h2>
       </li>
     </ul>
@@ -40,6 +42,20 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
     visibility: visible;
   }
 }
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: visible;
+    z-index: -1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    z-index: 0;
+  }
+}
 
 .nav {
   &__responsive {
@@ -55,6 +71,13 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       top: auto;
       right: 0;
     }
+    @include responsiveH(31.25em) {
+      bottom: auto;
+      top: 0;
+      right: auto;
+      left: map-get($map: $heights, $key: h-navbar);
+      visibility: visible;
+    }
     .nav-responsive {
       width: 10em;
       @include flex(column);
@@ -66,6 +89,11 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         visibility: hidden;
         opacity: 0;
         animation: slideInFromRight 0.3s ease-out forwards;
+        background-color: map-get($map: $colors, $key: 'c-black');
+        @include responsiveH(31.25em) {
+          visibility: visible;
+          animation: slideInFromLeft 0.3s ease-out forwards;
+        }
       }
 
       .animate-item:nth-child(2) {
@@ -93,8 +121,17 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
           border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-bottom: none;
         }
+        @include responsiveH(31.25em) {
+          border-left: none;
+          border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+          border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+          border-bottom: none;
+        }
         &--direction {
           cursor: pointer;
+        }
+        &--last {
+          border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
         }
       }
     }

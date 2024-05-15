@@ -156,7 +156,6 @@ td {
 
 /* Evitamos problemas con los SVG */
 svg {
-  width: 100%;
   display: block;
   fill: currentColor;
 }
@@ -173,6 +172,9 @@ body {
   font-size: 100%;
   /* opcional */
   hyphens: auto;
+  @include responsiveH(31.25em) {
+    margin-left: map-get($map: $heights, $key: h-navbar);
+  }
 }
 
 /** Barra Scroll **/

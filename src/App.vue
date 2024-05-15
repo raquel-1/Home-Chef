@@ -6,19 +6,22 @@ const RecipeInfo = defineAsyncComponent(() => import('@/components/RecipeInfo.vu
 const MainNavBar = defineAsyncComponent(
   () => import('@/components/navBar/MainNavBar.vue'),
 )
+const Header = defineAsyncComponent(() => import('@/components/header/Header.vue'))
 
 const themeStore = useThemeStore()
 </script>
 
 <template>
   <MainNavBar></MainNavBar>
-
+  <Header />
   <section>{{ themeStore.theme }}</section>
 </template>
 
 <style lang="scss" scoped>
 section {
   height: 200vh;
-  margin-top: map-get($map: $heights, $key: h-navbar);
+  @include responsive(31.25em) {
+    margin-top: 0;
+  }
 }
 </style>

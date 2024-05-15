@@ -31,7 +31,7 @@ const closeResponsiveNav = () => {
 <template>
   <nav class="nav">
     <button class="nav__logo">
-      <Logo />
+      <Logo :width="'3.9em'" :height="'3.9em'" />
       <h1 class="name-app">Home Chef</h1>
     </button>
 
@@ -47,7 +47,7 @@ const closeResponsiveNav = () => {
 
 <style lang="scss" scoped>
 /** 50em aparecera el hamburguesa */
-/** 500px el nav abajo falta nav a la izquierda cuando movil horizontal */
+/** 31.25em el nav abajo falta nav a la izquierda cuando movil horizontal */
 .list-enter-active,
 .list-leave-active {
   transition:
@@ -58,6 +58,9 @@ const closeResponsiveNav = () => {
 .list-leave-to {
   opacity: 0;
   transform: translateX(100%);
+  @include responsiveH(31.25em) {
+    transform: translateY(-100%);
+  }
 }
 
 .nav {
@@ -68,7 +71,7 @@ const closeResponsiveNav = () => {
   font-family: map-get($map: $fonts, $key: f-font-bold);
   position: fixed;
   top: 0;
-  z-index: 5;
+  z-index: 10;
   background-color: map-get($map: $colors, $key: c-black);
   border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
   padding: map-get($map: $sizes, $key: s-padding-nav);
@@ -86,9 +89,25 @@ const closeResponsiveNav = () => {
     border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
     border-bottom: none;
   }
+  @include responsiveH(31.25em) {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    height: 100%;
+    width: map-get($map: $heights, $key: h-navbar);
+    @include flex(column, center, space-between);
+    border: none;
+    border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+    padding-bottom: 1em;
+  }
   &__logo {
-    @include flex(row, center, center);
+    @include flex();
     cursor: pointer;
+    @include responsiveH(31.25em) {
+      @include flex(column);
+      margin-top: 1em;
+    }
     .name-app {
       font-size: map-get($map: $font-size, $key: fs-extra-big);
       margin-left: 0.5em;
@@ -100,11 +119,24 @@ const closeResponsiveNav = () => {
         text-align: start;
         font-size: 1.5rem;
       }
+      @include responsiveH(31.25em) {
+        transform: rotate(-90deg);
+        margin: 0;
+        padding: 0;
+        margin-top: 1em;
+        border: none;
+      }
     }
   }
   &__responsive {
     display: none;
     @include responsive(50em) {
+      display: block;
+      position: absolute;
+      top: map-get($map: $heights, $key: h-navbar);
+      right: 0;
+    }
+    @include responsiveH(31.25em) {
       display: block;
       position: absolute;
       top: map-get($map: $heights, $key: h-navbar);

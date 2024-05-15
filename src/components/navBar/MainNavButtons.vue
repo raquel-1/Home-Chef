@@ -13,7 +13,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       <ThemeButtons />
     </article>
     <button class="saved">
-      <Saved />
+      <Saved :width="'2em'" :height="'2em'" />
       <p>Saved</p>
     </button>
   </div>
@@ -29,6 +29,9 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       width: 17em;
     }
     @include responsive(50em) {
+      display: none;
+    }
+    @include responsiveH(31.25em) {
       display: none;
     }
     article {

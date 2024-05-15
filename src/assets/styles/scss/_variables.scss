@@ -11,6 +11,7 @@ $colors: (
   'c-red': red,
   'c-graphite': #1a1a1a,
   'c-principal-color': rgb(248, 0, 186),
+  'c-transparent-principal-color': rgba(248, 0, 186, 0.493),
   'c-transparent': #00000000,
   'c-facebook': #1877f2,
   'c-linkedin': #0077b5,
@@ -42,11 +43,11 @@ $font-size: (
 );
 
 $heights: (
-  'h-navbar': 6rem,
+  'h-navbar': 6em,
 );
 
 $sizes: (
-  's-navbar': 120rem,
+  's-navbar': 120em,
   's-body': 120rem,
   's-general-padding': 0 8rem,
   's-padding-nav': 0 3rem,

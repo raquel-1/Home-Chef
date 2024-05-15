@@ -54,6 +54,9 @@ const handleClick = (item) => {
     @include responsive(50em) {
       display: none;
     }
+    @include responsiveH(31.25em) {
+      display: none;
+    }
     .nav-list {
       @include flex(row, center, space-between);
       height: 100%;
