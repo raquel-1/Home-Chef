@@ -35,4 +35,11 @@ const props = defineProps({
   </svg>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.svg-light {
+  stroke: map-get($map: $colors, $key: c-black);
+  path {
+    fill: map-get($map: $colors, $key: c-black);
+  }
+}
+</style>

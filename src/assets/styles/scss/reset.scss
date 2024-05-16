@@ -252,3 +252,22 @@ body {
   visibility: hidden;
   opacity: 0;
 }
+
+// theme styles
+.theme-light {
+  background-color: white;
+  color: black;
+}
+
+.theme-dark {
+  background-color: black;
+  color: white;
+}
+
+.svg-light {
+  color: black;
+}
+
+.svg-dark {
+  color: white;
+}

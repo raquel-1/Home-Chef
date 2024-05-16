@@ -1,12 +1,16 @@
 <script setup>
 import { useThemeStore } from '@/stores/theme'
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, computed } from 'vue'
 import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
 
 const Day = defineAsyncComponent(() => import('@/assets/svgs/Day.vue'))
 const Night = defineAsyncComponent(() => import('@/assets/svgs/Night.vue'))
 
 const themeStore = useThemeStore()
+
+const themeClass = computed(() => {
+  return themeStore.theme === LIGHT_MODE ? 'svg-light' : 'svg-dark'
+})
 
 const changeTheme = () => {
   themeStore.changeTheme()
@@ -19,14 +23,14 @@ const changeTheme = () => {
     :class="{ 'time--active': themeStore.theme === LIGHT_MODE }"
     @click="changeTheme"
   >
-    <Day :width="'2.5em'" :height="'2.5em'" />
+    <Day :class="themeClass" :width="'2.5em'" :height="'2.5em'" />
   </button>
   <button
     class="time"
     :class="{ 'time--active': themeStore.theme === DARK_MODE }"
     @click="changeTheme"
   >
-    <Night :width="'2.5em'" :height="'2.5em'" />
+    <Night :class="themeClass" :width="'2.5em'" :height="'2.5em'" />
   </button>
 </template>
 

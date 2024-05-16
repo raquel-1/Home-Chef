@@ -1,5 +1,13 @@
 <script setup>
+import { useThemeStore } from '@/stores/theme'
 import { defineAsyncComponent, ref, computed } from 'vue'
+import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
+
+const themeStore = useThemeStore()
+
+const themeClass = computed(() => {
+  return themeStore.theme === LIGHT_MODE ? 'theme-light' : 'theme-dark'
+})
 
 const ThemeButtons = defineAsyncComponent(
   () => import('@/components/navBar/ThemeButtons.vue'),
@@ -10,16 +18,23 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 <template>
   <article class="nav__responsive">
     <ul class="nav-responsive">
-      <li class="nav-responsive__item nav-responsive__item--direction animate-item">
+      <li
+        :class="themeClass"
+        class="nav-responsive__item nav-responsive__item--direction animate-item"
+      >
         <a><h2>Home</h2></a>
       </li>
-      <li class="nav-responsive__item nav-responsive__item--direction animate-item">
+      <li
+        :class="themeClass"
+        class="nav-responsive__item nav-responsive__item--direction animate-item"
+      >
         <a><h2>Recipes</h2></a>
       </li>
-      <li class="nav-responsive__item animate-item">
-        <ThemeButtons />
+      <li :class="themeClass" class="nav-responsive__item animate-item">
+        <ThemeButtons :class="themeClass" />
       </li>
       <li
+        :class="themeClass"
         class="nav-responsive__item nav-responsive__item--direction nav-responsive__item--last animate-item"
       >
         <Saved :width="'2em'" :height="'2em'" />
@@ -89,7 +104,6 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         visibility: hidden;
         opacity: 0;
         animation: slideInFromRight 0.3s ease-out forwards;
-        background-color: map-get($map: $colors, $key: 'c-black');
         @include responsiveH(31.25em) {
           visibility: visible;
           animation: slideInFromLeft 0.3s ease-out forwards;

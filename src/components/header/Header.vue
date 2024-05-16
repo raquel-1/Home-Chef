@@ -39,6 +39,15 @@ const isHovered = ref(false)
 </template>
 
 <style lang="scss" scoped>
+.theme-light {
+  background-color: white;
+  color: black;
+}
+
+.theme-dark {
+  background-color: black;
+  color: white;
+}
 .header {
   @include flex();
   height: 50vh;

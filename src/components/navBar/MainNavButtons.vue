@@ -1,5 +1,13 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, computed } from 'vue'
+import { useThemeStore } from '@/stores/theme'
+import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
+
+const themeStore = useThemeStore()
+
+const themeClass = computed(() => {
+  return themeStore.theme === LIGHT_MODE ? 'svg-light' : 'svg-dark'
+})
 
 const ThemeButtons = defineAsyncComponent(
   () => import('@/components/navBar/ThemeButtons.vue'),
@@ -13,7 +21,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       <ThemeButtons />
     </article>
     <button class="saved">
-      <Saved :width="'2em'" :height="'2em'" />
+      <Saved :class="themeClass" :width="'2em'" :height="'2em'" />
       <p>Saved</p>
     </button>
   </div>

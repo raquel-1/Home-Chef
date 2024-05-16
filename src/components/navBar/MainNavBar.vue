@@ -1,6 +1,8 @@
 <script setup>
+import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
+import { useThemeStore } from '@/stores/theme'
 import { defineAsyncComponent, ref, computed } from 'vue'
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
+// import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 
 const InsideNav = defineAsyncComponent(() => import('@/components/navBar/InsideNav.vue'))
 const MainNavButtons = defineAsyncComponent(
@@ -72,7 +74,6 @@ const closeResponsiveNav = () => {
   position: fixed;
   top: 0;
   z-index: 10;
-  background-color: map-get($map: $colors, $key: c-black);
   border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
   padding: map-get($map: $sizes, $key: s-padding-nav);
   @include responsive() {
