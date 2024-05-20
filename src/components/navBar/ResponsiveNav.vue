@@ -9,6 +9,10 @@ const themeClass = computed(() => {
   return themeStore.theme === LIGHT_MODE ? 'theme-light' : 'theme-dark'
 })
 
+const themeClassSvg = computed(() => {
+  return themeStore.theme === LIGHT_MODE ? 'svg-light' : 'svg-dark'
+})
+
 const ThemeButtons = defineAsyncComponent(
   () => import('@/components/navBar/ThemeButtons.vue'),
 )
@@ -37,7 +41,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         :class="themeClass"
         class="nav-responsive__item nav-responsive__item--direction nav-responsive__item--last animate-item"
       >
-        <Saved :width="'2em'" :height="'2em'" />
+        <Saved :class="themeClassSvg" :width="'2em'" :height="'2em'" />
         <h2>Saved</h2>
       </li>
     </ul>
@@ -136,7 +140,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
           border-bottom: none;
         }
         @include responsiveH(31.25em) {
-          border-left: none;
+          border-left: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-bottom: none;

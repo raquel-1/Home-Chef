@@ -255,19 +255,19 @@ body {
 
 // theme styles
 .theme-light {
-  background-color: white;
-  color: black;
+  background-color: map-get($map: $colors, $key: c-white);
+  color: map-get($map: $colors, $key: c-black);
 }
 
 .theme-dark {
-  background-color: black;
-  color: white;
+  background-color: map-get($map: $colors, $key: c-black);
+  color: map-get($map: $colors, $key: c-white);
 }
 
 .svg-light {
-  color: black;
+  color: map-get($map: $colors, $key: c-black);
 }
 
 .svg-dark {
-  color: white;
+  color: map-get($map: $colors, $key: c-white);
 }

@@ -26,6 +26,7 @@ const props = defineProps({
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 511.999 511.999"
     xml:space="preserve"
+    class="icon"
   >
     <g>
       <g>
@@ -74,4 +75,11 @@ const props = defineProps({
   </svg>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.icon {
+  @include responsive(22em) {
+    height: 1.8em;
+    width: 1.8em;
+  }
+}
+</style>

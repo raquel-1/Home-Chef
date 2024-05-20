@@ -33,7 +33,7 @@ const props = defineProps({
 <style scoped lang="scss">
 .svg-light {
   path {
-    fill: map-get($map: $colors, $key: c-principal-color);
+    fill: map-get($map: $colors, $key: c-black);
   }
 }
 </style>

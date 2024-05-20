@@ -39,42 +39,39 @@ const isHovered = ref(false)
 </template>
 
 <style lang="scss" scoped>
-.theme-light {
-  background-color: white;
-  color: black;
-}
-
-.theme-dark {
-  background-color: black;
-  color: white;
-}
 .header {
   @include flex();
   height: 50vh;
   max-height: 50em;
-  margin: map-get($map: $heights, $key: h-navbar) 1em 1em;
-  margin-top: map-get($map: $heights, $key: h-navbar) + 1em;
-  border-radius: 1em;
-  background-image: url('../../assets/images/knife.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  padding: 1em;
+  margin-top: map-get($map: $heights, $key: h-navbar);
   @include responsive(50em) {
     max-height: 20em;
   }
   @include responsive(31.25em) {
-    margin-top: 1em;
+    margin-top: 0;
+    padding: 0;
+    margin: 0;
   }
   @include responsive(27em) {
     max-height: 15em;
-    margin: 0.5em;
-  }
-  @include responsive(25em) {
-    margin: 0;
-    border-radius: 0;
   }
   @include responsiveH(31.25em) {
-    margin-top: 1em;
+    margin-top: 0;
+    min-height: 15em;
+  }
+  &__container {
+    @include flex(column);
+    border-radius: 1em;
+    background-image: url('../../assets/images/knife.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    @include responsive(31.25em) {
+      border-radius: 0;
+    }
   }
   &__title {
     @include flex(column);
@@ -96,13 +93,9 @@ const isHovered = ref(false)
       width: 95%;
     }
   }
-  &__container {
-    @include flex(column);
-    width: 100%;
-  }
   &__search-box {
     @include flex();
-    width: 90%;
+    width: 80%;
     max-width: 60em;
     background-color: map-get($map: $colors, $key: c-transparent-principal-color);
     height: 3em;
@@ -111,9 +104,10 @@ const isHovered = ref(false)
     overflow: hidden;
     @include responsive(27em) {
       padding: 0 0 0 1em;
-    }
-    @include responsive(27em) {
       width: 95%;
+    }
+    @include responsive(22em) {
+      padding: 0 0 0 0.5em;
     }
     .search-box {
       &__input {
@@ -125,6 +119,9 @@ const isHovered = ref(false)
         text-decoration: none;
         @include flex();
         font-size: 1.3em;
+        @include responsive(22em) {
+          font-size: 1em;
+        }
         &::placeholder {
           color: map-get($map: $colors, $key: c-white);
           transform: translateY(0.1em);
@@ -138,6 +135,9 @@ const isHovered = ref(false)
         position: relative;
         @include responsive(30em) {
           padding: 0 1.4em 0 0.5em;
+        }
+        @include responsive(22em) {
+          padding: 0 0.8em 0 0.2em;
         }
         .rotate-180 {
           transition: transform 0.3s ease-in-out;

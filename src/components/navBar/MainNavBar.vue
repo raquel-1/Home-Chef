@@ -126,6 +126,10 @@ const closeResponsiveNav = () => {
         padding: 0;
         margin-top: 1em;
         border: none;
+        font-size: 1.8em;
+      }
+      @include responsiveH(20em) {
+        margin-top: 0.5em;
       }
     }
   }
