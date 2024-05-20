@@ -1,8 +1,6 @@
 <script setup>
-import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
-import { useThemeStore } from '@/stores/theme'
-import { defineAsyncComponent, ref, computed } from 'vue'
-// import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
+import { ref, defineAsyncComponent, onMounted } from 'vue'
+import { vOnClickOutside } from '@vueuse/components'
 
 const InsideNav = defineAsyncComponent(() => import('@/components/navBar/InsideNav.vue'))
 const MainNavButtons = defineAsyncComponent(
@@ -14,24 +12,20 @@ const ResponsiveNav = defineAsyncComponent(
 const Logo = defineAsyncComponent(() => import('@/assets/svgs/Logo.vue'))
 const Menu = defineAsyncComponent(() => import('@/assets/svgs/Menu.vue'))
 
-// Define una variable reactiva para almacenar el ítem activo
 const activeItem = ref('home')
-
-// for responsive nav
-
 const showResponsiveNav = ref(false)
 
 const changeResponsiveNav = () => {
   showResponsiveNav.value = !showResponsiveNav.value
 }
-// v-click-out-side="closeResponsiveNav"
+
 const closeResponsiveNav = () => {
   showResponsiveNav.value = false
 }
 </script>
 
 <template>
-  <nav class="nav">
+  <nav class="nav" v-on-click-outside="closeResponsiveNav">
     <button class="nav__logo">
       <Logo :width="'3.9em'" :height="'3.9em'" />
       <h1 class="name-app">Home Chef</h1>
@@ -41,6 +35,7 @@ const closeResponsiveNav = () => {
     <MainNavButtons />
 
     <Menu @click="changeResponsiveNav" />
+
     <Transition name="list" mode="out-in">
       <ResponsiveNav v-if="showResponsiveNav" />
     </Transition>
