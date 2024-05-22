@@ -26,10 +26,10 @@ const closeResponsiveNav = () => {
 
 <template>
   <nav class="nav" v-on-click-outside="closeResponsiveNav">
-    <button class="nav__logo">
+    <router-link to="/home" class="nav__logo">
       <Logo :width="'3.9em'" :height="'3.9em'" />
       <h1 class="name-app">Home Chef</h1>
-    </button>
+    </router-link>
 
     <InsideNav :activeItem="activeItem" @update:activeItem="activeItem = $event" />
     <MainNavButtons />

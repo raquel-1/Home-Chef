@@ -75,6 +75,7 @@ const isHovered = ref(false)
   }
   &__title {
     @include flex(column);
+    color: map-get($map: $colors, $key: c-white);
     width: 90%;
     font-size: map-get($map: $font-size, $key: fs-titular-big);
     margin-bottom: 0.5em;

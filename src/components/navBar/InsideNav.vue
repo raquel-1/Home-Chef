@@ -24,14 +24,16 @@ const handleClick = (item) => {
         :class="{ '--active': isActive('home') }"
         @click="handleClick('home')"
       >
-        <a class="nav-list__item--home"><h2>Home</h2></a>
+        <router-link to="/home" class="nav-list__item--home"><h2>Home</h2></router-link>
       </li>
       <li
         class="nav-list__item"
         :class="{ '--active': isActive('recipes') }"
         @click="handleClick('recipes')"
       >
-        <a class="nav-list__item--recipes"><h2>Recipes</h2></a>
+        <router-link to="/recipes" lass="nav-list__item--recipes"
+          ><h2>Recipes</h2></router-link
+        >
       </li>
     </ul>
   </div>

@@ -20,10 +20,10 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
     <article>
       <ThemeButtons />
     </article>
-    <button class="saved">
+    <router-link class="saved" to="/saved">
       <Saved :class="themeClass" :width="'2em'" :height="'2em'" />
       <p>Saved</p>
-    </button>
+    </router-link>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       border-radius: 2em;
       cursor: pointer;
       p {
-        font-size: 1.2em;
+        font-size: 1.5em;
       }
     }
   }

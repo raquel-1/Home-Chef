@@ -26,13 +26,13 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         :class="themeClass"
         class="nav-responsive__item nav-responsive__item--direction animate-item"
       >
-        <a><h2>Home</h2></a>
+        <router-link to="/home"><h2>Home</h2></router-link>
       </li>
       <li
         :class="themeClass"
         class="nav-responsive__item nav-responsive__item--direction animate-item"
       >
-        <a><h2>Recipes</h2></a>
+        <router-link to="/recipes"><h2>Recipes</h2></router-link>
       </li>
       <li :class="themeClass" class="nav-responsive__item animate-item">
         <ThemeButtons :class="themeClass" />
@@ -41,8 +41,10 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         :class="themeClass"
         class="nav-responsive__item nav-responsive__item--direction nav-responsive__item--last animate-item"
       >
-        <Saved :class="themeClassSvg" :width="'2em'" :height="'2em'" />
-        <h2>Saved</h2>
+        <router-link class="saved" to="/saved">
+          <Saved :class="themeClassSvg" :width="'2em'" :height="'2em'" />
+          <p>Saved</p>
+        </router-link>
       </li>
     </ul>
   </article>
@@ -144,6 +146,17 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
           border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-bottom: none;
+        }
+        .saved {
+          @include flex(row, center, space-evenly);
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          height: 100%;
+          font-size: 1.2em;
+          p {
+            font-size: 1.3em;
+          }
         }
         &--direction {
           cursor: pointer;
