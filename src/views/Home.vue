@@ -1,27 +1,28 @@
 <script setup>
 import { defineAsyncComponent, computed } from 'vue'
-import { useThemeStore } from '@/stores/theme'
-import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
 
 const Header = defineAsyncComponent(() => import('@/components/header/Header.vue'))
-
-const themeStore = useThemeStore()
-
-const themeClass = computed(() => {
-  return themeStore.theme === LIGHT_MODE ? 'theme-light' : 'theme-dark'
-})
+const Tabs = defineAsyncComponent(() => import('@/components/tabs/Tabs.vue'))
+const TabItem = defineAsyncComponent(() => import('@/components/tabs/TabItem.vue'))
 </script>
 
 <template>
   <Header />
   <section>{{ themeStore.theme }}</section>
+  <Tabs>
+    <TabItem name="uno" :selected="true">
+      <h3>Contenido de uno</h3>
+      <p>Este es el contenido para uno.</p>
+    </TabItem>
+    <TabItem name="dos">
+      <h3>Contenido de dos</h3>
+      <p>Este es el contenido para dos.</p>
+    </TabItem>
+    <TabItem name="tres">
+      <h3>Contenido de tres</h3>
+      <p>Este es el contenido para tres.</p>
+    </TabItem>
+  </Tabs>
 </template>
 
-<style lang="scss" scoped>
-section {
-  height: 200vh;
-  @include responsive(31.25em) {
-    margin-top: 0;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
