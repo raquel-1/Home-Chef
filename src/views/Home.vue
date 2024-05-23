@@ -1,6 +1,7 @@
 <script setup>
 import { defineAsyncComponent, computed } from 'vue'
 
+const Card = defineAsyncComponent(() => import('@/components/Card.vue'))
 const Header = defineAsyncComponent(() => import('@/components/header/Header.vue'))
 const Tabs = defineAsyncComponent(() => import('@/components/tabs/Tabs.vue'))
 const TabItem = defineAsyncComponent(() => import('@/components/tabs/TabItem.vue'))
@@ -8,19 +9,17 @@ const TabItem = defineAsyncComponent(() => import('@/components/tabs/TabItem.vue
 
 <template>
   <Header />
-  <section>{{ themeStore.theme }}</section>
   <Tabs>
-    <TabItem name="uno" :selected="true">
-      <h3>Contenido de uno</h3>
-      <p>Este es el contenido para uno.</p>
+    <TabItem title="Breakfast">
+      <Card></Card>
     </TabItem>
-    <TabItem name="dos">
-      <h3>Contenido de dos</h3>
-      <p>Este es el contenido para dos.</p>
+    <TabItem title="Lunch">
+      <h3>Contenido de Lunch</h3>
+      <p>Este es el contenido para Lunch.</p>
     </TabItem>
-    <TabItem name="tres">
-      <h3>Contenido de tres</h3>
-      <p>Este es el contenido para tres.</p>
+    <TabItem title="Dinner">
+      <h3>Contenido de Dinner</h3>
+      <p>Este es el contenido para Dinner.</p>
     </TabItem>
   </Tabs>
 </template>

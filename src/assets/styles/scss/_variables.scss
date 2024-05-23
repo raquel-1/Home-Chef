@@ -36,6 +36,7 @@ $font-size: (
   'fs-extra-small-button': 0.8rem,
   'fs-extra-small': 0.9rem,
   'fs-small': 1rem,
+  'fs-medium-small': 1.3rem,
   'fs-medium': 1.5rem,
   'fs-big': 2rem,
   'fs-extra-big': 3rem,
@@ -47,9 +48,10 @@ $heights: (
 );
 
 $sizes: (
+  's-card': 22rem,
   's-navbar': 120rem,
   's-body': 120rem,
-  's-general-padding': 0 8rem,
+  's-general-padding': 0 6rem,
   's-padding-nav': 0 3rem,
   's-general-padding-mobile': 0 1rem,
   's-margin-top': 10rem 0 0 0,

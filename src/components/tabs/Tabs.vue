@@ -1,62 +1,73 @@
-<!-- Tabs.vue-->
+<script>
+import { ref, provide } from 'vue'
+
+export default {
+  setup(props, { slots }) {
+    const tabtitles = ref(slots.default().map((tab) => tab.props.title))
+    const selected = ref(tabtitles.value[0])
+    provide('selected', selected)
+
+    const selectTab = (title) => {
+      selected.value = title
+    }
+
+    return {
+      selected,
+      tabtitles,
+      selectTab,
+    }
+  },
+}
+</script>
+
 <template>
   <div class="tabs">
-    <ul class="tabs-list">
+    <ul class="tabs__header">
       <li
-        v-for="tab in tabs"
-        :key="tab.name"
-        :class="{ active: tab.isActive }"
-        @click="selectTab(tab)"
+        class="header__title"
+        v-for="title in tabtitles"
+        :key="title"
+        @click="selectTab(title)"
+        :class="{ 'header__title--active': title === selected }"
       >
-        {{ tab.name }}
+        {{ title }}
       </li>
     </ul>
-    <div class="tabs-content">
+    <div class="tabs__content">
       <slot></slot>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, provide } from 'vue'
-
-const tabs = ref([])
-
-const selectTab = (selectedTab) => {
-  tabs.value.forEach((tab) => {
-    tab.isActive = tab.name === selectedTab.name
-  })
-}
-
-const registerTab = (tab) => {
-  if (tabs.value.length === 0) {
-    tab.isActive = true
+<style lang="scss" scoped>
+.tabs {
+  max-width: 100%;
+  margin: map-get($map: $sizes, $key: s-general-padding);
+  @include flex(column);
+  &__header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0;
+    .header {
+      &__title {
+        @include flex(column);
+        padding: 1em;
+        cursor: pointer;
+        flex-shrink: 1;
+        border-bottom: 0.05em solid map-get($map: $colors, $key: c-medium-grey);
+        font-size: map-get($map: $font-size, $key: fs-small);
+        &--active {
+          border-bottom: 0.3em solid map-get($map: $colors, $key: c-principal-color);
+        }
+      }
+    }
   }
-  tabs.value.push(tab)
-}
-
-provide('selectTab', selectTab)
-provide('registerTab', registerTab)
-</script>
-
-<style scoped>
-.tabs-list {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-}
-
-.tabs-list li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.tabs-list li.active {
-  font-weight: bold;
-  border-bottom: 2px solid #000;
-}
-
-.tabs-content {
-  padding: 10px;
+  &__content {
+    margin-top: 1em;
+    background-color: darksalmon;
+    width: 100%;
+    padding: 2em 0;
+  }
 }
 </style>

@@ -1,34 +1,22 @@
 <!-- Tabs.vue-->
 <template>
-  <div v-show="isActive">
+  <div class="tab-content" v-show="isActive">
     <slot></slot>
   </div>
 </template>
 
-<script setup>
-import { ref, inject, onMounted, watch } from 'vue'
+<script>
+import { inject, computed } from 'vue'
 
-const props = defineProps({
-  name: { type: String, required: true },
-  selected: { type: Boolean, default: false },
-})
+export default {
+  props: ['title'],
+  setup(props) {
+    const selected = inject('selected')
+    const isActive = computed(() => props.title === selected.value)
 
-const isActive = ref(false)
-const selectTab = inject('selectTab')
-const registerTab = inject('registerTab')
-
-onMounted(() => {
-  isActive.value = props.selected
-  registerTab({
-    name: props.name,
-    isActive: isActive.value,
-  })
-})
-
-watch(
-  () => props.selected,
-  (newValue) => {
-    isActive.value = newValue
+    return {
+      isActive,
+    }
   },
-)
+}
 </script>
