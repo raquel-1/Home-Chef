@@ -13,10 +13,16 @@ const themeClass = computed(() => {
 </script>
 
 <template>
-  <div :class="themeClass">
+  <div :class="themeClass" class="main">
     <MainNavBar :class="themeClass" />
     <router-view></router-view>
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.main {
+  @include responsive(31.25em) {
+    margin-bottom: map-get($map: $heights, $key: h-navbar);
+  }
+}
+</style>

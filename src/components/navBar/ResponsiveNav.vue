@@ -35,7 +35,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         <router-link to="/recipes"><h2>Recipes</h2></router-link>
       </li>
       <li :class="themeClass" class="nav-responsive__item animate-item">
-        <ThemeButtons :class="themeClass" />
+        <ThemeButtons />
       </li>
       <li
         :class="themeClass"
