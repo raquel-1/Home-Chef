@@ -44,6 +44,9 @@ export default {
   max-width: 100%;
   margin: map-get($map: $sizes, $key: s-general-padding);
   @include flex(column);
+  @include responsive() {
+    margin: map-get($map: $sizes, $key: s-general-padding-tablet);
+  }
   @include responsive(50em) {
     margin: map-get($map: $sizes, $key: s-general-padding-mobile);
   }
@@ -61,7 +64,8 @@ export default {
         padding: 1em;
         cursor: pointer;
         flex-shrink: 1;
-        border-bottom: 0.05em solid map-get($map: $colors, $key: c-medium-grey);
+        border-bottom: 0.05em solid
+          map-get($map: $colors, $key: c-transparent-dark-principal-color);
         font-size: map-get($map: $font-size, $key: fs-medium-small);
         &--active {
           border-bottom: 0.3em solid map-get($map: $colors, $key: c-principal-color);

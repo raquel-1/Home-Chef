@@ -36,7 +36,7 @@ export const useRecipeStore = defineStore('recipes', () => {
     try {
       const APP_ID = 'cc8cc6be'
       const APP_KEY = '4780bae104c5949415d89b10128fa192'
-      const query = 'cake'
+      const query = 'fish'
       const apiUrl = `https://api.edamam.com/search?q=${encodeURIComponent(query)}&app_id=${APP_ID}&app_key=${APP_KEY}`
 
       const response = await fetch(apiUrl)

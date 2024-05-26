@@ -1,41 +1,29 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 
-const props = defineProps({
-  activeItem: String,
-})
+const route = useRoute()
 
-const emits = defineEmits(['update:activeItem'])
-
-// Función para determinar si un ítem está activo
-const isActive = (item) => props.activeItem === item
-
-// Función para manejar el clic en un ítem de la lista
-const handleClick = (item) => {
-  emits('update:activeItem', item)
-}
+const currentRoute = computed(() => route.path)
 </script>
 
 <template>
   <div class="nav__nav">
-    <ul class="nav-list">
+    <article class="nav-list">
       <router-link
         to="/home"
         class="nav-list__item"
-        :class="{ '--active': isActive('home') }"
-        @click="handleClick('home')"
-      >
-        <div class="nav-list__item--home"><h2>Home</h2></div>
+        :class="{ '--active': currentRoute === '/home' }"
+        ><h2>Home</h2>
       </router-link>
       <router-link
         to="/recipes"
         class="nav-list__item"
-        :class="{ '--active': isActive('recipes') }"
-        @click="handleClick('recipes')"
+        :class="{ '--active': currentRoute === '/recipes' }"
       >
-        <div to="/recipes" lass="nav-list__item--recipes"><h2>Recipes</h2></div>
+        <h2>Recipes</h2>
       </router-link>
-    </ul>
+    </article>
   </div>
 </template>
 

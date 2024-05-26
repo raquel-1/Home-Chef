@@ -13,14 +13,16 @@ const toggleSaved = () => {
 
 <template>
   <article class="card">
-    <div class="card__photo">
-      <img class="card-photo" src="../../assets/images/knife.jpg" />
-    </div>
-    <div class="card__recipe-name">
-      <p class="title">
-        PizaaPizaa?PizaaPizaaPizaaPizaa Pizaizaa caca caca caca caca caca
-      </p>
-    </div>
+    <router-link to="/recipe-info">
+      <div class="card__photo">
+        <img class="card-photo" src="../../assets/images/horizontal.jpg" />
+      </div>
+      <div class="card__recipe-name">
+        <p class="title">
+          Curry-Crusted Fish Curry-Crusted Fish Curry-Crusted Fish Curry-Crusted Fish
+        </p>
+      </div>
+    </router-link>
     <div class="card__bottom">
       <div class="bottom__time">
         <Chronometer />
@@ -38,8 +40,8 @@ const toggleSaved = () => {
 .card {
   min-width: map-get($map: $sizes, $key: s-card);
   max-width: map-get($map: $sizes, $key: s-card);
-  max-height: 24.4em;
-  min-height: 24.4em;
+  max-height: map-get($map: $heights, $key: h-card);
+  min-height: map-get($map: $heights, $key: h-card);
   border-radius: 1em;
   overflow: hidden;
   margin-bottom: 1em;
@@ -66,7 +68,7 @@ const toggleSaved = () => {
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 18ch;
+      max-width: 25ch;
       overflow-wrap: break-word;
       word-break: break-all;
       -ms-hyphens: auto;

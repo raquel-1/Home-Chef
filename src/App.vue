@@ -5,6 +5,8 @@ import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
 const MainNavBar = defineAsyncComponent(
   () => import('@/components/navBar/MainNavBar.vue'),
 )
+const Footer = defineAsyncComponent(() => import('@/components/footer/Footer.vue'))
+
 const themeStore = useThemeStore()
 
 const themeClass = computed(() => {
@@ -16,6 +18,7 @@ const themeClass = computed(() => {
   <div :class="themeClass" class="main">
     <MainNavBar :class="themeClass" />
     <router-view></router-view>
+    <Footer :class="themeClass" />
   </div>
 </template>
 

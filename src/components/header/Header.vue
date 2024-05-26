@@ -1,15 +1,7 @@
 <script setup>
-import { useThemeStore } from '@/stores/theme'
 import { defineAsyncComponent, ref } from 'vue'
-import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
 
 const Pan = defineAsyncComponent(() => import('@/assets/svgs/Pan.vue'))
-
-const themeStore = useThemeStore()
-
-const changeTheme = () => {
-  themeStore.changeTheme()
-}
 
 const isHovered = ref(false)
 </script>
@@ -79,7 +71,6 @@ const isHovered = ref(false)
     width: 90%;
     font-size: map-get($map: $font-size, $key: fs-titular-big);
     margin-bottom: 0.5em;
-    font-family: map-get($map: $fonts, $key: ff-font-extraBold);
     @include responsive() {
       font-size: map-get($map: $font-size, $key: fs-extra-big);
     }

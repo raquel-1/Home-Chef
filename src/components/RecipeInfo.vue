@@ -1,5 +1,5 @@
 <script setup>
-import { useRecipeStore } from '@/src/stores/recipeStore'
+import { useRecipeStore } from '@/stores/recipeStore'
 import { watchEffect } from 'vue'
 
 const recipeStore = useRecipeStore()
@@ -7,10 +7,12 @@ const recipes = recipeStore.getRecipesDataOrError
 watchEffect(() => {
   console.log('Actualizando recetas:', recipes)
 })
+console.log('Actualizando recetas:', recipes)
 </script>
 
 <template>
   <div>
+    {{ recipes }}
     <p v-if="recipeStore.isLoading">Cargando...</p>
     <ul v-else-if="recipes && !recipeStore.isLoading">
       <li

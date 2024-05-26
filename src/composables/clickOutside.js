@@ -1,4 +1,3 @@
-// clickOutside.js
 export default {
   bind(el, binding) {
     el.__vueClickOutside__ = (event) => {

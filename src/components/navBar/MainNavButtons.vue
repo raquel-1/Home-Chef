@@ -53,6 +53,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       background-color: map-get($map: $colors, $key: c-principal-color);
       @include flex(row, center, space-between);
       border-radius: 2em;
+      margin-right: 0.5em;
       cursor: pointer;
       p {
         font-size: 1.5em;

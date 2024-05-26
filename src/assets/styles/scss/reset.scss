@@ -180,9 +180,13 @@ body {
 /** Barra Scroll **/
 
 ::-webkit-scrollbar {
-  width: 0.3rem;
+  width: 0.4rem;
   height: auto;
   background-color: map-get($map: $colors, $key: c-black);
+
+  -webkit-overflow-scrolling: touch; /* Añadir desplazamiento suave para dispositivos iOS */
+  scroll-snap-type: x mandatory; /* Permite el desplazamiento suave */
+
   @media (max-width: 53.625em) {
     width: 0;
   }

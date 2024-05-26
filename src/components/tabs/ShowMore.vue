@@ -11,9 +11,9 @@ const themeClass = computed(() => {
 </script>
 
 <template>
-  <button class="show-more">
+  <router-link to="/recipes" class="show-more">
     <span class="more" :class="themeClass">SEE MORE</span>
-  </button>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -27,10 +27,14 @@ const themeClass = computed(() => {
   @include flex();
   background-color: map-get($map: $colors, $key: c-transparent-dark-principal-color);
   cursor: pointer;
+  transition: background-color map-get($map: $transitions, $key: t-button);
+  &:hover {
+    background-color: map-get($map: $colors, $key: c-principal-light-color);
+  }
   .more {
     @include flex();
     padding: 1em 2em;
-    border-radius: 1em;
+    border-radius: 2em;
   }
 }
 </style>

@@ -12,7 +12,6 @@ const ResponsiveNav = defineAsyncComponent(
 const Logo = defineAsyncComponent(() => import('@/assets/svgs/Logo.vue'))
 const Menu = defineAsyncComponent(() => import('@/assets/svgs/Menu.vue'))
 
-const activeItem = ref('home')
 const showResponsiveNav = ref(false)
 
 const changeResponsiveNav = () => {
@@ -31,7 +30,7 @@ const closeResponsiveNav = () => {
       <h1 class="name-app">Home Chef</h1>
     </router-link>
 
-    <InsideNav :activeItem="activeItem" @update:activeItem="activeItem = $event" />
+    <InsideNav />
     <MainNavButtons />
 
     <Menu @click="changeResponsiveNav" />
@@ -44,7 +43,8 @@ const closeResponsiveNav = () => {
 
 <style lang="scss" scoped>
 /** 50em aparecera el hamburguesa */
-/** 31.25em el nav abajo falta nav a la izquierda cuando movil horizontal */
+/** 31.25em el nav abajo version movil */
+/** 31.25em h el nav abajo falta nav a la izquierda cuando movil horizontal */
 .list-enter-active,
 .list-leave-active {
   transition:
