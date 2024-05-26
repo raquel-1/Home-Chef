@@ -3,10 +3,14 @@ import { ref, provide } from 'vue'
 
 export default {
   setup(props, { slots }) {
+    // coge titulos de las pestañas apartir de los slots (tabitem)
     const tabtitles = ref(slots.default().map((tab) => tab.props.title))
     const selected = ref(tabtitles.value[0])
+
+    // titulo seleccionado para los componentes hijos(tabitem)
     provide('selected', selected)
 
+    // seleciona pestaña
     const selectTab = (title) => {
       selected.value = title
     }

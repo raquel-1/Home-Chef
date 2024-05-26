@@ -4,7 +4,9 @@ import { inject, computed } from 'vue'
 export default {
   props: ['title'],
   setup(props) {
+    // inyecta selected de padre tabs
     const selected = inject('selected')
+    // true si el titulo de esta pestaña es igual al titulo seleccionado
     const isActive = computed(() => props.title === selected.value)
 
     return {
