@@ -51,7 +51,7 @@ const toggleSaved = () => {
     border-radius: 1em;
     overflow: hidden;
     cursor: pointer;
-    img {
+    .card-photo {
       max-width: 100%;
       max-height: 100%;
       object-fit: cover;

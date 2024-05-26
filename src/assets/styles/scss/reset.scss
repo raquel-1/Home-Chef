@@ -180,7 +180,7 @@ body {
 /** Barra Scroll **/
 
 ::-webkit-scrollbar {
-  width: 0.4rem;
+  width: 0.6rem;
   height: auto;
   background-color: map-get($map: $colors, $key: c-black);
 

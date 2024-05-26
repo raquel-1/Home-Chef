@@ -71,6 +71,7 @@ const closeResponsiveNav = () => {
   z-index: 10;
   border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
   padding: map-get($map: $sizes, $key: s-padding-nav);
+  padding-left: 0.5em;
   @include responsive() {
     padding: 0 1em;
   }
