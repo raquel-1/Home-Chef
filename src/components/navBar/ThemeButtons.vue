@@ -23,21 +23,21 @@ const changeTheme = () => {
     :class="{ 'time--active': themeStore.theme === LIGHT_MODE }"
     @click="changeTheme"
   >
-    <Day :class="themeClass" :width="'2.5em'" :height="'2.5em'" />
+    <Day :class="themeClass" :width="'2em'" :height="'2em'" />
   </button>
   <button
     class="time"
     :class="{ 'time--active': themeStore.theme === DARK_MODE }"
     @click="changeTheme"
   >
-    <Night :class="themeClass" :width="'2.5em'" :height="'2.5em'" />
+    <Night :class="themeClass" :width="'2em'" :height="'2em'" />
   </button>
 </template>
 
 <style lang="scss" scoped>
 .time {
-  width: 3em;
-  height: 3em;
+  width: 2.5em;
+  height: 2.5em;
   @include flex();
   border-radius: 50%;
   cursor: pointer;

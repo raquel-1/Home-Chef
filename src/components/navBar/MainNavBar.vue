@@ -26,7 +26,7 @@ const closeResponsiveNav = () => {
 <template>
   <nav class="nav" v-on-click-outside="closeResponsiveNav">
     <router-link to="/home" class="nav__logo">
-      <Logo :width="'3.9em'" :height="'3.9em'" />
+      <Logo :width="'3em'" :height="'3em'" />
       <h1 class="name-app">Home Chef</h1>
     </router-link>
 
@@ -106,10 +106,10 @@ const closeResponsiveNav = () => {
       margin-top: 1em;
     }
     .name-app {
-      font-size: map-get($map: $font-size, $key: fs-extra-big);
+      font-size: map-get($map: $font-size, $key: fs-big);
       margin-left: 0.5em;
       @include responsive() {
-        font-size: map-get($map: $font-size, $key: fs-big);
+        font-size: map-get($map: $font-size, $key: fs-medium);
       }
       @include responsive(50em) {
         margin-left: 0.3em;

@@ -41,7 +41,6 @@ const isHovered = ref(false)
     max-height: 20em;
   }
   @include responsive(31.25em) {
-    margin-top: 0;
     padding: 0;
     margin: 0;
   }
@@ -69,19 +68,18 @@ const isHovered = ref(false)
     @include flex(column);
     color: map-get($map: $colors, $key: c-white);
     width: 90%;
-    font-size: map-get($map: $font-size, $key: fs-titular-big);
+    font-size: map-get($map: $font-size, $key: fs-extra-big);
     margin-bottom: 0.5em;
     @include responsive() {
-      font-size: map-get($map: $font-size, $key: fs-extra-big);
+      font-size: map-get($map: $font-size, $key: fs-more-big);
     }
     @include responsive(50em) {
       margin-bottom: 0.1em;
     }
     @include responsive(31.25em) {
-      font-size: 2.5em;
+      font-size: map-get($map: $font-size, $key: fs-big);
     }
     @include responsive(27em) {
-      font-size: map-get($map: $font-size, $key: fs-big);
       width: 95%;
     }
   }

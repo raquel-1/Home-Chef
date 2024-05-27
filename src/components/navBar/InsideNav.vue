@@ -14,14 +14,14 @@ const currentRoute = computed(() => route.path)
         to="/home"
         class="nav-list__item"
         :class="{ '--active': currentRoute === '/home' }"
-        ><h2>Home</h2>
+        ><h2 class="title">Home</h2>
       </router-link>
       <router-link
         to="/recipes"
         class="nav-list__item"
         :class="{ '--active': currentRoute === '/recipes' }"
       >
-        <h2>Recipes</h2>
+        <h2 class="title">Recipes</h2>
       </router-link>
     </article>
   </div>
@@ -30,13 +30,10 @@ const currentRoute = computed(() => route.path)
 <style lang="scss" scoped>
 .nav {
   &__nav {
-    width: 17em;
+    width: 15em;
     height: 100%;
-    @include responsive(71.87em) {
-      width: 14.5em;
-    }
     @include responsive() {
-      width: 13em;
+      width: 12em;
     }
     @include responsive(56.25em) {
       width: 11em;
@@ -51,12 +48,17 @@ const currentRoute = computed(() => route.path)
       @include flex(row, center, space-between);
       height: 100%;
       &__item {
-        font-size: map-get($map: $font-size, $key: fs-medium);
         height: 100%;
         @include flex(row, center, center);
         cursor: pointer;
         &.--active {
           border-bottom: 0.2em solid map-get($map: $colors, $key: c-principal-color);
+        }
+        .title {
+          font-size: map-get($map: $font-size, $key: fs-medium);
+          @include responsive() {
+            font-size: map-get($map: $font-size, $key: fs-medium-small);
+          }
         }
       }
     }
