@@ -28,6 +28,9 @@ import healthPreferences from '@/composables/healthPreferences'
   padding: 1em 0;
   &__title {
     font-size: map-get($map: $font-size, $key: fs-big);
+    @include responsive() {
+      font-size: 1.7em;
+    }
     @include responsive(50em) {
       padding: map-get($map: $sizes, $key: s-general-padding-tablet);
     }
@@ -37,8 +40,12 @@ import healthPreferences from '@/composables/healthPreferences'
   }
   &__subtitle {
     font-size: map-get($map: $font-size, $key: fs-medium-small);
-    padding: 0.3em 0;
+    padding: 0.5em 0;
     padding: map-get($map: $sizes, $key: s-general-padding);
+    @include responsive() {
+      font-size: map-get($map: $font-size, $key: fs-small);
+      padding: 0.35em 0;
+    }
     @include responsive(50em) {
       padding: map-get($map: $sizes, $key: s-general-padding-tablet);
     }
@@ -59,6 +66,9 @@ import healthPreferences from '@/composables/healthPreferences'
   }
   &__buttons {
     margin: 0.3em;
+    @include responsive(31.25em) {
+      margin: 0.15em;
+    }
     .button {
       padding: 1em 2em;
       background-color: map-get($map: $colors, $key: c-transparent-dark-principal-color);
@@ -66,6 +76,9 @@ import healthPreferences from '@/composables/healthPreferences'
       transition: background-color map-get($map: $transitions, $key: t-button);
       @include responsive(50em) {
         padding: 1em;
+      }
+      @include responsive(31.25em) {
+        padding: 0.65em;
       }
       &:hover {
         background-color: map-get($map: $colors, $key: c-principal-light-color);
