@@ -22,7 +22,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
     </article>
     <router-link class="saved" to="/saved">
       <Saved :class="themeClass" :width="'1.7em'" :height="'1.7em'" />
-      <p>Saved</p>
+      <p class="saved__p">Saved</p>
     </router-link>
   </div>
 </template>
@@ -51,8 +51,9 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       border-radius: 2em;
       margin-right: 0.5em;
       cursor: pointer;
-      p {
+      &__p {
         font-size: map-get($map: $font-size, $key: fs-medium);
+        padding-right: 0.2em;
         @include responsive() {
           font-size: map-get($map: $font-size, $key: fs-medium-small);
         }

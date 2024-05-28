@@ -33,7 +33,7 @@ const closeResponsiveNav = () => {
     <InsideNav />
     <MainNavButtons />
 
-    <Menu @click="changeResponsiveNav" />
+    <Menu @click="changeResponsiveNav" :width="'2.7em'" :height="'2.7em'" />
 
     <Transition name="list" mode="out-in">
       <ResponsiveNav v-if="showResponsiveNav" />

@@ -32,7 +32,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         :class="themeClass"
         class="nav-responsive__item nav-responsive__item--direction animate-item"
       >
-        <router-link to="/recipes"><h2>Recipes</h2></router-link>
+        <router-link to="/recipes"><h2 class="title">Recipes</h2></router-link>
       </li>
       <li :class="themeClass" class="nav-responsive__item animate-item">
         <ThemeButtons />
@@ -42,7 +42,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         class="nav-responsive__item nav-responsive__item--direction nav-responsive__item--last animate-item"
       >
         <router-link class="saved" to="/saved">
-          <Saved :class="themeClassSvg" :width="'2em'" :height="'2em'" />
+          <Saved :class="themeClassSvg" :width="'1.5em'" :height="'1.5em'" />
           <p>Saved</p>
         </router-link>
       </li>
@@ -100,7 +100,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       visibility: visible;
     }
     .nav-responsive {
-      width: 10em;
+      width: 8em;
       @include flex(column);
 
       @include responsive(31.25em) {
@@ -134,7 +134,7 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
         border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
         width: 100%;
         @include flex(row, center, space-evenly);
-        min-height: 4em;
+        min-height: 3.5em;
         @include responsive(31.25em) {
           border-left: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
@@ -146,6 +146,12 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
           border-right: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-top: 0.05em solid map-get($map: $colors, $key: c-principal-color);
           border-bottom: none;
+        }
+        .title {
+          font-size: map-get($map: $font-size, $key: fs-medium);
+          @include responsive() {
+            font-size: map-get($map: $font-size, $key: fs-medium-small);
+          }
         }
         .saved {
           @include flex(row, center, space-evenly);

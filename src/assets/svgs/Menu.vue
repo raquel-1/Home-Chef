@@ -6,11 +6,11 @@ const props = defineProps({
   },
   height: {
     type: String,
-    default: '3.5em',
+    default: '2em',
   },
   width: {
     type: String,
-    default: '3.5em',
+    default: '2em',
   },
 })
 </script>
@@ -54,10 +54,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .icon {
-  width: 3.5em;
-  height: 3.5em;
   display: none;
-  cursor: pointer;
   @include responsive(50em) {
     display: block;
   }
