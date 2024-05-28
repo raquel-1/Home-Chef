@@ -11,11 +11,11 @@ const themeClass = computed(() => {
 </script>
 
 <template>
-  <h1>Recipes</h1>
+  <h2>Recipes</h2>
 </template>
 
 <style lang="scss" scoped>
-h1 {
+h2 {
   margin-top: map-get($map: $heights, $key: h-navbar);
 }
 </style>

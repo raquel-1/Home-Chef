@@ -71,6 +71,12 @@ export default {
         border-bottom: 0.05em solid
           map-get($map: $colors, $key: c-transparent-dark-principal-color);
         font-size: map-get($map: $font-size, $key: fs-medium-small);
+        @include responsive() {
+          font-size: map-get($map: $font-size, $key: fs-small);
+        }
+        @include responsive(31.25em) {
+          font-size: map-get($map: $font-size, $key: fs-extra-small);
+        }
         &--active {
           border-bottom: 0.3em solid map-get($map: $colors, $key: c-principal-color);
         }
