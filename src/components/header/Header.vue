@@ -15,7 +15,7 @@ const isHovered = ref(false)
           type="text"
           id="search-trasparent"
           name="search"
-          placeholder="Burguer"
+          placeholder="Burguer . . ."
           class="search-box__input"
         />
         <button
@@ -92,6 +92,13 @@ const isHovered = ref(false)
     border-radius: 2em;
     padding: 0 0 0 2em;
     overflow: hidden;
+    @include responsive() {
+      height: 2.7em;
+      padding: 0 0 0 1.5em;
+    }
+    @include responsive(31.25em) {
+      height: 2.4em;
+    }
     @include responsive(27em) {
       padding: 0 0 0 1em;
       width: 95%;
@@ -108,9 +115,9 @@ const isHovered = ref(false)
         border: 0;
         text-decoration: none;
         @include flex();
-        font-size: 1.3em;
-        @include responsive(22em) {
-          font-size: 1em;
+        font-size: map-get($map: $font-size, $key: fs-medium-small);
+        @include responsive() {
+          font-size: map-get($map: $font-size, $key: fs-small);
         }
         &::placeholder {
           color: map-get($map: $colors, $key: c-white);
@@ -123,10 +130,10 @@ const isHovered = ref(false)
         padding: 0 1.6em 0 0.9em;
         cursor: pointer;
         position: relative;
-        @include responsive(30em) {
-          padding: 0 1.4em 0 0.5em;
+        @include responsive() {
+          padding: 0 1.3em 0 0.5em;
         }
-        @include responsive(22em) {
+        @include responsive(31.25em) {
           padding: 0 0.8em 0 0.2em;
         }
         .rotate-180 {
