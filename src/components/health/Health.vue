@@ -27,7 +27,7 @@ import healthPreferences from '@/composables/healthPreferences'
   min-width: 100%;
   padding: 1em 0;
   &__title {
-    font-size: map-get($map: $font-size, $key: fs-big);
+    font-size: 1.7em;
     @include responsive() {
       font-size: 1.7em;
     }
@@ -36,14 +36,15 @@ import healthPreferences from '@/composables/healthPreferences'
     }
     @include responsive(31.25em) {
       padding: map-get($map: $sizes, $key: s-general-padding-mobile);
+      font-size: map-get($map: $font-size, $key: fs-medium);
     }
   }
   &__subtitle {
-    font-size: map-get($map: $font-size, $key: fs-medium-small);
-    padding: 0.5em 0;
+    font-size: map-get($map: $font-size, $key: fs-small);
     padding: map-get($map: $sizes, $key: s-general-padding);
+    margin: 0.5em 0 0.7em;
     @include responsive() {
-      font-size: map-get($map: $font-size, $key: fs-small);
+      font-size: map-get($map: $font-size, $key: fs-extra-small);
       padding: 0.35em 0;
     }
     @include responsive(50em) {
@@ -51,6 +52,7 @@ import healthPreferences from '@/composables/healthPreferences'
     }
     @include responsive(31.25em) {
       padding: map-get($map: $sizes, $key: s-general-padding-mobile);
+      font-size: map-get($map: $font-size, $key: fs-extra-small-button);
     }
   }
   &__buttons-container {
@@ -70,15 +72,16 @@ import healthPreferences from '@/composables/healthPreferences'
       margin: 0.15em;
     }
     .button {
-      padding: 1em 2em;
+      padding: 0.6em 1em;
       background-color: map-get($map: $colors, $key: c-transparent-dark-principal-color);
       border-radius: 2em;
       transition: background-color map-get($map: $transitions, $key: t-button);
       @include responsive(50em) {
-        padding: 1em;
+        padding: 0.6em 0.8em;
       }
       @include responsive(31.25em) {
-        padding: 0.65em;
+        padding: 0.4em 0.6em;
+        font-size: map-get($map: $font-size, $key: fs-extra-small-button);
       }
       &:hover {
         background-color: map-get($map: $colors, $key: c-principal-light-color);
