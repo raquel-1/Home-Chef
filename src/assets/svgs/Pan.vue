@@ -77,13 +77,17 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .icon {
-  @include responsive(31.25em) {
+  @include responsive(50em) {
     height: 1.6em;
     width: 1.6em;
   }
-  @include responsive(22em) {
+  @include responsive(31.25em) {
     height: 1.45em;
     width: 1.45em;
+  }
+  @include responsive(22em) {
+    height: 1.4em;
+    width: 1.4em;
   }
 }
 </style>
