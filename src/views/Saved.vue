@@ -1,7 +1,9 @@
 <script setup>
 import { defineAsyncComponent, computed } from 'vue'
 
-const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
+const CardTemplate = defineAsyncComponent(
+  () => import('@/components/tabs/CardTemplate.vue'),
+)
 </script>
 
 <template>
@@ -9,11 +11,11 @@ const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
     <h2 class="saved__title">All your saved recipes</h2>
     <p class="saved__no-saved-yet">You have not saved any recipe yet</p>
     <ul class="saved__container">
-      <li><Card /></li>
-      <li><Card /></li>
-      <li><Card /></li>
-      <li><Card /></li>
-      <li><Card /></li>
+      <li><CardTemplate /></li>
+      <li><CardTemplate /></li>
+      <li><CardTemplate /></li>
+      <li><CardTemplate /></li>
+      <li><CardTemplate /></li>
     </ul>
   </section>
 </template>

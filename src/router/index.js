@@ -10,7 +10,7 @@ const routes = [
   { path: '/home', component: Home },
   { path: '/recipes', component: Recipes },
   { path: '/saved', component: Saved },
-  { path: '/recipe-info', component: RecipeInfo },
+  { path: '/recipe-info/:recipeId', name: 'RecipeInfo', component: RecipeInfo },
 ]
 
 const router = createRouter({

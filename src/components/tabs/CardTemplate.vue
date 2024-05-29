@@ -1,50 +1,32 @@
 <script setup>
-import { defineAsyncComponent, ref, computed } from 'vue'
-import { formatTime } from '@/composables/recipeUtils'
+import { defineAsyncComponent, ref } from 'vue'
 const Chronometer = defineAsyncComponent(() => import('@/assets/svgs/Chronometer.vue'))
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
-
-const props = defineProps({
-  dataObject: {
-    type: Object,
-    required: true,
-  },
-})
 
 const isSaved = ref(false)
 
 const toggleSaved = () => {
   isSaved.value = !isSaved.value
 }
-
-const formattedTime = computed(() => {
-  return formatTime(props.dataObject.recipe.totalTime)
-})
 </script>
 
 <template>
-  <article class="card" v-if="dataObject">
-    <router-link
-      :to="{ name: 'RecipeInfo', params: { recipeId: dataObject.recipe.label } }"
-    >
+  <article class="card">
+    <router-link to="/recipe-info">
       <div class="card__photo">
-        <img
-          class="card-photo"
-          :src="dataObject.recipe.image"
-          :alt="dataObject.recipe.label"
-        />
+        <img class="card-photo" src="../../assets/images/horizontal.jpg" />
       </div>
       <div class="card__recipe-name">
         <p class="title">
-          {{ dataObject.recipe.label }}
+          Curry-Crusted Fish Curry-Crusted Fish Curry-Crusted Fish Curry-Crusted Fish
         </p>
       </div>
     </router-link>
     <div class="card__bottom">
       <div class="bottom__time">
         <Chronometer :height="'1.65em'" :width="'1.65em'" />
-        <span class="bottom__minutes">{{ formattedTime }}</span>
+        <span class="bottom__minutes">13 minutes</span>
       </div>
       <article @click="toggleSaved">
         <NotSaved
@@ -83,7 +65,6 @@ const formattedTime = computed(() => {
   &__recipe-name {
     padding: 0.7em 0;
     max-height: 4em;
-    min-height: 4em;
     .title {
       font-size: map-get($map: $font-size, $key: fs-small);
       cursor: pointer;
@@ -103,7 +84,6 @@ const formattedTime = computed(() => {
   }
   &__bottom {
     @include flex(center, center, space-between);
-    bottom: 0;
     .bottom {
       &__time {
         @include flex(center, center, flex-start);

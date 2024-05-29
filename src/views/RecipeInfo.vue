@@ -1,5 +1,13 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref, onMounted, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { APP_ID, APP_KEY } from '@/constants/credentials'
+import {
+  formatTime,
+  countIngredients,
+  calories,
+  calDigest,
+} from '@/composables/recipeUtils'
 
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
@@ -12,29 +20,48 @@ const toggleSaved = () => {
 const dietLabels = ['High-Protein', 'Low-Fat']
 const cuisineType = ['south east asian']
 const mealType = ['lunch/dinner']
-/**
- * ingredientLines.length,totalTime, calories/yield
- * truncar calorias divideir entre yield
- * yield=servings
- *
- *
- * Labels: dietLabels, cuisineType, mealType
- *
- *
- * ingredientLines       yield=servings
- *
- *
- * (Divir todo entre yield)
- * cosas a mostrar dentro de digest:
- * label.....(total/4) unit
- * sub: no lo enseño,
- *
- *
- */
+
+const route = useRoute()
+
+const recipeId = route.params.recipeId
+const recipe = ref([])
+
+const fetchRecipeDetails = async () => {
+  try {
+    const response = await fetch(
+      `https://api.edamam.com/search?q=${recipeId}&app_id=${APP_ID}&app_key=${APP_KEY}`,
+    )
+    const data = await response.json()
+    if (data.hits.length > 0) {
+      recipe.value = data.hits[0].recipe
+    }
+  } catch (error) {
+    console.error('Error fetching recipe details:', error)
+  }
+}
+
+onMounted(() => {
+  fetchRecipeDetails()
+})
+
+// time
+const formattedTime = computed(() => {
+  return formatTime(recipe.value.totalTime)
+})
+// n ingredients
+const ingredientCount = ref(0)
+const ingredientCalories = ref(0)
+
+watch(recipe, () => {
+  if (recipe.value) {
+    ingredientCount.value = countIngredients(recipe.value.ingredientLines)
+    ingredientCalories.value = calories(recipe.value.calories, recipe.value.yield)
+  }
+})
 </script>
 
 <template>
-  <section class="info-recipe">
+  <section class="info-recipe" v-if="recipe">
     <div class="info-recipe__title">
       <article @click="toggleSaved" class="heart">
         <NotSaved
@@ -45,179 +72,70 @@ const mealType = ['lunch/dinner']
         />
         <Saved v-else :fill="'rgb(248, 0, 186)'" :height="'100%'" :width="'100%'" />
       </article>
-      <h2 class="title">Curry-Crusted Fish</h2>
+      <h2 class="title">{{ recipe.label }}</h2>
     </div>
     <div class="info-recipe__info info">
       <div class="info__img">
-        <img class="card-photo" src="../assets/images/horizontal.jpg" />
+        <img class="card-photo" :src="recipe.image" :alt="recipe.label" />
       </div>
       <div class="info__details details">
         <div class="details__source">
           <p>Full recipe in</p>
-          <a
-            href="http://www.seriouseats.com/recipes/2011/03/deep-fried-fish-bones-recipe.html"
-            target="_blank"
-            class="source"
-            >Serious Eats</a
-          >
+          <a :href="recipe.url" target="_blank" class="source">{{ recipe.source }}</a>
         </div>
         <ul class="details__i-m-c">
           <li class="imc">
-            <span class="imc__number">4</span>
+            <span class="imc__number">{{ ingredientCount }}</span>
             <p class="imc__string">ingredients</p>
           </li>
           <div class="imc">
-            <span class="imc__number">31</span>
+            <span class="imc__number">{{ recipe.totalTime }}</span>
             <p class="imc__string">minutes</p>
           </div>
           <div class="imc">
-            <span class="imc__number">732</span>
+            <span class="imc__number">{{ ingredientCalories }}</span>
             <p class="imc__string">calories/serving</p>
           </div>
         </ul>
         <ul class="details__labels labels">
-          <li class="labels__label"><p>Low-Carb</p></li>
-          <li class="labels__label"><p>south east asian</p></li>
-          <li class="labels__label"><p>lunch/dinner</p></li>
-          <li class="labels__label"><p>Low-Carb</p></li>
-          <li class="labels__label"><p>south east asian</p></li>
-          <li class="labels__label"><p>lunch/dinner</p></li>
-          <li class="labels__label"><p>Low-Carb</p></li>
-          <li class="labels__label"><p>south east asian</p></li>
-          <li class="labels__label"><p>lunch/dinner</p></li>
-          <li class="labels__label"><p>Low-Carb</p></li>
-          <li class="labels__label"><p>south east asian</p></li>
-          <li class="labels__label"><p>lunch/dinner</p></li>
+          <li
+            class="labels__label"
+            v-for="dietLabels in recipe.dietLabels"
+            :key="recipe.uri"
+          >
+            <p>{{ dietLabels }}</p>
+          </li>
+          <li
+            class="labels__label"
+            v-for="cuisineType in recipe.cuisineType"
+            :key="recipe.uri"
+          >
+            <p>{{ cuisineType }}</p>
+          </li>
+          <li class="labels__label" v-for="mealType in recipe.mealType" :key="recipe.uri">
+            <p>{{ mealType }}</p>
+          </li>
         </ul>
         <div class="details__servings">
           <p>Ingredients</p>
-          <p>for 4 servings</p>
+          <p>For {{ recipe.yield }} servings</p>
         </div>
         <ul class="details__ingredients">
-          <li class="ingredient">- small knob of butter</li>
-          <li class="ingredient">- 1 onion , roughly chopped</li>
-          <li class="ingredient">- 1kg white fish heads and bones</li>
-          <li class="ingredient">- 250ml white wine</li>
-          <li class="ingredient">
-            - bouquet garni of 2 parsley stalks, 2 sprigs of thyme and 1 bay leaf tied
-            with string
-          </li>
-          <li class="ingredient">- small knob of butter</li>
-          <li class="ingredient">- 1 onion , roughly chopped</li>
-          <li class="ingredient">- 1kg white fish heads and bones</li>
-          <li class="ingredient">- 250ml white wine</li>
-          <li class="ingredient">
-            - bouquet garni of 2 parsley stalks, 2 sprigs of thyme and 1 bay leaf tied
-            with string
+          <li
+            class="ingredient"
+            v-for="ingredient in recipe.ingredientLines"
+            :key="recipe.uri"
+          >
+            - {{ ingredient }}
           </li>
         </ul>
         <div class="details__nutrition">
           <p>Nutrition</p>
         </div>
         <ul class="details__digest digest">
-          <li class="digest__item">
-            <p>Fat</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Carbs</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Protein</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Cholesterol</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Sodium</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Calcium</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Magnesium</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Potassium</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Iron</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Zinc</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Phosphorus</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin A</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin C</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Thiamin (B1)</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Riboflavin (B2)</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Niacin (B3)</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin B6</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Folate equivalent (total)</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Folate (food)</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Folic acid</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin B12</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin D</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin E</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Vitamin K</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Sugar alcohols</p>
-            <p>12g</p>
-          </li>
-          <li class="digest__item">
-            <p>Water</p>
-            <p>12g</p>
+          <li class="digest__item" v-for="digest in recipe.digest" :key="recipe.uri">
+            <p>{{ digest.label }}</p>
+            <p>{{ calDigest(digest.total, recipe.yield) }}{{ digest.unit }}</p>
           </li>
         </ul>
       </div>
@@ -336,24 +254,28 @@ const mealType = ['lunch/dinner']
           }
           &__i-m-c {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            padding: 3em 0;
-            gap: 1em;
+            @include flex(center, center, space-between);
+            flex-wrap: wrap;
+            padding: 2.5em 0;
+            gap: 0.5em;
             @include responsive(50em) {
               padding: 1.5em 0;
             }
             .imc {
+              border-left: 0.05em solid map-get($map: $colors, $key: c-principal-color);
+              padding-left: 0.5em;
+              padding-right: 0.5em;
+              margin: 0.5em 0;
               &__number {
-                font-size: map-get($map: $font-size, $key: fs-titular-big);
+                font-size: map-get($map: $font-size, $key: fs-extra-big);
                 @include responsive(75em) {
-                  font-size: map-get($map: $font-size, $key: fs-extra-big);
-                }
-                @include responsive(50em) {
                   font-size: map-get($map: $font-size, $key: fs-more-big);
                 }
-                @include responsive(31.25em) {
+                @include responsive(50em) {
                   font-size: map-get($map: $font-size, $key: fs-big);
+                }
+                @include responsive(31.25em) {
+                  font-size: map-get($map: $font-size, $key: fs-medium);
                 }
               }
               &__string {

@@ -1,3 +1,4 @@
+// healthPreferences.js
 export default [
   'alcohol-cocktail',
   'alcohol-free',

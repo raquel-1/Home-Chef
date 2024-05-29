@@ -35,6 +35,7 @@ const themeClass = computed(() => {
     @include flex();
     padding: 1em 2em;
     border-radius: 2em;
+    font-size: map-get($map: $font-size, $key: fs-small);
   }
 }
 </style>

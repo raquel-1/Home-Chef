@@ -1,7 +1,9 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 
-const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
+const CardTemplate = defineAsyncComponent(
+  () => import('@/components/tabs/CardTemplate.vue'),
+)
 const ShowMore = defineAsyncComponent(() => import('@/components/tabs/ShowMore.vue'))
 const Header = defineAsyncComponent(() => import('@/components/header/Header.vue'))
 const Tabs = defineAsyncComponent(() => import('@/components/tabs/Tabs.vue'))
@@ -13,14 +15,14 @@ const Health = defineAsyncComponent(() => import('@/components/health/Health.vue
   <Header />
   <Tabs>
     <TabItem title="Breakfast">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <CardTemplate />
+      <CardTemplate />
+      <CardTemplate />
+      <CardTemplate />
+      <CardTemplate />
+      <CardTemplate />
+      <CardTemplate />
+      <CardTemplate />
       <ShowMore />
     </TabItem>
     <TabItem title="Lunch">
