@@ -75,9 +75,6 @@ const closeResponsiveNav = () => {
   @include responsive() {
     padding: 0 1em;
   }
-  @include responsive(43em) {
-    padding: 2em;
-  }
   @include responsive(31.25em) {
     top: auto;
     bottom: 0;

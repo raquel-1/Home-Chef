@@ -53,7 +53,7 @@ const mealType = ['lunch/dinner']
       </div>
       <div class="info__details details">
         <div class="details__source">
-          <p>full recipe in</p>
+          <p>Full recipe in</p>
           <a
             href="http://www.seriouseats.com/recipes/2011/03/deep-fried-fish-bones-recipe.html"
             target="_blank"
@@ -247,24 +247,20 @@ const mealType = ['lunch/dinner']
     padding: 1.5em 0;
     @include flex(row, center, flex-start);
     .heart {
-      width: 3em;
-      height: 3em;
+      width: 2.5em;
+      height: 2.5em;
       overflow: hidden;
       margin-right: 1em;
       @include responsive() {
-        width: 2.5em;
-        height: 2.5em;
-      }
-      @include responsive(31.25em) {
         width: 2em;
         height: 2em;
       }
     }
     .title {
       transform: translateY(0.05em);
-      font-size: map-get($map: $font-size, $key: fs-more-big);
+      font-size: map-get($map: $font-size, $key: fs-big);
       @include responsive() {
-        font-size: map-get($map: $font-size, $key: fs-big);
+        font-size: map-get($map: $font-size, $key: fs-medium);
       }
       @include responsive(31.25em) {
         font-size: map-get($map: $font-size, $key: fs-medium);
@@ -401,6 +397,7 @@ const mealType = ['lunch/dinner']
             width: 100%;
             .ingredient {
               margin-bottom: 0.55em;
+              text-transform: capitalize;
             }
           }
           &__nutrition {
