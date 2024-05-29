@@ -92,7 +92,7 @@ const isHovered = ref(false)
     border-radius: 2em;
     padding: 0 0 0 1.5em;
     overflow: hidden;
-    @include responsive(31.25em) {
+    @include responsive(50em) {
       height: 2.2em;
     }
     @include responsive(27em) {
@@ -112,6 +112,9 @@ const isHovered = ref(false)
         text-decoration: none;
         @include flex();
         font-size: map-get($map: $font-size, $key: fs-small);
+        @include responsive(31.25em) {
+          font-size: map-get($map: $font-size, $key: fs-extra-small);
+        }
         &::placeholder {
           color: map-get($map: $colors, $key: c-white);
           transform: translateY(0.1em);
