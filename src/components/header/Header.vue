@@ -23,7 +23,7 @@ const isHovered = ref(false)
           :class="{ hovered: isHovered }"
           @mouseover="isHovered = true"
         >
-          <Pan :class="{ 'rotate-180': isHovered }" :width="'2em'" :height="'2em'" />
+          <Pan :class="{ 'rotate-180': isHovered }" />
         </button>
       </article>
     </div>
