@@ -25,12 +25,17 @@ const toggleSaved = () => {
     </router-link>
     <div class="card__bottom">
       <div class="bottom__time">
-        <Chronometer />
+        <Chronometer :height="'1.65em'" :width="'1.65em'" />
         <span class="bottom__minutes">13 minutes</span>
       </div>
       <article @click="toggleSaved">
-        <NotSaved v-if="!isSaved" :fill="'rgb(248, 0, 186)'" />
-        <Saved v-else :fill="'rgb(248, 0, 186)'" />
+        <NotSaved
+          v-if="!isSaved"
+          :fill="'rgb(248, 0, 186)'"
+          :height="'1.65em'"
+          :width="'1.65em'"
+        />
+        <Saved v-else :fill="'rgb(248, 0, 186)'" :height="'1.65em'" :width="'1.65em'" />
       </article>
     </div>
   </article>
@@ -61,7 +66,7 @@ const toggleSaved = () => {
     padding: 0.7em 0;
     max-height: 4em;
     .title {
-      font-size: map-get($map: $font-size, $key: fs-medium-small);
+      font-size: map-get($map: $font-size, $key: fs-small);
       cursor: pointer;
       display: -webkit-box;
       -webkit-line-clamp: 2;

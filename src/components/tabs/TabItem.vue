@@ -26,7 +26,7 @@ export default {
 .tab-item {
   min-width: 100%;
   @include flex(center, center, flex-start);
-  gap: 1em;
+  gap: 1.3em;
   white-space: nowrap;
   overflow-x: auto; /* Permitir desplazamiento horizontal */
   -webkit-overflow-scrolling: touch; /* Añadir desplazamiento suave para dispositivos iOS */
