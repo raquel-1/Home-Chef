@@ -70,12 +70,12 @@ export default {
         flex-shrink: 1;
         border-bottom: 0.05em solid
           map-get($map: $colors, $key: c-transparent-dark-principal-color);
-        font-size: map-get($map: $font-size, $key: fs-medium-small);
+        font-size: map-get($map: $font-size, $key: fs-small);
         @include responsive() {
-          font-size: map-get($map: $font-size, $key: fs-small);
+          font-size: map-get($map: $font-size, $key: fs-extra-small);
         }
         @include responsive(31.25em) {
-          font-size: map-get($map: $font-size, $key: fs-extra-small);
+          font-size: map-get($map: $font-size, $key: fs-extra-small-button);
         }
         &--active {
           border-bottom: 0.3em solid map-get($map: $colors, $key: c-principal-color);
