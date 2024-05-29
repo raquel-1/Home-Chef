@@ -88,16 +88,12 @@ const isHovered = ref(false)
     width: 80%;
     max-width: 60em;
     background-color: map-get($map: $colors, $key: c-transparent-principal-color);
-    height: 3em;
+    height: 2.5em;
     border-radius: 2em;
-    padding: 0 0 0 2em;
+    padding: 0 0 0 1.5em;
     overflow: hidden;
-    @include responsive() {
-      height: 2.7em;
-      padding: 0 0 0 1.5em;
-    }
     @include responsive(31.25em) {
-      height: 2.4em;
+      height: 2.2em;
     }
     @include responsive(27em) {
       padding: 0 0 0 1em;
@@ -115,10 +111,7 @@ const isHovered = ref(false)
         border: 0;
         text-decoration: none;
         @include flex();
-        font-size: map-get($map: $font-size, $key: fs-medium-small);
-        @include responsive() {
-          font-size: map-get($map: $font-size, $key: fs-small);
-        }
+        font-size: map-get($map: $font-size, $key: fs-small);
         &::placeholder {
           color: map-get($map: $colors, $key: c-white);
           transform: translateY(0.1em);
