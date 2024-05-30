@@ -35,11 +35,3 @@ npm run lint
 ```
 
 ### https://prettier.io/docs/en/install
-
-### TODO
-
-- [] tabs con scripsetup y filter
-- [x] fetch
-- [] search
-- [] padding para todos igual
-- [] saved

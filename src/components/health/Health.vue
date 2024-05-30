@@ -35,45 +35,41 @@ const handlePreferenceClick = (preference) => {
   @include flex(column);
   min-width: 100%;
   padding: 1em 0;
+  padding: map-get($map: $sizes, $key: s-general-padding);
+
+  @include responsive() {
+    padding: map-get($map: $sizes, $key: s-general-padding-tablet);
+  }
+  @include responsive(50em) {
+    padding: map-get($map: $sizes, $key: s-general-padding-mobile);
+  }
+  @include responsive(31.25em) {
+    padding: 0;
+  }
   &__title {
     font-size: 1.7em;
     @include responsive() {
       font-size: 1.7em;
     }
-    @include responsive(50em) {
-      padding: map-get($map: $sizes, $key: s-general-padding-tablet);
-    }
     @include responsive(31.25em) {
-      padding: map-get($map: $sizes, $key: s-general-padding-mobile);
       font-size: map-get($map: $font-size, $key: fs-medium);
     }
   }
   &__subtitle {
     font-size: map-get($map: $font-size, $key: fs-small);
-    padding: map-get($map: $sizes, $key: s-general-padding);
     margin: 0.5em 0 0.7em;
+    text-align: center;
     @include responsive() {
       font-size: map-get($map: $font-size, $key: fs-extra-small);
       padding: 0.35em 0;
     }
-    @include responsive(50em) {
-      padding: map-get($map: $sizes, $key: s-general-padding-tablet);
-    }
     @include responsive(31.25em) {
-      padding: map-get($map: $sizes, $key: s-general-padding-mobile);
       font-size: map-get($map: $font-size, $key: fs-extra-small-button);
     }
   }
   &__buttons-container {
     @include flex();
     flex-wrap: wrap;
-    padding: map-get($map: $sizes, $key: s-general-padding);
-    @include responsive(50em) {
-      padding: map-get($map: $sizes, $key: s-general-padding-tablet);
-    }
-    @include responsive(31.25em) {
-      padding: map-get($map: $sizes, $key: s-general-padding-mobile);
-    }
   }
   &__buttons {
     margin: 0.3em;

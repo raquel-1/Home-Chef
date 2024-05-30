@@ -46,8 +46,8 @@ export default {
 <style lang="scss" scoped>
 .tabs {
   max-width: 100%;
-  margin: map-get($map: $sizes, $key: s-general-padding);
   @include flex(column);
+  margin: map-get($map: $sizes, $key: s-general-padding);
   @include responsive() {
     margin: map-get($map: $sizes, $key: s-general-padding-tablet);
   }

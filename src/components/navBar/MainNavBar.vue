@@ -70,12 +70,15 @@ const closeResponsiveNav = () => {
   top: 0;
   z-index: 10;
   border-bottom: 0.05em solid map-get($map: $colors, $key: c-principal-color);
-  padding: map-get($map: $sizes, $key: s-padding-nav);
-  padding-left: 0.5em;
+  padding: map-get($map: $sizes, $key: s-general-padding);
   @include responsive() {
-    padding: 0 1em;
+    padding: map-get($map: $sizes, $key: s-general-padding-tablet);
+  }
+  @include responsive(50em) {
+    padding: map-get($map: $sizes, $key: s-general-padding-mobile);
   }
   @include responsive(31.25em) {
+    padding: 0;
     top: auto;
     bottom: 0;
     left: 0;

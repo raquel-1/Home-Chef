@@ -163,18 +163,24 @@ watch(recipe, () => {
   }
   &__title {
     padding: 1.5em 0;
-    @include flex(row, center, flex-start);
+    width: 100%;
+    @include flex(row, flex-start, flex-start);
     .heart {
-      width: 2.5em;
-      height: 2.5em;
+      min-width: 2.5em;
+      min-height: 2.5em;
+      max-width: 2.5em;
+      max-height: 2.5em;
       overflow: hidden;
       margin-right: 1em;
       @include responsive() {
-        width: 2em;
-        height: 2em;
+        min-width: 2em;
+        min-height: 2em;
+        max-width: 2em;
+        max-height: 2em;
       }
     }
     .title {
+      flex-grow: 1;
       transform: translateY(0.05em);
       font-size: map-get($map: $font-size, $key: fs-big);
       @include responsive() {

@@ -43,19 +43,17 @@ const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
       display: none;
     }
     .saved {
-      height: 2.7em;
-      width: 8em;
-      padding: 0 0.7em;
+      width: 7.5em;
+      padding: 0.4em;
       background-color: map-get($map: $colors, $key: c-principal-color);
-      @include flex(row, center, space-between);
+      @include flex(row, center, space-around);
       border-radius: 2em;
-      margin-right: 0.5em;
       cursor: pointer;
       &__p {
-        font-size: map-get($map: $font-size, $key: fs-medium);
+        font-size: map-get($map: $font-size, $key: fs-medium-small);
         padding-right: 0.2em;
         @include responsive() {
-          font-size: map-get($map: $font-size, $key: fs-medium-small);
+          font-size: map-get($map: $font-size, $key: fs-small);
         }
       }
     }
