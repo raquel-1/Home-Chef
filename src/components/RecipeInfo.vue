@@ -1,5 +1,5 @@
 <script setup>
-import { useRecipeStore } from '@/stores/recipeStore'
+import { useRecipeStore } from '@/stores/recipeStoreTest'
 import { watchEffect } from 'vue'
 
 const recipeStore = useRecipeStore()

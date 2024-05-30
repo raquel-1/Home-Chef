@@ -1,5 +1,5 @@
 import { fetchRecipes } from '@/composables/fetchRecipes'
-import { useRecipeStore } from '@/stores/recipeStore'
+import { useRecipeStore } from '@/stores/recipeStoreTest'
 import '@/assets/styles/scss/reset.scss'
 import { createApp, watchEffect } from 'vue'
 import router from './router'

@@ -1,19 +1,12 @@
-<script>
-import { inject, computed } from 'vue'
+<script setup>
+import { inject, computed, defineProps } from 'vue'
 
-export default {
-  props: ['title'],
-  setup(props) {
-    // inyecta selected de padre tabs
-    const selected = inject('selected')
-    // true si el titulo de esta pestaña es igual al titulo seleccionado
-    const isActive = computed(() => props.title === selected.value)
+const props = defineProps(['title'])
 
-    return {
-      isActive,
-    }
-  },
-}
+// inyecta selected de padre tabs
+const selected = inject('selected')
+
+const isActive = computed(() => props.title === selected.value)
 </script>
 
 <template>
@@ -28,9 +21,9 @@ export default {
   @include flex(center, center, flex-start);
   gap: 1.3em;
   white-space: nowrap;
-  overflow-x: auto; /* Permitir desplazamiento horizontal */
-  -webkit-overflow-scrolling: touch; /* Añadir desplazamiento suave para dispositivos iOS */
-  scroll-snap-type: x mandatory; /* Permite el desplazamiento suave */
+  overflow-x: auto; /* permitir desplazamiento horizontal */
+  -webkit-overflow-scrolling: touch; /* añadir desplazamiento suave para dispositivos iOS */
+  scroll-snap-type: x mandatory; /* permite el desplazamiento suave */
   -webkit-overflow-scrolling: touch;
   margin-bottom: 2em;
 }

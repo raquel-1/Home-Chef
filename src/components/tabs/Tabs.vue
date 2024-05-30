@@ -1,26 +1,25 @@
-<script>
-import { ref, provide } from 'vue'
+<script setup>
+import { ref, provide, onMounted, getCurrentInstance } from 'vue'
 
-export default {
-  setup(props, { slots }) {
-    // coge titulos de las pestañas apartir de los slots (tabitem)
-    const tabtitles = ref(slots.default().map((tab) => tab.props.title))
-    const selected = ref(tabtitles.value[0])
+const tabtitles = ref([])
 
-    // titulo seleccionado para los componentes hijos(tabitem)
-    provide('selected', selected)
+// pestaña seleccionada
+const selected = ref('')
 
-    // seleciona pestaña
-    const selectTab = (title) => {
-      selected.value = title
-    }
+provide('selected', selected)
 
-    return {
-      selected,
-      tabtitles,
-      selectTab,
-    }
-  },
+// accede a la instancia actual para obtener los slots
+const instance = getCurrentInstance()
+
+// coge titulos de las pestañas a partir de los slots (TabItem)
+onMounted(() => {
+  tabtitles.value = instance.slots.default().map((tab) => tab.props.title)
+  selected.value = tabtitles.value[0] // Selecciona la primera pestaña por defecto
+})
+
+// seleccionar pestaña
+const selectTab = (title) => {
+  selected.value = title
 }
 </script>
 
