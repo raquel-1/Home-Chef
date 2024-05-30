@@ -1,18 +1,11 @@
 <script setup>
-import { defineAsyncComponent, computed, ref, onMounted } from 'vue'
-import { useThemeStore } from '@/stores/theme'
-import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
+import { defineAsyncComponent, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { APP_ID, APP_KEY } from '@/constants/credentials'
 
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 
-const themeStore = useThemeStore()
 const route = useRoute()
-
-const themeClass = computed(() => {
-  return themeStore.theme === LIGHT_MODE ? 'theme-light' : 'theme-dark'
-})
 
 const recipes = ref([])
 

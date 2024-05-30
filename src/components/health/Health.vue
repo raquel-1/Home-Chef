@@ -90,6 +90,7 @@ const handlePreferenceClick = (preference) => {
       }
       &:hover {
         background-color: map-get($map: $colors, $key: c-principal-light-color);
+        transition-duration: 0.6s;
       }
     }
   }
