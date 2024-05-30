@@ -63,6 +63,7 @@ const selectTab = (title) => {
     padding: 0;
     .header {
       &__title {
+        text-transform: capitalize;
         @include flex(column);
         padding: 1em;
         cursor: pointer;

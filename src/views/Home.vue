@@ -1,13 +1,11 @@
 <script setup>
-import { defineAsyncComponent, onMounted, ref } from 'vue'
+import { defineAsyncComponent, onMounted, computed } from 'vue'
 import { useRecipesStore } from '@/stores/recipesStore'
 
 const Header = defineAsyncComponent(() => import('@/components/header/Header.vue'))
 const Tabs = defineAsyncComponent(() => import('@/components/tabs/Tabs.vue'))
 const TabItem = defineAsyncComponent(() => import('@/components/tabs/TabItem.vue'))
-const CardTemplate = defineAsyncComponent(
-  () => import('@/components/tabs/CardTemplate.vue'),
-)
+const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 const ShowMore = defineAsyncComponent(() => import('@/components/tabs/ShowMore.vue'))
 const Health = defineAsyncComponent(() => import('@/components/health/Health.vue'))
 
@@ -21,6 +19,21 @@ onMounted(async () => {
   } catch (err) {
     console.error('Error recipes tabs:', err)
   }
+})
+const filteredBreakfastRecipes = computed(() => {
+  return recipesStore.recipes.filter((recipe) => {
+    return recipe.mealType.includes('breakfast')
+  })
+})
+const filteredBrunchRecipes = computed(() => {
+  return recipesStore.recipes.filter((recipe) => {
+    return recipe.mealType.includes('brunch')
+  })
+})
+const filteredSnackRecipes = computed(() => {
+  return recipesStore.recipes.filter((recipe) => {
+    return recipe.mealType.includes('snack')
+  })
 })
 </script>
 
@@ -36,37 +49,22 @@ onMounted(async () => {
     "
   >
     <Tabs>
-      <TabItem title="Breakfast">
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
+      <TabItem title="breakfast">
+        <template v-for="recipe in filteredBreakfastRecipes" :key="recipe.uri">
+          <Card :dataObject="{ recipe: recipe }" />
+        </template>
         <ShowMore />
       </TabItem>
-      <TabItem title="Lunch">
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
+      <TabItem title="brunch">
+        <template v-for="recipe in filteredBrunchRecipes" :key="recipe.uri">
+          <Card :dataObject="{ recipe: recipe }" />
+        </template>
         <ShowMore />
       </TabItem>
-      <TabItem title="Dinner">
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
-        <CardTemplate />
+      <TabItem title="snack">
+        <template v-for="recipe in filteredSnackRecipes" :key="recipe.uri">
+          <Card :dataObject="{ recipe: recipe }" />
+        </template>
         <ShowMore />
       </TabItem>
     </Tabs>
