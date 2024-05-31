@@ -11,6 +11,7 @@ const routes = [
   { path: '/recipes', component: Recipes },
   { path: '/saved', component: Saved },
   { path: '/recipe-info/:recipeId', name: 'RecipeInfo', component: RecipeInfo },
+  { path: '/:catchAll(.*)', redirect: '/home' },
 ]
 
 const router = createRouter({

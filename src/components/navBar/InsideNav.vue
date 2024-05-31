@@ -16,15 +16,14 @@ const currentRoute = computed(() => route.path)
         :class="{ '--active': currentRoute === '/home' }"
         ><h2 class="title">Home</h2>
       </router-link>
-      <!-- 
-        <router-link
+
+      <router-link
         to="/recipes"
         class="nav-list__item"
         :class="{ '--active': currentRoute === '/recipes' }"
       >
         <h2 class="title">Recipes</h2>
       </router-link>
-        -->
     </article>
   </div>
 </template>
@@ -47,9 +46,7 @@ const currentRoute = computed(() => route.path)
       display: none;
     }
     .nav-list {
-      //@include flex(row, center, space-between);
-      @include flex();
-
+      @include flex(row, center, space-between);
       height: 100%;
       &__item {
         height: 100%;

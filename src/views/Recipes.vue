@@ -47,7 +47,7 @@ onMounted(() => {
 .recipes {
   padding: map-get($map: $sizes, $key: s-general-padding);
   padding-top: map-get($map: $heights, $key: h-navbar);
-  min-height: 100vh; /** quitar esto */
+  min-height: 100vh;
 
   @include responsive(50em) {
     padding: map-get($map: $sizes, $key: s-general-padding-tablet);

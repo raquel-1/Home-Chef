@@ -1,6 +1,8 @@
 <script setup>
 import { defineAsyncComponent, ref, computed } from 'vue'
 import { formatTime } from '@/composables/recipeUtils'
+import useSavedRecipes from '@/composables/useSavedRecipes'
+
 const Chronometer = defineAsyncComponent(() => import('@/assets/svgs/Chronometer.vue'))
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
@@ -12,11 +14,7 @@ const props = defineProps({
   },
 })
 
-const isSaved = ref(false)
-
-const toggleSaved = () => {
-  isSaved.value = !isSaved.value
-}
+const { isSaved, toggleSaved } = useSavedRecipes()
 
 const formattedTime = computed(() => {
   return formatTime(props.dataObject.recipe.totalTime)
@@ -46,9 +44,9 @@ const formattedTime = computed(() => {
         <Chronometer :height="'1.65em'" :width="'1.65em'" />
         <span class="bottom__minutes">{{ formattedTime }}</span>
       </div>
-      <article @click="toggleSaved">
+      <article @click="toggleSaved(props.dataObject.recipe)">
         <NotSaved
-          v-if="!isSaved"
+          v-if="!isSaved(props.dataObject.recipe)"
           :fill="'rgb(248, 0, 186)'"
           :height="'1.65em'"
           :width="'1.65em'"

@@ -91,7 +91,6 @@ const isHovered = ref(false)
     }
   }
   &__search-box {
-    visibility: hidden; //
     @include flex();
     width: 80%;
     max-width: 60em;
@@ -111,8 +110,6 @@ const isHovered = ref(false)
       padding: 0 0 0 0.5em;
     }
     .search-box {
-      display: none; //
-      visibility: hidden; //
       &__input {
         background-color: map-get($map: $colors, $key: c-transparent);
         flex-grow: 1;

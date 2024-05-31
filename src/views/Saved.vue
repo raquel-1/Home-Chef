@@ -1,21 +1,21 @@
 <script setup>
-import { defineAsyncComponent, computed } from 'vue'
+import { defineAsyncComponent } from 'vue'
+import useSavedRecipes from '@/composables/useSavedRecipes'
 
-const CardTemplate = defineAsyncComponent(
-  () => import('@/components/tabs/CardTemplate.vue'),
-)
+const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
+const { savedRecipes } = useSavedRecipes()
 </script>
 
 <template>
   <section class="saved">
     <h2 class="saved__title">All your saved recipes</h2>
-    <p class="saved__no-saved-yet">You have not saved any recipe yet</p>
-    <ul class="saved__container">
-      <li><CardTemplate /></li>
-      <li><CardTemplate /></li>
-      <li><CardTemplate /></li>
-      <li><CardTemplate /></li>
-      <li><CardTemplate /></li>
+    <p class="saved__no-saved-yet" v-if="savedRecipes.length === 0">
+      You have not saved any recipe yet
+    </p>
+    <ul class="saved__container" v-else>
+      <li v-for="recipe in savedRecipes" :key="recipe.uri">
+        <Card :dataObject="{ recipe: recipe }" />
+      </li>
     </ul>
   </section>
 </template>
@@ -24,7 +24,7 @@ const CardTemplate = defineAsyncComponent(
 .saved {
   padding: map-get($map: $sizes, $key: s-general-padding);
   padding-top: map-get($map: $heights, $key: h-navbar);
-  min-height: 100vh; /** quitar esto */
+  min-height: 100vh;
 
   @include responsive(50em) {
     padding: map-get($map: $sizes, $key: s-general-padding-tablet);
@@ -46,7 +46,7 @@ const CardTemplate = defineAsyncComponent(
   }
   &__container {
     width: 100%;
-    @include flex(row, center, space-between);
+    @include flex(row, center, flex-start);
     gap: 1em;
     flex-wrap: wrap;
     @include responsive(31.25em) {

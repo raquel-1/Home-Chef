@@ -20,21 +20,18 @@ onMounted(async () => {
     console.error('Error recipes tabs:', err)
   }
 })
-const filteredBreakfastRecipes = computed(() => {
-  return recipesStore.recipes.filter((recipe) => {
-    return recipe.mealType.includes('breakfast')
+
+function filterRecipesByMealType(mealType) {
+  return computed(() => {
+    return recipesStore.recipes.filter((recipe) => {
+      return recipe.mealType.includes(mealType)
+    })
   })
-})
-const filteredBrunchRecipes = computed(() => {
-  return recipesStore.recipes.filter((recipe) => {
-    return recipe.mealType.includes('brunch')
-  })
-})
-const filteredSnackRecipes = computed(() => {
-  return recipesStore.recipes.filter((recipe) => {
-    return recipe.mealType.includes('snack')
-  })
-})
+}
+
+const filteredBreakfastRecipes = filterRecipesByMealType('breakfast')
+const filteredBrunchRecipes = filterRecipesByMealType('brunch')
+const filteredSnackRecipes = filterRecipesByMealType('snack')
 </script>
 
 <template>

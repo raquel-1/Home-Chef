@@ -8,18 +8,12 @@ import {
   calories,
   calDigest,
 } from '@/composables/recipeUtils'
+import useSavedRecipes from '@/composables/useSavedRecipes'
 
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 
-const isSaved = ref(false)
-
-const toggleSaved = () => {
-  isSaved.value = !isSaved.value
-}
-const dietLabels = ['High-Protein', 'Low-Fat']
-const cuisineType = ['south east asian']
-const mealType = ['lunch/dinner']
+const { isSaved, toggleSaved } = useSavedRecipes()
 
 const route = useRoute()
 
@@ -63,9 +57,9 @@ watch(recipe, () => {
 <template>
   <section class="info-recipe" v-if="recipe">
     <div class="info-recipe__title">
-      <article @click="toggleSaved" class="heart">
+      <article @click="toggleSaved(recipe)" class="heart">
         <NotSaved
-          v-if="!isSaved"
+          v-if="!isSaved(recipe)"
           :fill="'rgb(248, 0, 186)'"
           :height="'100%'"
           :width="'100%'"
