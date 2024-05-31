@@ -1,45 +1,46 @@
 <script setup>
-import { defineAsyncComponent, ref, onMounted } from 'vue'
+import { defineAsyncComponent, onMounted, computed, ref } from 'vue'
+import { useRecipesStore } from '@/stores/recipesStore'
 import { useRoute } from 'vue-router'
 import { APP_ID, APP_KEY } from '@/constants/credentials'
 
+const InputSearch = defineAsyncComponent(
+  () => import('@/components/header/InputSearch.vue'),
+)
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 
-const route = useRoute()
+const recipesStore = useRecipesStore()
 
-const recipes = ref([])
-
-const fetchRecipes = async (healthLabel) => {
+onMounted(async () => {
   try {
-    const response = await fetch(
-      `https://api.edamam.com/search?q=&app_id=${APP_ID}&app_key=${APP_KEY}&health=${healthLabel}&from=0&to=20`,
-    )
-    const data = await response.json()
-    recipes.value = data.hits
-  } catch (error) {
-    console.error('Error fetching recipes:', error)
-  }
-}
-
-onMounted(() => {
-  const healthLabel = route.query.health
-  if (healthLabel) {
-    fetchRecipes(healthLabel)
+    if (recipesStore.recipes.length === 0) {
+      await recipesStore.loadRecipes()
+    }
+  } catch (err) {
+    console.error('Error recipes tabs:', err)
   }
 })
 </script>
 
 <template>
   <div class="recipes">
-    <h2 class="recipes__title">Recipes</h2>
-    <div v-if="recipes.length" class="recipes__results">
-      <div v-for="recipe in recipes" :key="recipe.recipe.uri" class="recipe">
-        <Card :dataObject="recipe" />
-      </div>
-    </div>
-    <div v-else>
-      <p>No recipes found.</p>
-    </div>
+    <article class="recipes__search">
+      <InputSearch />
+    </article>
+    <template v-if="recipesStore.isLoading">Loading...</template>
+    <template v-else-if="recipesStore.error">{{ recipesStore.error }}</template>
+    <section
+      class="recipes__tabs-recipes"
+      v-else-if="
+        !recipesStore.error &&
+        !recipesStore.isLoading &&
+        recipesStore.recipes.length === 30
+      "
+    >
+      <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
+        <Card :dataObject="{ recipe: recipe }" />
+      </template>
+    </section>
   </div>
 </template>
 
@@ -61,16 +62,16 @@ onMounted(() => {
     padding: map-get($map: $sizes, $key: s-general-padding-mobile);
     padding-top: 0;
   }
-  &__title {
+  &__search {
+    width: 100%;
+    @include flex();
     padding: 1em 0;
   }
-  &__results {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    @include flex(row, center, space-between);
+  &__tabs-recipes {
+    margin: 2em 0;
+    @include flex(center, center, space-between);
+    gap: 1.5em;
     flex-wrap: wrap;
-    gap: 2em;
   }
 }
 </style>
