@@ -14,7 +14,6 @@ export default [
   'keto-friendly',
   'kidney-friendly',
   'kosher',
-  'low-fat-abs',
   'low-potassium',
   'low-sugar',
   'lupine-free',

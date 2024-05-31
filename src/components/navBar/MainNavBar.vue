@@ -78,7 +78,7 @@ const closeResponsiveNav = () => {
     padding: map-get($map: $sizes, $key: s-general-padding-mobile);
   }
   @include responsive(31.25em) {
-    padding: 0;
+    padding: 0 1em;
     top: auto;
     bottom: 0;
     left: 0;

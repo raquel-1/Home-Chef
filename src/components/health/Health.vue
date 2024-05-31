@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const handlePreferenceClick = (preference) => {
-  router.push({ path: '/recipes', query: { health: preference } })
+  router.push({ path: '/health-preference', query: { health: preference } })
 }
 </script>
 
@@ -81,6 +81,8 @@ const handlePreferenceClick = (preference) => {
       background-color: map-get($map: $colors, $key: c-transparent-dark-principal-color);
       border-radius: 2em;
       transition: background-color map-get($map: $transitions, $key: t-button);
+      text-transform: capitalize;
+
       @include responsive(50em) {
         padding: 0.6em 0.8em;
       }
