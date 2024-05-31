@@ -221,3 +221,11 @@ body {
 .icon {
   cursor: pointer;
 }
+
+.error-message {
+  color: map-get($map: $colors, $key: c-red);
+}
+
+.loading-message {
+  color: map-get($map: $colors, $key: c-green);
+}

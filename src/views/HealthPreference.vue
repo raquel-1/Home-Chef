@@ -72,8 +72,5 @@ onMounted(() => {
     flex-wrap: wrap;
     gap: 2em;
   }
-  .error-message {
-    color: map-get($map: $colors, $key: c-red);
-  }
 }
 </style>

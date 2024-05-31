@@ -1,153 +1,155 @@
 /*********** VARIABLES GLOBALES *************/
 
 $colors: (
-  "c-white": #ffffff,
-  "c-light-grey": #f0f0f0,
-  "c-medium-grey": #869fb2,
-  "c-form-grey": #616161,
-  "c-light-blue": #d2e3fc,
-  "c-back": rgb(48, 48, 48),
-  "c-black": #000000,
-  "c-red": red,
-  "c-graphite": #1a1a1a,
-  "c-principal-color": rgb(248, 0, 186),
-  "c-principal-light-color": rgb(255, 138, 226),
-  "c-transparent-dark-principal-color": rgba(136, 87, 124, 0.493),
-  "c-transparent-principal-color": rgba(248, 0, 186, 0.568),
-  "c-transparent": #00000000,
-  "c-facebook": #1877f2,
-  "c-linkedin": #0077b5,
-  "c-graphite-transparent": #1a1a1a80
+  'c-white': #ffffff,
+  'c-light-grey': #f0f0f0,
+  'c-medium-grey': #869fb2,
+  'c-form-grey': #616161,
+  'c-light-blue': #d2e3fc,
+  'c-back': rgb(48, 48, 48),
+  'c-black': #000000,
+  'c-red': red,
+  'c-green': rgb(210, 255, 210),
+  'c-graphite': #1a1a1a,
+  'c-principal-color': rgb(248, 0, 186),
+  'c-principal-light-color': rgb(255, 138, 226),
+  'c-transparent-dark-principal-color': rgba(136, 87, 124, 0.493),
+  'c-transparent-principal-color': rgba(248, 0, 186, 0.568),
+  'c-transparent': #00000000,
+  'c-facebook': #1877f2,
+  'c-linkedin': #0077b5,
+  'c-graphite-transparent': #1a1a1a80,
 );
 
 $fonts: (
-  "f-font-thin": "Campton-Thin",
-  "f-font-extraLight": "Campton-ExtraLight",
-  "f-font-light": "Campton-light",
-  "f-font-book": "Campton-book",
-  "f-font-medium": "Campton-medium",
-  "f-font-semiBold": "Campton-semibold",
-  "f-font-bold": "Campton-bold",
-  "f-font-extraBold": "Campton-ExtraBold",
-  "f-font-black": "Campton-Black",
-  "f-material-icons": "Material Icons"
+  'f-font-thin': 'Campton-Thin',
+  'f-font-extraLight': 'Campton-ExtraLight',
+  'f-font-light': 'Campton-light',
+  'f-font-book': 'Campton-book',
+  'f-font-medium': 'Campton-medium',
+  'f-font-semiBold': 'Campton-semibold',
+  'f-font-bold': 'Campton-bold',
+  'f-font-extraBold': 'Campton-ExtraBold',
+  'f-font-black': 'Campton-Black',
+  'f-material-icons': 'Material Icons',
 );
 
 $font-size: (
-  "fs-detail-paragraph": 0.7rem,
-  "fs-extra-small-button": 0.8rem,
-  "fs-extra-small": 0.9rem,
-  "fs-small": 1rem,
-  "fs-medium-small": 1.3rem,
-  "fs-medium": 1.5rem,
-  "fs-big": 2rem,
-  "fs-more-big": 2.5rem,
-  "fs-extra-big": 3rem,
-  "fs-titular-big": 4rem
+  'fs-detail-paragraph': 0.7rem,
+  'fs-extra-small-button': 0.8rem,
+  'fs-extra-small': 0.9rem,
+  'fs-small': 1rem,
+  'fs-medium-small': 1.3rem,
+  'fs-medium': 1.5rem,
+  'fs-big': 2rem,
+  'fs-more-big': 2.5rem,
+  'fs-extra-big': 3rem,
+  'fs-titular-big': 4rem,
 );
 
 $heights: (
-  "h-navbar": 4.5rem,
-  "h-card": 19.7rem
+  'h-navbar': 4.5rem,
+  'h-card': 19.7rem,
 );
 
 $sizes: (
-  "s-card": 14rem,
-  "s-navbar": 120rem,
-  "s-body": 120rem,
-  "s-general-padding": 0 6rem,
-  "s-general-padding-tablet": 0 3rem,
-  "s-general-padding-mobile": 0 1rem,
-  "s-margin-top": 10rem 0 0 0,
-  "s-margin-top-banner": 5rem 0 0 0,
-  "s-margin-bottom-banner": 0 0 5rem,
-  "s-margin-blocks": 8rem 0,
-  "s-margin-blocks-mobile": 4rem 0,
-  "s-margin-elements": 4rem 0,
-  "s-border-radius-button": 0.25rem,
-  "s-border-radius-textField": 0.125rem,
-  "s-logo": 9rem
+  's-card': 14rem,
+  's-navbar': 120rem,
+  's-body': 120rem,
+  's-general-padding': 0 6rem,
+  's-general-padding-tablet': 0 3rem,
+  's-general-padding-mobile': 0 1rem,
+  's-margin-top': 10rem 0 0 0,
+  's-margin-top-banner': 5rem 0 0 0,
+  's-margin-bottom-banner': 0 0 5rem,
+  's-margin-blocks': 8rem 0,
+  's-margin-blocks-mobile': 4rem 0,
+  's-margin-elements': 4rem 0,
+  's-border-radius-button': 0.25rem,
+  's-border-radius-textField': 0.125rem,
+  's-logo': 9rem,
 );
 
 $transitions: (
-  "t-button": 0.5s ease
+  't-button': 0.5s ease,
 );
 
 $icons: (
-  "error": "\e000",
-  "warning": "⚠",
-  "info": "ⓘ",
-  "close": "\e5cd"
+  'error': '\e000',
+  'warning': '⚠',
+  'info': 'ⓘ',
+  'close': '\e5cd',
 );
 
 /*********** FIN VARIABLES GLOBALES *************/
 
 /******** FUENTES ********/
 @font-face {
-  font-family: "Campton-Thin";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Thin.ttf");
+  font-family: 'Campton-Thin';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Thin.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-ExtraLight";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-ExtraLight.ttf");
+  font-family: 'Campton-ExtraLight';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-ExtraLight.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-light";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Light.ttf");
+  font-family: 'Campton-light';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Light.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-book";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Book.ttf");
+  font-family: 'Campton-book';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Book.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-medium";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Medium.ttf");
+  font-family: 'Campton-medium';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Medium.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-semibold";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-SemiBold.ttf");
+  font-family: 'Campton-semibold';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-SemiBold.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-bold";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Bold.ttf");
+  font-family: 'Campton-bold';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Bold.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-ExtraBold";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-ExtraBold.ttf");
+  font-family: 'Campton-ExtraBold';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-ExtraBold.ttf');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Campton-Black";
-  src: url("https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Black.ttf");
+  font-family: 'Campton-Black';
+  src: url('https://d1zjrnsze32g3g.cloudfront.net/fonts-globales/Campton-Black.ttf');
   font-display: swap;
 }
 /******** FIN FUENTES ********/
 /********CSS GOOGLE**********/
 /* fallback */
 @font-face {
-  font-family: "Material Icons";
+  font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v139/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2");
+  src: url(https://fonts.gstatic.com/s/materialicons/v139/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format('woff2');
 }
 
 .material-icons {
-  font-family: "Material Icons";
+  font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
   font-size: 1.5em;
@@ -158,6 +160,6 @@ $icons: (
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: "liga";
+  -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }

@@ -12,4 +12,5 @@
 - [] show more
 - [x] si la ruta esta mal me redirige a /home
 - [] arreglar ruta recipes
-- [] error message
+- [x] error message health
+- [x] error message detail recipe

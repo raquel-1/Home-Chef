@@ -1,7 +1,6 @@
 <script setup>
-import { defineAsyncComponent, ref, onMounted, computed, watch } from 'vue'
+import { defineAsyncComponent, ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { APP_ID, APP_KEY } from '@/constants/credentials'
 import {
   formatTime,
   countIngredients,
@@ -15,21 +14,15 @@ const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue')
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 
 const route = useRoute()
-
 const recipeId = route.params.recipeId
 
-const { recipe, fetchRecipeDetails } = useRecipeDetails(recipeId)
+const { recipe, fetchRecipeDetails, errorMessage } = useRecipeDetails(recipeId)
 const { isSaved, toggleSaved } = useSavedRecipes()
 
 onMounted(() => {
   fetchRecipeDetails()
 })
 
-// time
-const formattedTime = computed(() => {
-  return formatTime(recipe.value.totalTime)
-})
-// n ingredients
 const ingredientCount = ref(0)
 const ingredientCalories = ref(0)
 
@@ -42,85 +35,98 @@ watch(recipe, () => {
 </script>
 
 <template>
-  <section class="info-recipe" v-if="recipe">
-    <div class="info-recipe__title">
-      <article @click="toggleSaved(recipe)" class="heart">
-        <NotSaved
-          v-if="!isSaved(recipe)"
-          :fill="'rgb(248, 0, 186)'"
-          :height="'100%'"
-          :width="'100%'"
-        />
-        <Saved v-else :fill="'rgb(248, 0, 186)'" :height="'100%'" :width="'100%'" />
-      </article>
-      <h2 class="title">{{ recipe.label }}</h2>
-    </div>
-    <div class="info-recipe__info info">
-      <div class="info__img">
-        <img class="card-photo" :src="recipe.image" :alt="recipe.label" />
+  <section class="info-recipe">
+    <template v-if="recipe">
+      <div class="info-recipe__title">
+        <article @click="toggleSaved(recipe)" class="heart">
+          <NotSaved
+            v-if="!isSaved(recipe)"
+            :fill="'rgb(248, 0, 186)'"
+            :height="'100%'"
+            :width="'100%'"
+          />
+          <Saved v-else :fill="'rgb(248, 0, 186)'" :height="'100%'" :width="'100%'" />
+        </article>
+        <h2 class="title">{{ recipe.label }}</h2>
       </div>
-      <div class="info__details details">
-        <div class="details__source">
-          <p>Full recipe in</p>
-          <a :href="recipe.url" target="_blank" class="source">{{ recipe.source }}</a>
+      <div class="info-recipe__info info">
+        <div class="info__img">
+          <img class="card-photo" :src="recipe.image" :alt="recipe.label" />
         </div>
-        <ul class="details__i-m-c">
-          <li class="imc">
-            <span class="imc__number">{{ ingredientCount }}</span>
-            <p class="imc__string">ingredients</p>
-          </li>
-          <div class="imc">
-            <span class="imc__number">{{ recipe.totalTime }}</span>
-            <p class="imc__string">minutes</p>
+        <div class="info__details details">
+          <div class="details__source">
+            <p>Full recipe in</p>
+            <a :href="recipe.url" target="_blank" class="source">{{ recipe.source }}</a>
           </div>
-          <div class="imc">
-            <span class="imc__number">{{ ingredientCalories }}</span>
-            <p class="imc__string">calories/serving</p>
+          <ul class="details__i-m-c">
+            <li class="imc">
+              <span class="imc__number">{{ ingredientCount }}</span>
+              <p class="imc__string">ingredients</p>
+            </li>
+            <div class="imc">
+              <span class="imc__number">{{ recipe.totalTime }}</span>
+              <p class="imc__string">minutes</p>
+            </div>
+            <div class="imc">
+              <span class="imc__number">{{ ingredientCalories }}</span>
+              <p class="imc__string">calories/serving</p>
+            </div>
+          </ul>
+          <ul class="details__labels labels">
+            <li
+              class="labels__label"
+              v-for="dietLabels in recipe.dietLabels"
+              :key="recipe.uri"
+            >
+              <p>{{ dietLabels }}</p>
+            </li>
+            <li
+              class="labels__label"
+              v-for="cuisineType in recipe.cuisineType"
+              :key="recipe.uri"
+            >
+              <p>{{ cuisineType }}</p>
+            </li>
+            <li
+              class="labels__label"
+              v-for="mealType in recipe.mealType"
+              :key="recipe.uri"
+            >
+              <p>{{ mealType }}</p>
+            </li>
+          </ul>
+          <div class="details__servings">
+            <p>Ingredients</p>
+            <p>For {{ recipe.yield }} servings</p>
           </div>
-        </ul>
-        <ul class="details__labels labels">
-          <li
-            class="labels__label"
-            v-for="dietLabels in recipe.dietLabels"
-            :key="recipe.uri"
-          >
-            <p>{{ dietLabels }}</p>
-          </li>
-          <li
-            class="labels__label"
-            v-for="cuisineType in recipe.cuisineType"
-            :key="recipe.uri"
-          >
-            <p>{{ cuisineType }}</p>
-          </li>
-          <li class="labels__label" v-for="mealType in recipe.mealType" :key="recipe.uri">
-            <p>{{ mealType }}</p>
-          </li>
-        </ul>
-        <div class="details__servings">
-          <p>Ingredients</p>
-          <p>For {{ recipe.yield }} servings</p>
+          <ul class="details__ingredients">
+            <li
+              class="ingredient"
+              v-for="ingredient in recipe.ingredientLines"
+              :key="recipe.uri"
+            >
+              - {{ ingredient }}
+            </li>
+          </ul>
+          <div class="details__nutrition">
+            <p>Nutrition</p>
+          </div>
+          <ul class="details__digest digest">
+            <li class="digest__item" v-for="digest in recipe.digest" :key="recipe.uri">
+              <p>{{ digest.label }}</p>
+              <p>{{ calDigest(digest.total, recipe.yield) }}{{ digest.unit }}</p>
+            </li>
+          </ul>
         </div>
-        <ul class="details__ingredients">
-          <li
-            class="ingredient"
-            v-for="ingredient in recipe.ingredientLines"
-            :key="recipe.uri"
-          >
-            - {{ ingredient }}
-          </li>
-        </ul>
-        <div class="details__nutrition">
-          <p>Nutrition</p>
-        </div>
-        <ul class="details__digest digest">
-          <li class="digest__item" v-for="digest in recipe.digest" :key="recipe.uri">
-            <p>{{ digest.label }}</p>
-            <p>{{ calDigest(digest.total, recipe.yield) }}{{ digest.unit }}</p>
-          </li>
-        </ul>
       </div>
-    </div>
+    </template>
+    <template v-else-if="errorMessage">
+      <div class="error-message">
+        <p>Oops! Something went wrong while fetching recipes.</p>
+        <p>Please check your internet connection and try again later.</p>
+        <p>{{ errorMessage }}</p>
+      </div>
+    </template>
   </section>
 </template>
 
