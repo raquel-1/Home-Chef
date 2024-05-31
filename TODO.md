@@ -10,4 +10,5 @@
 - [] minutos en recipe detail
 - [x] botones health se le vaya el color de forma mas lenta
 - [] show more
-- [] si la ruta est mal me redirige a /home
+- [x] si la ruta esta mal me redirige a /home
+- [] arreglar ruta recipes

@@ -9,30 +9,17 @@ import {
   calDigest,
 } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
+import useRecipeDetails from '@/composables/useRecipeDetails'
 
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 
-const { isSaved, toggleSaved } = useSavedRecipes()
-
 const route = useRoute()
 
 const recipeId = route.params.recipeId
-const recipe = ref([])
 
-const fetchRecipeDetails = async () => {
-  try {
-    const response = await fetch(
-      `https://api.edamam.com/search?q=${recipeId}&app_id=${APP_ID}&app_key=${APP_KEY}`,
-    )
-    const data = await response.json()
-    if (data.hits.length > 0) {
-      recipe.value = data.hits[0].recipe
-    }
-  } catch (error) {
-    console.error('Error fetching recipe details:', error)
-  }
-}
+const { recipe, fetchRecipeDetails } = useRecipeDetails(recipeId)
+const { isSaved, toggleSaved } = useSavedRecipes()
 
 onMounted(() => {
   fetchRecipeDetails()
