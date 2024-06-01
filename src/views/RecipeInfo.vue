@@ -134,7 +134,7 @@ watch(recipe, () => {
 .info-recipe {
   padding: map-get($map: $sizes, $key: s-general-padding);
   padding-top: map-get($map: $heights, $key: h-navbar);
-  min-height: 100vh; /** quitar esto */
+  min-height: 100vh;
   @include responsive() {
     padding: map-get($map: $sizes, $key: s-general-padding-tablet);
     padding-top: map-get($map: $heights, $key: h-navbar);

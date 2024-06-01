@@ -43,24 +43,18 @@ const handleSearch = async (query) => {
     </article>
     <template v-if="isLoading">Loading...</template>
     <template v-else-if="errorMessage">{{ errorMessage }}</template>
-    <section class="recipes__tabs-recipes" v-else>
+    <section class="recipes__tabs-recipes">
       <template v-if="results.length > 0">
         <template v-for="recipe in results" :key="recipe.uri">
           <Card :dataObject="{ recipe: recipe }" />
         </template>
       </template>
-      <template v-else-if="showDefaultRecipes">
-        <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
-          <Card :dataObject="{ recipe: recipe }" />
-        </template>
-      </template>
       <template v-else>
-        <p>No recipe found, try another one.</p>
-        <section class="recipes__tabs-recipes">
+        <template v-if="showDefaultRecipes">
           <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
             <Card :dataObject="{ recipe: recipe }" />
           </template>
-        </section>
+        </template>
       </template>
     </section>
   </div>
