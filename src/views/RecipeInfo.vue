@@ -33,7 +33,6 @@ watch(recipe, () => {
     ingredientCount.value = countIngredients(recipe.value.ingredientLines)
     ingredientCalories.value = calories(recipe.value.calories, recipe.value.yield)
     formattedTime.value = formatTimeRecipeInfo(recipe.value.totalTime)
-    console.log(formattedTime)
   }
 })
 </script>
