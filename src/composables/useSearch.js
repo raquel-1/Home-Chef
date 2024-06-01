@@ -1,4 +1,3 @@
-// composables/useSearch.js
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { APP_ID, APP_KEY } from '@/constants/credentials'

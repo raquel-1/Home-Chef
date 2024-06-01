@@ -15,3 +15,4 @@
 - [x] arreglar ruta recipes
 - [x] error message health
 - [x] error message detail recipe
+- ??show more??? voy a recipes pero veo el resultado de la busqueda anterior

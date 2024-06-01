@@ -16,7 +16,8 @@ const route = useRoute()
 const showDefaultRecipes = ref(true)
 
 onMounted(async () => {
-  if (route.path === '/recipes' && results.value.length === 0) {
+  // if (route.path === '/recipes' && results.value.length === 0) {
+  if (results.value.length === 0) {
     try {
       if (recipesStore.recipes.length === 0) {
         await recipesStore.loadRecipes()

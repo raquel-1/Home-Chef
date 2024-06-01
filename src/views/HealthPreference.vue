@@ -5,7 +5,7 @@ import { useHealth } from '@/composables/useHealth'
 
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 
-const router = useRouter() // Definir router
+const router = useRouter()
 const route = useRoute()
 const healthLabel = ref(route.query.health || '')
 const { recipes, errorMessage, fetchRecipes } = useHealth()

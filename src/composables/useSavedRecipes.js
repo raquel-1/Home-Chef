@@ -1,4 +1,3 @@
-// src/composables/useSavedRecipes.js
 import { ref, watchEffect } from 'vue'
 
 const savedRecipes = ref(JSON.parse(localStorage.getItem('savedRecipes')) || [])
