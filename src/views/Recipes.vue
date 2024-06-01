@@ -50,7 +50,7 @@ const handleSearch = async (query) => {
         </template>
       </template>
       <template v-else>
-        <template v-if="showDefaultRecipes">
+        <template v-if="showDefaultRecipes && !isLoading">
           <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
             <Card :dataObject="{ recipe: recipe }" />
           </template>
