@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent, onMounted } from 'vue'
+import { defineAsyncComponent, onMounted, ref } from 'vue'
 import { useRecipesStore } from '@/stores/recipesStore'
 import { useRoute } from 'vue-router'
 import useSearch from '@/composables/useSearch'
@@ -12,6 +12,8 @@ const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 const { results, isLoading, errorMessage, searchRecipes } = useSearch()
 const recipesStore = useRecipesStore()
 const route = useRoute()
+
+const showDefaultRecipes = ref(true)
 
 onMounted(async () => {
   if (route.path === '/recipes' && results.value.length === 0) {
@@ -26,12 +28,16 @@ onMounted(async () => {
 })
 
 const handleSearch = async (query) => {
+  showDefaultRecipes.value = false
   await searchRecipes(query)
+  if (results.value.length === 0 && !errorMessage.value) {
+    showDefaultRecipes.value = true
+  }
 }
 </script>
 
 <template>
-  <section class="recipes">
+  <div class="recipes">
     <article class="recipes__search">
       <InputSearch @search="handleSearch" />
     </article>
@@ -43,13 +49,21 @@ const handleSearch = async (query) => {
           <Card :dataObject="{ recipe: recipe }" />
         </template>
       </template>
-      <template v-else>
+      <template v-else-if="showDefaultRecipes">
         <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
           <Card :dataObject="{ recipe: recipe }" />
         </template>
       </template>
+      <template v-else>
+        <p>No recipe found, try another one.</p>
+        <section class="recipes__tabs-recipes">
+          <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
+            <Card :dataObject="{ recipe: recipe }" />
+          </template>
+        </section>
+      </template>
     </section>
-  </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>

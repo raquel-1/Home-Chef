@@ -4,7 +4,8 @@
 - [x] tabs con scripsetup
 - [x] tabs filter
 - [x] fetch
-- [] search
+- [x] search
+- [] display recipes by default if nothing is found
 - [x] padding para todos igual
 - [x] saved
 - [] minutos en recipe detail
