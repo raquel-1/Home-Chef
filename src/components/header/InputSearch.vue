@@ -1,24 +1,36 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
+import { useRoute } from 'vue-router'
+import useSearch from '@/composables/useSearch'
 
 const Pan = defineAsyncComponent(() => import('@/assets/svgs/Pan.vue'))
 
 const isHovered = ref(false)
+const query = ref('')
+
+const { handleSearch } = useSearch()
+const route = useRoute()
+
+const onSearch = () => {
+  handleSearch(query.value, route.path)
+}
 </script>
 
 <template>
   <article class="header__search-box search-box">
     <input
+      v-model="query"
       type="text"
       id="search-trasparent"
       name="search"
-      placeholder="Burguer . . ."
+      placeholder="Pizza . . ."
       class="search-box__input"
     />
     <button
       class="search-box__pan"
       :class="{ hovered: isHovered }"
       @mouseover="isHovered = true"
+      @click="onSearch"
     >
       <Pan :class="{ 'rotate-180': isHovered }" />
     </button>

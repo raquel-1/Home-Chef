@@ -1,47 +1,55 @@
 <script setup>
-import { defineAsyncComponent, onMounted, computed, ref } from 'vue'
+import { defineAsyncComponent, onMounted } from 'vue'
 import { useRecipesStore } from '@/stores/recipesStore'
 import { useRoute } from 'vue-router'
-import { APP_ID, APP_KEY } from '@/constants/credentials'
+import useSearch from '@/composables/useSearch'
 
 const InputSearch = defineAsyncComponent(
   () => import('@/components/header/InputSearch.vue'),
 )
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 
+const { results, isLoading, errorMessage, searchRecipes } = useSearch()
 const recipesStore = useRecipesStore()
+const route = useRoute()
 
 onMounted(async () => {
-  try {
-    if (recipesStore.recipes.length === 0) {
-      await recipesStore.loadRecipes()
+  if (route.path === '/recipes' && results.value.length === 0) {
+    try {
+      if (recipesStore.recipes.length === 0) {
+        await recipesStore.loadRecipes()
+      }
+    } catch (err) {
+      console.error('Error recipes tabs:', err)
     }
-  } catch (err) {
-    console.error('Error recipes tabs:', err)
   }
 })
+
+const handleSearch = async (query) => {
+  await searchRecipes(query)
+}
 </script>
 
 <template>
-  <div class="recipes">
+  <section class="recipes">
     <article class="recipes__search">
-      <InputSearch />
+      <InputSearch @search="handleSearch" />
     </article>
-    <template v-if="recipesStore.isLoading">Loading...</template>
-    <template v-else-if="recipesStore.error">{{ recipesStore.error }}</template>
-    <section
-      class="recipes__tabs-recipes"
-      v-else-if="
-        !recipesStore.error &&
-        !recipesStore.isLoading &&
-        recipesStore.recipes.length === 30
-      "
-    >
-      <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
-        <Card :dataObject="{ recipe: recipe }" />
+    <template v-if="isLoading">Loading...</template>
+    <template v-else-if="errorMessage">{{ errorMessage }}</template>
+    <section class="recipes__tabs-recipes" v-else>
+      <template v-if="results.length > 0">
+        <template v-for="recipe in results" :key="recipe.uri">
+          <Card :dataObject="{ recipe: recipe }" />
+        </template>
+      </template>
+      <template v-else>
+        <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">
+          <Card :dataObject="{ recipe: recipe }" />
+        </template>
       </template>
     </section>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
