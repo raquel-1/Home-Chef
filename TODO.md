@@ -5,7 +5,7 @@
 - [x] tabs filter
 - [x] fetch
 - [x] search
-- [] display recipes by default if nothing is found
+- [x] display recipes by default if nothing is found
 - [x] padding para todos igual
 - [x] saved
 - [] minutos en recipe detail
