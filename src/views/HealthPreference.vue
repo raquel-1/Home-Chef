@@ -32,7 +32,7 @@ onMounted(() => {
         </div>
       </div>
     </template>
-    <template v-else>
+    <template v-else-if="errorMessage">
       <div class="error-message">
         <p>Oops! Something went wrong while fetching recipes.</p>
         <p>Please check your internet connection and try again later.</p>
