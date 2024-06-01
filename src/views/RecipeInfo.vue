@@ -1,14 +1,15 @@
 <script setup>
-import { defineAsyncComponent, ref, onMounted, watch } from 'vue'
+import { defineAsyncComponent, ref, onMounted, watch, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import {
-  formatTime,
   countIngredients,
   calories,
   calDigest,
+  formatTimeRecipeInfo,
 } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
 import useRecipeDetails from '@/composables/useRecipeDetails'
+import { createSharedComposable } from '@vueuse/core'
 
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
@@ -25,11 +26,14 @@ onMounted(() => {
 
 const ingredientCount = ref(0)
 const ingredientCalories = ref(0)
+const formattedTime = ref([])
 
 watch(recipe, () => {
   if (recipe.value) {
     ingredientCount.value = countIngredients(recipe.value.ingredientLines)
     ingredientCalories.value = calories(recipe.value.calories, recipe.value.yield)
+    formattedTime.value = formatTimeRecipeInfo(recipe.value.totalTime)
+    console.log(formattedTime)
   }
 })
 </script>
@@ -64,8 +68,8 @@ watch(recipe, () => {
               <p class="imc__string">ingredients</p>
             </li>
             <div class="imc">
-              <span class="imc__number">{{ recipe.totalTime }}</span>
-              <p class="imc__string">minutes</p>
+              <span class="imc__number">{{ formattedTime.value }}</span>
+              <p class="imc__string">{{ formattedTime.unit }}</p>
             </div>
             <div class="imc">
               <span class="imc__number">{{ ingredientCalories }}</span>
@@ -109,7 +113,7 @@ watch(recipe, () => {
             </li>
           </ul>
           <div class="details__nutrition">
-            <p>Nutrition</p>
+            <p>Nutrition/serving</p>
           </div>
           <ul class="details__digest digest">
             <li class="digest__item" v-for="digest in recipe.digest" :key="recipe.uri">
