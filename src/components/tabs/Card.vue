@@ -24,7 +24,10 @@ const formattedTime = computed(() => {
 <template>
   <article class="card" v-if="dataObject">
     <router-link
-      :to="{ name: 'RecipeInfo', params: { recipeId: dataObject.recipe.label } }"
+      :to="{
+        name: 'RecipeInfo',
+        params: { recipeId: dataObject.recipe.label.replace(/\s+/g, '-') },
+      }"
     >
       <div class="card__photo">
         <img
