@@ -20,6 +20,7 @@ const changeTheme = () => {
 <template>
   <button
     class="time"
+    id="sun"
     :class="{ 'time--active': themeStore.theme === LIGHT_MODE }"
     @click="changeTheme"
   >
@@ -27,6 +28,7 @@ const changeTheme = () => {
   </button>
   <button
     class="time"
+    id="moon"
     :class="{ 'time--active': themeStore.theme === DARK_MODE }"
     @click="changeTheme"
   >

@@ -35,11 +35,7 @@ const formattedTime = computed(() => {
       }"
     >
       <div class="card__photo">
-        <img
-          class="card-photo"
-          :src="dataObject.recipe.image"
-          :alt="dataObject.recipe.label"
-        />
+        <img class="card-photo" :src="dataObject.recipe.image" alt="image recipe" />
       </div>
       <div class="card__recipe-name">
         <p class="title">

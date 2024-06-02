@@ -28,6 +28,7 @@ const onSearch = () => {
     />
     <button
       class="search-box__pan"
+      id="search"
       :class="{ hovered: isHovered }"
       @mouseover="isHovered = true"
       @click="onSearch"
