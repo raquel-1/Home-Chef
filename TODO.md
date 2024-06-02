@@ -17,5 +17,6 @@
 - [x] error message detail recipe
 - ??show more??? voy a recipes pero veo el resultado de la busqueda anterior
 
-- [] hojas firmadas alebat
+- [x] hojas firmadas alebat
 - [] otra api key por si acaso
+- [] pdf

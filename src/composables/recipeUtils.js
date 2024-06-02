@@ -33,7 +33,7 @@ export function countIngredients(ingredientLines) {
 
 export function calories(cal, servings) {
   const numero = cal / servings
-  const redondeado = numero.toFixed(2)
+  const redondeado = numero.toFixed(1)
   return redondeado
 }
 export function calDigest(calDigest, servings) {

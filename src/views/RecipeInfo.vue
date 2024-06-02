@@ -10,10 +10,11 @@ import {
 import useSavedRecipes from '@/composables/useSavedRecipes'
 import useRecipeDetails from '@/composables/useRecipeDetails'
 
+import { generatePDF } from '@/composables/genratePdf'
+
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 
-// Función para decodificar base64
 function base64Decode(str) {
   try {
     return decodeURIComponent(escape(atob(str)))
@@ -152,10 +153,30 @@ watch(recipe, () => {
         <p>{{ errorMessage }}</p>
       </div>
     </template>
+    <article v-if="recipe" class="generate">
+      <button @click="generatePDF(recipe)" class="generate__button">Generar PDF</button>
+    </article>
   </section>
 </template>
 
 <style lang="scss" scoped>
+.generate {
+  width: 100%;
+  padding: 2em 0;
+  @include flex();
+  &__button {
+    padding: 1em 2em;
+    border-radius: 2em;
+    background-color: map-get($map: $colors, $key: c-principal-color);
+    font-size: map-get($map: $font-size, $key: fs-small);
+    cursor: pointer;
+    @include responsive(50em) {
+      padding: 0.5em 1em;
+      font-size: map-get($map: $font-size, $key: fs-extra-small);
+    }
+  }
+}
+
 .info-recipe {
   padding: map-get($map: $sizes, $key: s-general-padding);
   padding-top: map-get($map: $heights, $key: h-navbar);
