@@ -46,7 +46,7 @@ const InputSearch = defineAsyncComponent(
   &__container {
     @include flex(column);
     border-radius: 1em;
-    background-image: url('../../assets/images/knife.jpg');
+    background-image: url('../../assets/images/juice.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -58,7 +58,7 @@ const InputSearch = defineAsyncComponent(
   }
   &__title {
     @include flex(column);
-    color: map-get($map: $colors, $key: c-white);
+    color: map-get($map: $colors, $key: c-black);
     width: 90%;
     font-size: map-get($map: $font-size, $key: fs-extra-big);
     margin-bottom: 0.5em;
