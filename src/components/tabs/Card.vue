@@ -3,6 +3,11 @@ import { defineAsyncComponent, ref, computed } from 'vue'
 import { formatTime } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
 
+// Función para codificar en base64
+function base64Encode(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+}
+
 const Chronometer = defineAsyncComponent(() => import('@/assets/svgs/Chronometer.vue'))
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
@@ -26,7 +31,7 @@ const formattedTime = computed(() => {
     <router-link
       :to="{
         name: 'RecipeInfo',
-        params: { recipeId: dataObject.recipe.label.replace(/\s+/g, '-') },
+        params: { recipeId: base64Encode(dataObject.recipe.uri) },
       }"
     >
       <div class="card__photo">

@@ -2,22 +2,23 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { APP_ID, APP_KEY } from '@/constants/credentials'
 
-export default function useRecipeDetails(recipeId) {
+export default function useRecipeDetails() {
   const recipe = ref(null)
   const errorMessage = ref('')
   const router = useRouter()
 
-  const fetchRecipeDetails = async () => {
+  const fetchRecipeDetails = async (decodedRecipeId) => {
     try {
       const response = await fetch(
-        `https://api.edamam.com/search?q=${encodeURIComponent(recipeId)}&app_id=${APP_ID}&app_key=${APP_KEY}`,
+        `https://api.edamam.com/search?r=${encodeURIComponent(decodedRecipeId)}&app_id=${APP_ID}&app_key=${APP_KEY}`,
       )
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
       const data = await response.json()
-      if (data.hits.length > 0) {
-        recipe.value = data.hits[0].recipe
+      if (data.length > 0) {
+        // Cambié data.hits a data
+        recipe.value = data[0]
       } else {
         throw new Error('Recipe not found')
       }

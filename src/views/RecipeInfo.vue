@@ -1,6 +1,6 @@
 <script setup>
-import { defineAsyncComponent, ref, onMounted, watch, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, watch, defineAsyncComponent } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import {
   countIngredients,
   calories,
@@ -9,24 +9,46 @@ import {
 } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
 import useRecipeDetails from '@/composables/useRecipeDetails'
-import { createSharedComposable } from '@vueuse/core'
 
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 
+// Función para decodificar base64
+function base64Decode(str) {
+  try {
+    return decodeURIComponent(escape(atob(str)))
+  } catch (error) {
+    throw new Error('Failed to decode base64 string')
+  }
+}
+
 const route = useRoute()
+const router = useRouter()
 const recipeId = route.params.recipeId
 
 const { recipe, fetchRecipeDetails, errorMessage } = useRecipeDetails(recipeId)
 const { isSaved, toggleSaved } = useSavedRecipes()
 
-onMounted(() => {
-  fetchRecipeDetails()
-})
-
 const ingredientCount = ref(0)
 const ingredientCalories = ref(0)
 const formattedTime = ref([])
+
+const decodeAndFetchRecipe = async () => {
+  try {
+    const decodedRecipeId = base64Decode(recipeId)
+    await fetchRecipeDetails(decodedRecipeId)
+  } catch (error) {
+    errorMessage.value = 'Invalid recipe ID. Redirecting to home page...'
+    console.error('Error fetching recipe details:', error)
+    setTimeout(() => {
+      router.push('/home')
+    }, 3000)
+  }
+}
+
+onMounted(() => {
+  decodeAndFetchRecipe()
+})
 
 watch(recipe, () => {
   if (recipe.value) {
