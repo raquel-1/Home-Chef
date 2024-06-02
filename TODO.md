@@ -19,4 +19,4 @@
 
 - [x] hojas firmadas alebat
 - [] otra api key por si acaso
-- [] pdf
+- [x] pdf

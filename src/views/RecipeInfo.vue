@@ -164,6 +164,9 @@ watch(recipe, () => {
   width: 100%;
   padding: 2em 0;
   @include flex();
+  @include responsive(50em) {
+    padding: 1em 0;
+  }
   &__button {
     padding: 1em 2em;
     border-radius: 2em;

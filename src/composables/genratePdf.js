@@ -7,16 +7,16 @@ export const generatePDF = (recipe) => {
 
   doc.text(recipe.label, 10, 10)
 
-  doc.text('- NUTRITIONAL INFORMATION - ', 10, 20)
+  doc.text('- NUTRITIONAL INFORMATION - ', 20, 20)
 
   const caloriesServing = calories(recipe.calories, recipe.yield)
-  doc.text(`Calories: ${caloriesServing}`, 20, 30)
+  doc.text(`Calories: ${caloriesServing}`, 30, 30)
 
   let y = 40
   recipe.digest.forEach((digest) => {
     doc.text(
       `${digest.label}: ${calDigest(digest.total, recipe.yield)} ${digest.unit}`,
-      20,
+      30,
       y,
     )
     y += 10 // posicion de la siguiente linea
