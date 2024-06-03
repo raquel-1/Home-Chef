@@ -14,6 +14,12 @@ const route = useRoute()
 const onSearch = () => {
   handleSearch(query.value, route.path)
 }
+
+const onKeyDown = (event) => {
+  if (event.key === 'Enter') {
+    onSearch()
+  }
+}
 </script>
 
 <template>
@@ -25,6 +31,7 @@ const onSearch = () => {
       name="search"
       placeholder="Pizza . . ."
       class="search-box__input"
+      @keydown="onKeyDown"
     />
     <button
       class="search-box__pan"
