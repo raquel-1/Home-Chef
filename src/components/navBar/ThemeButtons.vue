@@ -20,7 +20,7 @@ const changeTheme = () => {
 <template>
   <button
     class="time"
-    id="sun"
+    aria-label="Toggle light theme"
     :class="{ 'time--active': themeStore.theme === LIGHT_MODE }"
     @click="changeTheme"
   >
@@ -28,7 +28,7 @@ const changeTheme = () => {
   </button>
   <button
     class="time"
-    id="moon"
+    aria-label="Toggle dark theme"
     :class="{ 'time--active': themeStore.theme === DARK_MODE }"
     @click="changeTheme"
   >
