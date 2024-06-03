@@ -14,7 +14,7 @@ const themeClass = computed(() => {
   <router-link
     to="/recipes"
     class="show-more"
-    aria-label="See more recipes on Home Chef Lemon"
+    aria-label="See more recipes for all category on Home Chef Lemon"
   >
     <span class="more" :class="themeClass">SEE MORE</span>
   </router-link>
