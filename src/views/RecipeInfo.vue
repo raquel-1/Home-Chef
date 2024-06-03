@@ -9,6 +9,7 @@ import {
 } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
 import useRecipeDetails from '@/composables/useRecipeDetails'
+import { shareOnWhatsApp } from '@/composables/whatsappUtils.js'
 
 import { generatePDF } from '@/composables/genratePdf'
 
@@ -58,6 +59,12 @@ watch(recipe, () => {
     formattedTime.value = formatTimeRecipeInfo(recipe.value.totalTime)
   }
 })
+
+const shareRecipeOnWhatsApp = () => {
+  const currentRecipeURL = window.location.href // optengo la url de la receta actual basada en la ruta de vue Router
+
+  shareOnWhatsApp(currentRecipeURL)
+}
 </script>
 
 <template>
@@ -153,19 +160,35 @@ watch(recipe, () => {
         <p>{{ errorMessage }}</p>
       </div>
     </template>
-    <article v-if="recipe" class="generate">
-      <button @click="generatePDF(recipe)" class="generate__button">Generate PDF</button>
+    <article v-if="recipe" class="bottom-butons">
+      <button
+        @click="generatePDF(recipe)"
+        aria-label="Download pdf"
+        class="bottom-butons__button"
+      >
+        Generate PDF
+      </button>
+      <button
+        @click="shareRecipeOnWhatsApp"
+        aria-label="Share the nutritional information of the recipe on WhatsApp"
+        class="bottom-butons__button bottom-butons__button--share"
+      >
+        Compartir en WhatsApp
+      </button>
     </article>
   </section>
 </template>
 
 <style lang="scss" scoped>
-.generate {
+.bottom-butons {
   width: 100%;
   padding: 2em 0;
-  @include flex();
+  @include flex(row, center, space-around);
   @include responsive(50em) {
-    padding: 1em 0;
+    padding: 1.5em 0;
+  }
+  @include responsive(31.25em) {
+    @include flex(column);
   }
   &__button {
     padding: 1em 2em;
@@ -173,13 +196,20 @@ watch(recipe, () => {
     background-color: map-get($map: $colors, $key: c-principal-color);
     font-size: map-get($map: $font-size, $key: fs-small);
     cursor: pointer;
+    color: black;
     @include responsive(50em) {
-      padding: 0.5em 1em;
+      padding: 0.7em 1em;
       font-size: map-get($map: $font-size, $key: fs-extra-small);
+    }
+
+    &--share {
+      background-color: map-get($map: $colors, $key: c-whatsapp);
+      @include responsive(31.25em) {
+        margin-top: 1.5em;
+      }
     }
   }
 }
-
 .info-recipe {
   padding: map-get($map: $sizes, $key: s-general-padding);
   padding-top: map-get($map: $heights, $key: h-navbar);
