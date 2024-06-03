@@ -36,6 +36,7 @@ const onKeyDown = (event) => {
     <button
       class="search-box__pan"
       id="search"
+      aria-label="Search Button"
       :class="{ hovered: isHovered }"
       @mouseover="isHovered = true"
       @click="onSearch"
