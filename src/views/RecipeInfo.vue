@@ -154,7 +154,7 @@ watch(recipe, () => {
       </div>
     </template>
     <article v-if="recipe" class="generate">
-      <button @click="generatePDF(recipe)" class="generate__button">Generar PDF</button>
+      <button @click="generatePDF(recipe)" class="generate__button">Generate PDF</button>
     </article>
   </section>
 </template>
