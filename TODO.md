@@ -20,3 +20,4 @@
 - [x] hojas firmadas alebat
 - [] otra api key por si acaso
 - [x] pdf
+- [x] whastapp
