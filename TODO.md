@@ -18,6 +18,6 @@
 - ??show more??? voy a recipes pero veo el resultado de la busqueda anterior
 
 - [x] hojas firmadas alebat
-- [] otra api key por si acaso
+- [x] otra api key por si acaso
 - [x] pdf
 - [x] whastapp
