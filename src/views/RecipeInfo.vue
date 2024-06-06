@@ -13,6 +13,8 @@ import { shareOnWhatsApp } from '@/composables/whatsappUtils.js'
 
 import { generatePDF } from '@/composables/genratePdf'
 
+window.scrollTo(0, 0)
+
 const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
 const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
 
