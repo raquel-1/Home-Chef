@@ -4,6 +4,8 @@ import { useRecipesStore } from '@/stores/recipesStore'
 import { useRoute } from 'vue-router'
 import useSearch from '@/composables/useSearch'
 
+window.scrollTo(0, 0)
+
 const InputSearch = defineAsyncComponent(
   () => import('@/components/header/InputSearch.vue'),
 )

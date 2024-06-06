@@ -3,6 +3,8 @@ import { defineAsyncComponent, ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useHealth } from '@/composables/useHealth'
 
+window.scrollTo(0, 0)
+
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 
 const router = useRouter()

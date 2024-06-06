@@ -2,6 +2,8 @@
 import { defineAsyncComponent } from 'vue'
 import useSavedRecipes from '@/composables/useSavedRecipes'
 
+window.scrollTo(0, 0)
+
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 const { savedRecipes } = useSavedRecipes()
 </script>
