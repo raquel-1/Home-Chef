@@ -181,5 +181,5 @@ const shareRecipeOnWhatsApp = () => {
 
 <style lang="scss" scoped>
 /* stylelint-disable-next-line scss/at-import-partial-extension */
-@import '../assets/styles/recipeinfo.scss';
+@import '../assets/styles/scss/recipeinfo.scss';
 </style>
