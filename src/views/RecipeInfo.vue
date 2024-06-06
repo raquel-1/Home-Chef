@@ -15,8 +15,8 @@ import { generatePDF } from '@/composables/genratePdf'
 
 window.scrollTo(0, 0)
 
-const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
-const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
+const NotSaved = defineAsyncComponent(() => import('@/components/svgs/NotSaved.vue'))
+const Saved = defineAsyncComponent(() => import('@/components/svgs/Saved.vue'))
 
 function base64Decode(str) {
   try {

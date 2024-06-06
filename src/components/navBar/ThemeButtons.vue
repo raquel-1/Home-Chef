@@ -3,8 +3,8 @@ import { useThemeStore } from '@/stores/theme'
 import { defineAsyncComponent, computed } from 'vue'
 import { LIGHT_MODE, DARK_MODE } from '@/constants/theme'
 
-const Day = defineAsyncComponent(() => import('@/assets/svgs/Day.vue'))
-const Night = defineAsyncComponent(() => import('@/assets/svgs/Night.vue'))
+const Day = defineAsyncComponent(() => import('@/components/svgs/Day.vue'))
+const Night = defineAsyncComponent(() => import('@/components/svgs/Night.vue'))
 
 const themeStore = useThemeStore()
 

@@ -16,7 +16,7 @@ const themeClassSvg = computed(() => {
 const ThemeButtons = defineAsyncComponent(
   () => import('@/components/navBar/ThemeButtons.vue'),
 )
-const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
+const Saved = defineAsyncComponent(() => import('@/components/svgs/Saved.vue'))
 </script>
 
 <template>

@@ -3,7 +3,7 @@ import { ref, defineAsyncComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import useSearch from '@/composables/useSearch'
 
-const Pan = defineAsyncComponent(() => import('@/assets/svgs/Pan.vue'))
+const Pan = defineAsyncComponent(() => import('@/components/svgs/Pan.vue'))
 
 const isHovered = ref(false)
 const query = ref('')

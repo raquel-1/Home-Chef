@@ -3,14 +3,16 @@ import { defineAsyncComponent, ref, computed } from 'vue'
 import { formatTime } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
 
-// Función para codificar en base64
+// funcion para codificar en base64
 function base64Encode(str) {
   return btoa(unescape(encodeURIComponent(str)))
 }
 
-const Chronometer = defineAsyncComponent(() => import('@/assets/svgs/Chronometer.vue'))
-const NotSaved = defineAsyncComponent(() => import('@/assets/svgs/NotSaved.vue'))
-const Saved = defineAsyncComponent(() => import('@/assets/svgs/Saved.vue'))
+const Chronometer = defineAsyncComponent(
+  () => import('@/components/svgs/Chronometer.vue'),
+)
+const NotSaved = defineAsyncComponent(() => import('@/components/svgs/NotSaved.vue'))
+const Saved = defineAsyncComponent(() => import('@/components/svgs/Saved.vue'))
 
 const props = defineProps({
   dataObject: {

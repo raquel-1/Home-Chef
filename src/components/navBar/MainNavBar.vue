@@ -9,8 +9,8 @@ const MainNavButtons = defineAsyncComponent(
 const ResponsiveNav = defineAsyncComponent(
   () => import('@/components/navBar/ResponsiveNav.vue'),
 )
-const Logo = defineAsyncComponent(() => import('@/assets/svgs/Logo.vue'))
-const Menu = defineAsyncComponent(() => import('@/assets/svgs/Menu.vue'))
+const Logo = defineAsyncComponent(() => import('@/components/svgs/Logo.vue'))
+const Menu = defineAsyncComponent(() => import('@/components/svgs/Menu.vue'))
 
 const showResponsiveNav = ref(false)
 
