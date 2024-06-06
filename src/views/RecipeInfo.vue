@@ -173,7 +173,7 @@ const shareRecipeOnWhatsApp = () => {
         aria-label="Share the nutritional information of the recipe on WhatsApp"
         class="bottom-butons__button bottom-butons__button--share"
       >
-        Compartir en WhatsApp
+        Share in WhatsApp
       </button>
     </article>
   </section>
