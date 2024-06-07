@@ -15,7 +15,7 @@ const themeClass = computed(() => {
 </script>
 
 <template>
-  <div :class="themeClass" class="main">
+  <div :class="themeClass" class="main" id="app">
     <MainNavBar :class="themeClass" />
     <router-view></router-view>
     <Footer :class="themeClass" />
