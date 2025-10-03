@@ -1,7 +1,7 @@
 // /api/recipes.js
 export default async function handler(req, res) {
-  const appID = process.env.VITE_EDAMAM_APP_ID
-  const appKey = process.env.VITE_EDAMAM_APP_KEY
+  const appID = process.env.EDAMAM_APP_ID
+  const appKey = process.env.EDAMAM_APP_KEY
   const mealType = req.query.mealType || 'breakfast'
   const count = req.query.count || 10
 
@@ -14,6 +14,6 @@ export default async function handler(req, res) {
     res.status(200).json(data)
   } catch (error) {
     console.error(error)
-    res.status(500).json({ error: 'Error from Edamam API' })
+    res.status(500).json({ error: 'Error fetching recipes from Edamam' })
   }
 }

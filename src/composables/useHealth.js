@@ -1,35 +1,23 @@
+// src/composables/useHealth.js
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { APP_ID, APP_KEY } from '@/constants/credentials'
+import { fetchRecipes } from '@/services/recipesService'
 
 export function useHealth() {
   const recipes = ref([])
   const errorMessage = ref('')
-  const router = useRouter()
 
-  const fetchRecipes = async (healthLabel) => {
+  const loadHealthRecipes = async () => {
     try {
-      const response = await fetch(
-        `https://api.edamam.com/search?q=&app_id=${APP_ID}&app_key=${APP_KEY}&health=${healthLabel}&from=0&to=20`,
-      )
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
-      const data = await response.json()
-      recipes.value = data.hits
+      recipes.value = await fetchRecipes()
     } catch (error) {
       console.error('Error fetching recipes:', error)
-      errorMessage.value =
-        'There was an error fetching the recipes. Redirecting to home page...'
-      setTimeout(() => {
-        router.replace('/home')
-      }, 3000)
+      errorMessage.value = 'There was an error fetching the recipes.'
     }
   }
 
   return {
     recipes,
     errorMessage,
-    fetchRecipes,
+    loadHealthRecipes,
   }
 }
