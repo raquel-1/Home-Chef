@@ -1,31 +1,18 @@
-// api/recipes.js
+// /api/recipes.js
 export default async function handler(req, res) {
-  const { mealType, count } = req.query
+  const appID = process.env.EDAMAM_APP_ID
+  const appkey = process.env.EDAMAM_APP_KEY
+  const mealType = req.query.mealType || 'breakfast'
 
-  if (!mealType || !count) {
-    return res.status(400).json({ error: 'Missing mealType or count' })
-  }
-
-  const appId = process.env.VITE_EDAMAM_APP_ID
-  const appKey = process.env.VITE_EDAMAM_APP_KEY
-
-  if (!appId || !appKey) {
-    return res.status(500).json({ error: 'Missing API credentials' })
-  }
+  const url = `https://api.edamam.com/search?q=recipe&app_id=${appID}&app_key=${appkey}&mealType=${mealType}&to=10`
 
   try {
-    const response = await fetch(
-      `https://api.edamam.com/search?q=&app_id=${appId}&app_key=${appKey}&mealType=${mealType}&to=${count}`,
-    )
-
-    if (!response.ok) {
-      return res.status(response.status).json({ error: 'Error from Edamam API' })
-    }
-
+    const response = await fetch(url)
+    if (!response.ok) throw new Error(`Edamam API error: ${response.status}`)
     const data = await response.json()
-    res.status(200).json(data.hits.map((hit) => hit.recipe))
-  } catch (err) {
-    console.error('Error fetching recipes:', err)
-    res.status(500).json({ error: 'Failed to fetch recipes' })
+    res.status(200).json(data)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Error from Edamam API' })
   }
 }
