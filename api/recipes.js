@@ -1,10 +1,10 @@
 // /api/recipes.js
 export default async function handler(req, res) {
   const appID = process.env.EDAMAM_APP_ID
-  const appkey = process.env.EDAMAM_APP_KEY
+  const appKey = process.env.EDAMAM_APP_KEY
   const mealType = req.query.mealType || 'breakfast'
 
-  const url = `https://api.edamam.com/search?q=recipe&app_id=${appID}&app_key=${appkey}&mealType=${mealType}&to=10`
+  const url = `https://api.edamam.com/search?q=recipe&app_id=${appID}&app_key=${appKey}&mealType=${mealType}&to=10`
 
   try {
     const response = await fetch(url)
