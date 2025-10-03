@@ -1,8 +1,12 @@
 // src/services/recipesService.js
 const getRecipesByMealType = async (mealType, count) => {
-  const response = await fetch(`/api/recipes?mealType=${mealType}&count=${count}`)
-  const data = await response.json()
-  return data
+  const url = `/api/recipes?mealType=${mealType}&count=${count}`
+  const response = await fetch(url)
+  if (!response.ok) {
+    console.error('Error fetching', mealType, await response.text())
+    return []
+  }
+  return response.json()
 }
 
 export const fetchRecipes = async () => {
