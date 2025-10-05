@@ -1,3 +1,4 @@
+// src/ comopsables/useRecipeDetails
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -8,7 +9,7 @@ export default function useRecipeDetails() {
 
   const fetchRecipeDetails = async (recipeId) => {
     try {
-      const response = await fetch(`/api/recipes?mealType=all&count=50`) // fetch mas recetas y filtras por id
+      const response = await fetch(`/api/recipes?mealType=brunch&count=50`) // fetch mas recetas y filtras por id
       if (!response.ok) throw new Error('Error fetching recipe details')
       const data = await response.json()
       recipe.value = data.hits.find((r) => r.recipe.uri.includes(recipeId)) || null
