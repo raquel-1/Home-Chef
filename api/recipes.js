@@ -1,40 +1,31 @@
 // src/composables/useRecipeDetails.js
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 
-export default function useRecipeDetails() {
-  const recipe = ref(null)
-  const errorMessage = ref('')
-  const router = useRouter()
+export default async function handler(req, res) {
+  const appID = process.env.EDAMAM_APP_ID
+  const appKey = process.env.EDAMAM_APP_KEY
+  const mealType = req.query.mealType || 'breakfast'
+  const count = parseInt(req.query.count) || 10
 
-  const fetchRecipeDetails = async (recipeId) => {
-    try {
-      const response = await fetch(`/api/recipes?mealType=brunch&count=50`)
-      if (!response.ok) throw new Error('Error fetching recipe details')
+  const mealTypes =
+    mealType === 'all' ? ['breakfast', 'brunch', 'lunch', 'dinner', 'snack'] : [mealType]
 
-      const data = await response.json()
+  try {
+    const results = await Promise.all(
+      mealTypes.map(async (type) => {
+        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=recipe&app_id=${appID}&app_key=${appKey}&mealType=${type}&to=${count}`
+        console.log('Fetching from Edamam:', url) // log para depuración
+        const response = await fetch(url)
+        if (!response.ok) throw new Error(`Edamam API error: ${response.status}`)
+        const data = await response.json()
+        return data.hits || []
+      }),
+    )
 
-      console.log('Decoded recipeId:', recipeId)
-      console.log(
-        'All fetched recipe URIs:',
-        data.hits.map((hit) => hit.recipe.uri),
-      )
+    const allRecipes = results.flat()
 
-      const shortId = recipeId.split('#recipe_')[1]
-
-      recipe.value = data.hits.find((r) => r.recipe.uri.endsWith(shortId)) || null
-
-      if (!recipe.value) throw new Error('Recipe not found')
-    } catch (error) {
-      errorMessage.value = 'Error fetching recipe details'
-      console.error(error)
-      setTimeout(() => router.push('/home'), 3000)
-    }
-  }
-
-  return {
-    recipe,
-    errorMessage,
-    fetchRecipeDetails,
+    res.status(200).json({ hits: allRecipes })
+  } catch (error) {
+    console.error('Error fetching recipes:', error)
+    res.status(500).json({ error: 'Error fetching recipes from Edamam' })
   }
 }
