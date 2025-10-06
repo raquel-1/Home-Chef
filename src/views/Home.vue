@@ -61,10 +61,6 @@ const filteredSnackRecipes = filterRecipesByMealType('snack')
 </template>
 
 <style lang="scss" scoped>
-/* Tus estilos existentes */
-</style>
-
-<style lang="scss" scoped>
 .alternative {
   padding: map-get($map: $sizes, $key: s-general-padding);
   @include flex();

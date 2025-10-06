@@ -1,27 +1,23 @@
 <script setup>
-import healthPreferences from '@/composables/healthPreferences'
+import dietPreferences from '@/composables/dietPreferences'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 const handlePreferenceClick = (preference) => {
-  router.push({ path: '/health-preference', query: { health: preference } })
+  router.push({ path: '/diet-preference', query: { diet: preference } })
 }
 </script>
 
 <template>
-  <section class="health">
-    <h2 class="health__title">Choose your health preference:</h2>
-    <p class="health__subtitle">
+  <section class="diet">
+    <h2 class="diet__title">Choose your Diet preference:</h2>
+    <p class="diet__subtitle">
       Remember that choosing your healthy diet is an important step towards a healthier
       lifestyle.
     </p>
-    <ul class="health__buttons-container">
-      <li
-        v-for="preference in healthPreferences"
-        :key="preference"
-        class="health__buttons"
-      >
+    <ul class="diet__buttons-container">
+      <li v-for="preference in dietPreferences" :key="preference" class="diet__buttons">
         <button @click="handlePreferenceClick(preference)" class="button">
           {{ preference }}
         </button>
@@ -31,7 +27,7 @@ const handlePreferenceClick = (preference) => {
 </template>
 
 <style lang="scss" scoped>
-.health {
+.diet {
   @include flex(column);
   min-width: 100%;
   padding: 1em 0;
