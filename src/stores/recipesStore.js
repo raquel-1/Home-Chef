@@ -1,22 +1,26 @@
 // src/stores/recipesStore.js
 
-import { fetchRecipes } from '@/services/recipesService'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { fetchRecipes } from '@/services/recipesService'
 
 export const useRecipesStore = defineStore('recipes', () => {
   const recipes = ref([])
-  const selectedRecipe = ref(null)
-  const errorMessage = ref('')
+  const isLoading = ref(false)
+  const error = ref(null)
 
   const loadRecipes = async () => {
+    isLoading.value = true
+    error.value = null
     try {
       recipes.value = await fetchRecipes()
-    } catch (error) {
-      console.error('Error loading recipes:', error)
-      errorMessage.value = 'There was an error fetching the recipes.'
+    } catch (err) {
+      console.error('Error loading recipes:', err)
+      error.value = 'There was an error fetching recipes.'
+    } finally {
+      isLoading.value = false
     }
   }
 
-  return { recipes, selectedRecipe, errorMessage, loadRecipes }
+  return { recipes, isLoading, error, loadRecipes }
 })

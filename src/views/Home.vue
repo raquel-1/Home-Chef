@@ -12,21 +12,15 @@ const Health = defineAsyncComponent(() => import('@/components/health/Health.vue
 const recipesStore = useRecipesStore()
 
 onMounted(async () => {
-  try {
-    if (recipesStore.recipes.length === 0) {
-      await recipesStore.loadRecipes()
-    }
-  } catch (err) {
-    console.error('Error recipes tabs:', err)
+  if (recipesStore.recipes.length === 0) {
+    await recipesStore.loadRecipes()
   }
 })
 
 function filterRecipesByMealType(mealType) {
-  return computed(() => {
-    return recipesStore.recipes.filter((recipe) => {
-      return recipe.mealType.includes(mealType)
-    })
-  })
+  return computed(() =>
+    recipesStore.recipes.filter((recipe) => recipe.mealType.includes(mealType)),
+  )
 }
 
 const filteredBreakfastRecipes = filterRecipesByMealType('breakfast')
@@ -36,31 +30,27 @@ const filteredSnackRecipes = filterRecipesByMealType('snack')
 
 <template>
   <Header />
-  <article v-if="recipesStore.isLoading" class="alternative">Loading...</article>
-  <article v-else-if="recipesStore.error" class="alternative">
-    {{ recipesStore.error }}
-  </article>
-  <article
-    v-else-if="
-      !recipesStore.error && !recipesStore.isLoading && recipesStore.recipes.length === 30
-    "
-  >
+
+  <article v-if="recipesStore.isLoading">Loading...</article>
+  <article v-else-if="recipesStore.error">{{ recipesStore.error }}</article>
+
+  <article v-else>
     <Tabs>
-      <TabItem title="breakfast">
+      <TabItem title="Breakfast">
         <template v-for="recipe in filteredBreakfastRecipes" :key="recipe.uri">
-          <Card :dataObject="{ recipe: recipe }" />
+          <Card :dataObject="{ recipe }" />
         </template>
         <ShowMore />
       </TabItem>
-      <TabItem title="brunch">
+      <TabItem title="Brunch">
         <template v-for="recipe in filteredBrunchRecipes" :key="recipe.uri">
-          <Card :dataObject="{ recipe: recipe }" />
+          <Card :dataObject="{ recipe }" />
         </template>
         <ShowMore />
       </TabItem>
-      <TabItem title="snack">
+      <TabItem title="Snack">
         <template v-for="recipe in filteredSnackRecipes" :key="recipe.uri">
-          <Card :dataObject="{ recipe: recipe }" />
+          <Card :dataObject="{ recipe }" />
         </template>
         <ShowMore />
       </TabItem>
@@ -69,6 +59,10 @@ const filteredSnackRecipes = filterRecipesByMealType('snack')
 
   <Health />
 </template>
+
+<style lang="scss" scoped>
+/* Tus estilos existentes */
+</style>
 
 <style lang="scss" scoped>
 .alternative {
