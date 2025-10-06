@@ -37,19 +37,28 @@ const filteredSnackRecipes = filterRecipesByMealType('snack')
   <article v-else>
     <Tabs>
       <TabItem title="Breakfast">
-        <template v-for="recipe in filteredBreakfastRecipes" :key="recipe.uri">
+        <template
+          v-for="recipe in filteredBreakfastRecipes"
+          :key="recipe.uri || recipe.recipe?.uri"
+        >
           <Card :dataObject="{ recipe }" />
         </template>
         <ShowMore />
       </TabItem>
       <TabItem title="Brunch">
-        <template v-for="recipe in filteredBrunchRecipes" :key="recipe.uri">
+        <template
+          v-for="recipe in filteredBrunchRecipes"
+          :key="recipe.uri || recipe.recipe?.uri"
+        >
           <Card :dataObject="{ recipe }" />
         </template>
         <ShowMore />
       </TabItem>
       <TabItem title="Snack">
-        <template v-for="recipe in filteredSnackRecipes" :key="recipe.uri">
+        <template
+          v-for="recipe in filteredSnackRecipes"
+          :key="recipe.uri || recipe.recipe?.uri"
+        >
           <Card :dataObject="{ recipe }" />
         </template>
         <ShowMore />

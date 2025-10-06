@@ -14,9 +14,11 @@ export const useRecipesStore = defineStore('recipes', () => {
     error.value = null
     try {
       recipes.value = await fetchRecipes()
+      if (!recipes.value) recipes.value = [] // fallback
     } catch (err) {
       console.error('Error loading recipes:', err)
       error.value = 'There was an error fetching recipes.'
+      recipes.value = [] // fallback
     } finally {
       isLoading.value = false
     }
