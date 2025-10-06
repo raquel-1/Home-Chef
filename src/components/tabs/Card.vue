@@ -1,4 +1,5 @@
 <script setup>
+// src/components/tabs/card.vue
 import { defineAsyncComponent, ref, computed } from 'vue'
 import { formatTime } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'

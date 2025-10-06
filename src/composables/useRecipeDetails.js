@@ -13,21 +13,15 @@ export default function useRecipeDetails() {
       if (!response.ok) throw new Error('Error fetching recipe details')
 
       const data = await response.json()
-
-      // debug
-      console.log('Decoded recipeId:', recipeId)
-      console.log(
-        'All fetched recipe URIs:',
-        data.hits.map((hit) => hit.recipe.uri),
-      )
-
       recipe.value = data.hits.find((r) => r.recipe.uri.endsWith(recipeId)) || null
 
-      if (!recipe.value) throw new Error('Recipe not found')
+      if (!recipe.value) {
+        errorMessage.value = 'Recipe not found. Redirecting to home...'
+        setTimeout(() => router.push('/home'), 3000)
+      }
     } catch (error) {
-      errorMessage.value = 'Error fetching recipe details'
+      errorMessage.value = 'Oops! Something went wrong while fetching the recipe.'
       console.error(error)
-      setTimeout(() => router.push('/home'), 3000)
     }
   }
 

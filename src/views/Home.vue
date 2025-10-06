@@ -32,7 +32,6 @@ function filterRecipesByMealType(mealType) {
 const filteredBreakfastRecipes = filterRecipesByMealType('breakfast')
 const filteredBrunchRecipes = filterRecipesByMealType('brunch')
 const filteredSnackRecipes = filterRecipesByMealType('snack')
-
 </script>
 
 <template>
