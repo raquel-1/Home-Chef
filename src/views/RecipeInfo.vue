@@ -1,6 +1,7 @@
 <script setup>
-import { ref, onMounted, watch, defineAsyncComponent } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useRecipesStore } from '@/stores/recipesStore'
 import {
   countIngredients,
   calories,
@@ -8,63 +9,48 @@ import {
   formatTimeRecipeInfo,
 } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
-import useRecipeDetails from '@/composables/useRecipeDetails'
-import { shareOnWhatsApp } from '@/composables/whatsappUtils.js'
-
+import { shareOnWhatsApp } from '@/composables/whatsappUtils'
 import { generatePDF } from '@/composables/genratePdf'
-
-window.scrollTo(0, 0)
-
-const NotSaved = defineAsyncComponent(() => import('@/components/svgs/NotSaved.vue'))
-const Saved = defineAsyncComponent(() => import('@/components/svgs/Saved.vue'))
 
 function base64Decode(str) {
   try {
     return decodeURIComponent(escape(atob(str)))
   } catch (error) {
-    throw new Error('Failed to decode base64 string')
+    return null
   }
 }
 
 const route = useRoute()
 const router = useRouter()
-const recipeId = route.params.recipeId
-
-const { recipe, fetchRecipeDetails, errorMessage } = useRecipeDetails(recipeId)
+const recipesStore = useRecipesStore()
 const { isSaved, toggleSaved } = useSavedRecipes()
 
-const ingredientCount = ref(0)
-const ingredientCalories = ref(0)
-const formattedTime = ref([])
+const recipeId = route.params.recipeId
+const decodedRecipeId = base64Decode(recipeId)
 
-const decodeAndFetchRecipe = async () => {
-  try {
-    const decodedRecipeId = base64Decode(recipeId)
-    await fetchRecipeDetails(decodedRecipeId)
-  } catch (error) {
-    errorMessage.value = 'Invalid recipe ID. Redirecting to home page...'
-    console.error('Error fetching recipe details:', error)
-    setTimeout(() => {
-      router.push('/home')
-    }, 3000)
-  }
+// Obtener receta del store
+const recipe = computed(() => {
+  return recipesStore.selectedRecipe?.uri === decodedRecipeId
+    ? recipesStore.selectedRecipe
+    : null
+})
+
+const ingredientCount = computed(() =>
+  recipe.value ? countIngredients(recipe.value.ingredientLines) : 0,
+)
+const ingredientCalories = computed(() =>
+  recipe.value ? calories(recipe.value.calories, recipe.value.yield) : 0,
+)
+const formattedTime = computed(() =>
+  recipe.value ? formatTimeRecipeInfo(recipe.value.totalTime) : [],
+)
+
+if (!recipe.value) {
+  setTimeout(() => router.push('/home'), 3000)
 }
 
-onMounted(() => {
-  decodeAndFetchRecipe()
-})
-
-watch(recipe, () => {
-  if (recipe.value) {
-    ingredientCount.value = countIngredients(recipe.value.ingredientLines)
-    ingredientCalories.value = calories(recipe.value.calories, recipe.value.yield)
-    formattedTime.value = formatTimeRecipeInfo(recipe.value.totalTime)
-  }
-})
-
 const shareRecipeOnWhatsApp = () => {
-  const currentRecipeURL = window.location.href // optengo la url de la receta actual basada en la ruta de vue Router
-
+  const currentRecipeURL = window.location.href
   shareOnWhatsApp(currentRecipeURL)
 }
 </script>
@@ -155,13 +141,12 @@ const shareRecipeOnWhatsApp = () => {
         </div>
       </div>
     </template>
-    <template v-else-if="errorMessage">
+    <template v-else>
       <div class="error-message">
-        <p>Oops! Something went wrong while fetching recipes.</p>
-        <p>Please check your internet connection and try again later.</p>
-        <p>{{ errorMessage }}</p>
+        <p>Oops! Recipe not found. Redirecting to home...</p>
       </div>
     </template>
+
     <article v-if="recipe" class="bottom-butons">
       <button
         @click="generatePDF(recipe)"

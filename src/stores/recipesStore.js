@@ -1,10 +1,12 @@
 // src/stores/recipesStore.js
+
 import { fetchRecipes } from '@/services/recipesService'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useRecipesStore = defineStore('recipes', () => {
   const recipes = ref([])
+  const selectedRecipe = ref(null)
   const errorMessage = ref('')
 
   const loadRecipes = async () => {
@@ -16,5 +18,5 @@ export const useRecipesStore = defineStore('recipes', () => {
     }
   }
 
-  return { recipes, errorMessage, loadRecipes }
+  return { recipes, selectedRecipe, errorMessage, loadRecipes }
 })

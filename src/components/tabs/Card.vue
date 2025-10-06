@@ -1,10 +1,10 @@
 <script setup>
-// src/components/tabs/card.vue
-import { defineAsyncComponent, ref, computed } from 'vue'
+import { defineAsyncComponent, computed } from 'vue'
 import { formatTime } from '@/composables/recipeUtils'
 import useSavedRecipes from '@/composables/useSavedRecipes'
+import { useRecipesStore } from '@/stores/recipesStore'
 
-// funcion para codificar en base64
+// función para codificar en Base64
 function base64Encode(str) {
   return btoa(unescape(encodeURIComponent(str)))
 }
@@ -16,36 +16,41 @@ const NotSaved = defineAsyncComponent(() => import('@/components/svgs/NotSaved.v
 const Saved = defineAsyncComponent(() => import('@/components/svgs/Saved.vue'))
 
 const props = defineProps({
-  dataObject: {
-    type: Object,
-    required: true,
-  },
+  dataObject: { type: Object, required: true },
 })
 
 const { isSaved, toggleSaved } = useSavedRecipes()
+const recipesStore = useRecipesStore()
 
-const formattedTime = computed(() => {
-  return formatTime(props.dataObject.recipe.totalTime)
-})
+const formattedTime = computed(() => formatTime(props.dataObject.recipe.totalTime))
+
+// Guardar receta seleccionada en el store
+const selectRecipe = () => {
+  recipesStore.selectedRecipe = props.dataObject.recipe
+}
 </script>
 
 <template>
-  <article class="card" v-if="dataObject">
+  <article class="card" v-if="props.dataObject">
     <router-link
       :to="{
         name: 'RecipeInfo',
-        params: { recipeId: base64Encode(dataObject.recipe.uri) },
+        params: { recipeId: base64Encode(props.dataObject.recipe.uri) },
       }"
+      @click.native="selectRecipe"
     >
       <div class="card__photo">
-        <img class="card-photo" :src="dataObject.recipe.image" alt="image recipe" />
+        <img
+          class="card-photo"
+          :src="props.dataObject.recipe.image"
+          :alt="props.dataObject.recipe.label"
+        />
       </div>
       <div class="card__recipe-name">
-        <p class="title">
-          {{ dataObject.recipe.label }}
-        </p>
+        <p class="title">{{ props.dataObject.recipe.label }}</p>
       </div>
     </router-link>
+
     <div class="card__bottom">
       <div class="bottom__time">
         <Chronometer :height="'1.65em'" :width="'1.65em'" />
