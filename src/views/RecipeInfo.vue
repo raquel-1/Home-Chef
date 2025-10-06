@@ -53,15 +53,19 @@ const shareRecipeOnWhatsApp = () => {
   const currentRecipeURL = window.location.href
   shareOnWhatsApp(currentRecipeURL)
 }
+
+const toggleRecipeSaved = () => {
+  if (recipe.value) toggleSaved(recipe.value)
+}
 </script>
 
 <template>
   <section class="info-recipe">
     <template v-if="recipe">
       <div class="info-recipe__title">
-        <article @click="toggleSaved(recipe)" class="heart">
+        <article @click="toggleRecipeSaved" class="heart">
           <NotSaved
-            v-if="!isSaved(recipe)"
+            v-if="!isSaved(recipe.value)"
             :fill="'rgb(248, 0, 186)'"
             :height="'100%'"
             :width="'100%'"
