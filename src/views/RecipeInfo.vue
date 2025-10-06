@@ -1,16 +1,19 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useRecipesStore } from '@/stores/recipesStore'
+import useSavedRecipes from '@/composables/useSavedRecipes'
 import {
   countIngredients,
   calories,
   calDigest,
   formatTimeRecipeInfo,
 } from '@/composables/recipeUtils'
-import useSavedRecipes from '@/composables/useSavedRecipes'
 import { shareOnWhatsApp } from '@/composables/whatsappUtils'
 import { generatePDF } from '@/composables/genratePdf'
+
+import NotSaved from '@/components/svgs/NotSaved.vue'
+import Saved from '@/components/svgs/Saved.vue'
 
 function base64Decode(str) {
   try {
@@ -28,11 +31,20 @@ const { isSaved, toggleSaved } = useSavedRecipes()
 const recipeId = route.params.recipeId
 const decodedRecipeId = base64Decode(recipeId)
 
-// Obtener receta del store
+// Computed seguro para la receta
 const recipe = computed(() => {
   return recipesStore.selectedRecipe?.uri === decodedRecipeId
     ? recipesStore.selectedRecipe
     : null
+})
+
+// Si no hay receta, intenta cargar desde todas las recetas o redirige
+onMounted(() => {
+  if (!recipe.value) {
+    const found = recipesStore.recipes.find((r) => r.uri === decodedRecipeId)
+    if (found) recipesStore.selectedRecipe = found
+    else setTimeout(() => router.push('/home'), 3000)
+  }
 })
 
 const ingredientCount = computed(() =>
@@ -45,17 +57,14 @@ const formattedTime = computed(() =>
   recipe.value ? formatTimeRecipeInfo(recipe.value.totalTime) : [],
 )
 
-if (!recipe.value) {
-  setTimeout(() => router.push('/home'), 3000)
-}
-
-const shareRecipeOnWhatsApp = () => {
-  const currentRecipeURL = window.location.href
-  shareOnWhatsApp(currentRecipeURL)
+const shareRecipeOnWhatsAppHandler = () => {
+  if (!recipe.value) return
+  shareOnWhatsApp(window.location.href)
 }
 
 const toggleRecipeSaved = () => {
-  if (recipe.value) toggleSaved(recipe.value)
+  if (!recipe.value) return
+  toggleSaved(recipe.value)
 }
 </script>
 
@@ -65,7 +74,7 @@ const toggleRecipeSaved = () => {
       <div class="info-recipe__title">
         <article @click="toggleRecipeSaved" class="heart">
           <NotSaved
-            v-if="!isSaved(recipe.value)"
+            v-if="!isSaved(recipe)"
             :fill="'rgb(248, 0, 186)'"
             :height="'100%'"
             :width="'100%'"
