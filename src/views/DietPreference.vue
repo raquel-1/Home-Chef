@@ -1,7 +1,7 @@
 <script setup>
 import { defineAsyncComponent, ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useHealth } from '@/composables/useHealth'
+import { useDiet } from '@/composables/useDiet'
 
 window.scrollTo(0, 0)
 
@@ -9,14 +9,15 @@ const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 
 const router = useRouter()
 const route = useRoute()
-const healthLabel = ref(route.query.health || '')
-const { recipes, errorMessage, fetchRecipes } = useHealth()
+const dietLabel = ref(route.query.diet || '')
+
+const { recipes, errorMessage, fetchRecipes } = useDiet()
 
 onMounted(() => {
-  if (healthLabel.value) {
-    fetchRecipes(healthLabel.value)
+  if (dietLabel.value) {
+    fetchRecipes(dietLabel.value)
   } else {
-    errorMessage.value = 'Health label is required. Redirecting to home page...'
+    errorMessage.value = 'Diet label is required. Redirecting to home page...'
     setTimeout(() => {
       router.replace('/home')
     }, 3000)
@@ -25,10 +26,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="health">
+  <div class="diet">
     <template v-if="recipes.length">
-      <h2 class="health__title">{{ healthLabel }}</h2>
-      <div class="health__results">
+      <h2 class="diet__title">{{ dietLabel }}</h2>
+      <div class="diet__results">
         <div v-for="recipe in recipes" :key="recipe.recipe.uri" class="recipe">
           <Card :dataObject="recipe" />
         </div>
@@ -45,7 +46,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.health {
+.diet {
   padding: map-get($map: $sizes, $key: s-general-padding);
   padding-top: map-get($map: $heights, $key: h-navbar);
   min-height: 100vh;

@@ -7,7 +7,7 @@ const Tabs = defineAsyncComponent(() => import('@/components/tabs/Tabs.vue'))
 const TabItem = defineAsyncComponent(() => import('@/components/tabs/TabItem.vue'))
 const Card = defineAsyncComponent(() => import('@/components/tabs/Card.vue'))
 const ShowMore = defineAsyncComponent(() => import('@/components/tabs/ShowMore.vue'))
-const Health = defineAsyncComponent(() => import('@/components/health/Health.vue'))
+const Diet = defineAsyncComponent(() => import('@/components/diet/Diet.vue'))
 
 const recipesStore = useRecipesStore()
 
@@ -57,7 +57,7 @@ const filteredSnackRecipes = filterRecipesByMealType('snack')
     </Tabs>
   </article>
 
-  <Health />
+  <Diet />
 </template>
 
 <style lang="scss" scoped>

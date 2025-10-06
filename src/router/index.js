@@ -3,7 +3,7 @@ import Home from '@/views/Home.vue'
 import Recipes from '@/views/Recipes.vue'
 import Saved from '@/views/Saved.vue'
 import RecipeInfo from '@/views/RecipeInfo.vue'
-import HealthPreference from '@/views/HealthPreference.vue'
+import DietPreference from '@/views/DietPreferences.vue'
 
 const routes = [
   { path: '/', redirect: '/home' },
@@ -11,7 +11,7 @@ const routes = [
   { path: '/recipes', component: Recipes },
   { path: '/saved', component: Saved },
   { path: '/recipe-info/:recipeId', name: 'RecipeInfo', component: RecipeInfo },
-  { path: '/health-preference', component: HealthPreference },
+  { path: '/diet-preference', component: DietPreference },
   { path: '/:catchAll(.*)', redirect: '/home' },
 ]
 
