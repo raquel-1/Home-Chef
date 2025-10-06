@@ -20,14 +20,14 @@ export const fetchRecipes = async () => {
   return [...breakfast, ...brunch, ...snack]
 }
 
-export const fetchRecipesByDiet = async (diet) => {
+export const fetchRecipesByDiet = async (dietLabel) => {
   try {
-    const response = await fetch(`/api/recipes?diet=${diet}&mealType=all&count=15`)
+    const response = await fetch(`/api/recipes?diet=${dietLabel}`)
     if (!response.ok) throw new Error('Failed to fetch recipes by diet')
     const data = await response.json()
-    return data.hits ? data.hits.map((hit) => hit.recipe) : []
+    return data.hits.map((hit) => hit.recipe)
   } catch (error) {
-    console.error('Error fetching recipes by diet:', error)
+    console.error(error)
     return []
   }
 }

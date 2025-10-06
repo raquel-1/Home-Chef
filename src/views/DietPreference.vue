@@ -30,8 +30,8 @@ onMounted(() => {
     <template v-if="recipes.length">
       <h2 class="diet__title">{{ dietLabel }}</h2>
       <div class="diet__results">
-        <div v-for="recipe in recipes" :key="recipe.recipe.uri" class="recipe">
-          <Card :dataObject="recipe" />
+        <div v-for="recipe in recipes" :key="recipe.uri" class="recipe">
+          <Card :dataObject="{ recipe }" />
         </div>
       </div>
     </template>
