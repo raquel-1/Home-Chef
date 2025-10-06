@@ -3,7 +3,7 @@ import Home from '@/views/Home.vue'
 import Recipes from '@/views/Recipes.vue'
 import Saved from '@/views/Saved.vue'
 import RecipeInfo from '@/views/RecipeInfo.vue'
-import DietPreference from '@/views/DietPreferences.vue'
+import DietPreference from '@/views/DietPreference.vue'
 
 const routes = [
   { path: '/', redirect: '/home' },
