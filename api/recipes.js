@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const appKey = process.env.EDAMAM_APP_KEY
   const mealType = req.query.mealType || 'breakfast'
   const diet = req.query.diet || ''
-  const count = parseInt(req.query.count) || 10
+  const count = parseInt(req.query.count) || 30
 
   const mealTypes =
     mealType === 'all' ? ['breakfast', 'brunch', 'lunch', 'dinner', 'snack'] : [mealType]
