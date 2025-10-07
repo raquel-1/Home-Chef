@@ -14,8 +14,10 @@ export default function useSearch() {
     isLoading.value = true
     results.value = []
     errorMessage.value = ''
+
     try {
       const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&to=30`
+      const response = await fetch(url) // <- falta esto
       if (!response.ok) throw new Error(await response.text())
       const data = await response.json()
       results.value = data.hits || []
