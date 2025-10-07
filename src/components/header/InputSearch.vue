@@ -1,18 +1,17 @@
 <script setup>
 import { ref, defineAsyncComponent } from 'vue'
-import { useRoute } from 'vue-router'
-import useSearch from '@/composables/useSearch'
 
 const Pan = defineAsyncComponent(() => import('@/components/svgs/Pan.vue'))
 
 const isHovered = ref(false)
 const query = ref('')
 
-const { handleSearch } = useSearch()
-const route = useRoute()
+const emit = defineEmits(['search']) // emito el evento al padre
 
 const onSearch = () => {
-  handleSearch(query.value, route.path)
+  if (query.value.trim()) {
+    emit('search', query.value)
+  }
 }
 
 const onKeyDown = (event) => {
@@ -39,6 +38,7 @@ const onKeyDown = (event) => {
       aria-label="Search Button"
       :class="{ hovered: isHovered }"
       @mouseover="isHovered = true"
+      @mouseleave="isHovered = false"
       @click="onSearch"
     >
       <Pan :class="{ 'rotate-180': isHovered }" />

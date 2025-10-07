@@ -1,16 +1,25 @@
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router'
 
 const InputSearch = defineAsyncComponent(
   () => import('@/components/header/InputSearch.vue'),
 )
+
+const router = useRouter()
+
+const onSearch = (query) => {
+  if (query.trim()) {
+    router.push(`/recipes?query=${encodeURIComponent(query)}`)
+  }
+}
 </script>
 
 <template>
   <header class="header">
     <div class="header__container">
       <h2 class="header__title">Your favourite meal?</h2>
-      <InputSearch />
+      <InputSearch @search="onSearch" />
     </div>
   </header>
 </template>
