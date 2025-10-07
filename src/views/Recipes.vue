@@ -18,15 +18,12 @@ const route = useRoute()
 const showDefaultRecipes = ref(true)
 
 onMounted(async () => {
-  // if (route.path === '/recipes' && results.value.length === 0) {
-  if (results.value.length === 0) {
-    try {
-      if (recipesStore.recipes.length === 0) {
-        await recipesStore.loadRecipes()
-      }
-    } catch (err) {
-      console.error('Error recipes tabs:', err)
-    }
+  const queryFromRoute = route.query.query
+  if (queryFromRoute) {
+    showDefaultRecipes.value = false
+    await searchRecipes(queryFromRoute)
+  } else if (recipesStore.recipes.length === 0) {
+    await recipesStore.loadRecipes()
   }
 })
 
@@ -44,14 +41,17 @@ const handleSearch = async (query) => {
     <article class="recipes__search">
       <InputSearch @search="handleSearch" />
     </article>
+
     <template v-if="isLoading">Loading...</template>
     <template v-else-if="errorMessage">{{ errorMessage }}</template>
+
     <section class="recipes__tabs-recipes">
       <template v-if="results.length > 0">
         <template v-for="recipe in results" :key="recipe.uri">
           <Card :dataObject="{ recipe: recipe }" />
         </template>
       </template>
+
       <template v-else>
         <template v-if="showDefaultRecipes && !isLoading">
           <template v-for="recipe in recipesStore.recipes" :key="recipe.uri">

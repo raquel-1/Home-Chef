@@ -15,7 +15,7 @@ export default function useSearch() {
     results.value = []
     errorMessage.value = ''
     try {
-      const response = await fetch(`/api/recipes?mealType=${query}&count=10`)
+      const response = await fetch(`/api/recipes?mealType=${query}&count=13`)
       if (!response.ok) throw new Error(await response.text())
       const data = await response.json()
       results.value = data.hits || []
