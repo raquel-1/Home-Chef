@@ -16,8 +16,7 @@ export default function useSearch() {
     errorMessage.value = ''
 
     try {
-      const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&to=30`
-      const response = await fetch(url) // <- falta esto
+      const response = await fetch(`/api/recipes?mealType=all&q=${query}`)
       if (!response.ok) throw new Error(await response.text())
       const data = await response.json()
       results.value = data.hits || []
