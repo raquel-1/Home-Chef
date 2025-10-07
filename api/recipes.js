@@ -1,5 +1,4 @@
 // api/recipes.js
-
 export default async function handler(req, res) {
   const appID = process.env.EDAMAM_APP_ID
   const appKey = process.env.EDAMAM_APP_KEY
