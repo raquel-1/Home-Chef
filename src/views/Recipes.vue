@@ -30,9 +30,12 @@ onMounted(async () => {
 const handleSearch = async (query) => {
   showDefaultRecipes.value = false
   await searchRecipes(query)
+
   if (results.value.length === 0 && !errorMessage.value) {
     showDefaultRecipes.value = true
   }
+
+  router.replace({ query: { query } })
 }
 </script>
 
