@@ -1,22 +1,23 @@
 // src/composables/usesearch.js
 
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 const results = ref([])
 const isLoading = ref(false)
 const errorMessage = ref('')
 
 export default function useSearch() {
-  const router = useRouter()
-
   const searchRecipes = async (query) => {
+    if (!query.trim()) return // evita busquedas vacías
+
     isLoading.value = true
     results.value = []
     errorMessage.value = ''
 
     try {
-      const response = await fetch(`/api/recipes?mealType=all&q=${query}`)
+      const response = await fetch(
+        `/api/recipes?q=${encodeURIComponent(query)}&mealType=all`,
+      )
       if (!response.ok) throw new Error(await response.text())
       const data = await response.json()
       results.value = data.hits || []
