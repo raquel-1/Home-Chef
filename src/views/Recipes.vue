@@ -6,8 +6,6 @@ import useSearch from '@/composables/useSearch'
 
 window.scrollTo(0, 0)
 
-const router = useRouter()
-
 const InputSearch = defineAsyncComponent(
   () => import('@/components/header/InputSearch.vue'),
 )
@@ -18,6 +16,9 @@ const recipesStore = useRecipesStore()
 const route = useRoute()
 
 const showDefaultRecipes = ref(true)
+
+const router = useRouter()
+const noResults = ref(false)
 
 onMounted(async () => {
   const queryFromRoute = route.query.query
@@ -35,6 +36,7 @@ watch(
     if (newQuery && newQuery !== oldQuery) {
       showDefaultRecipes.value = false
       await searchRecipes(newQuery)
+      noResults.value = results.value.length === 0 && !errorMessage.value
     }
   },
 )
@@ -44,6 +46,8 @@ const handleSearch = async (query) => {
   await searchRecipes(query)
 
   router.replace({ query: { query } })
+
+  noResults.value = results.value.length === 0 && !errorMessage.value
 }
 </script>
 
@@ -55,6 +59,12 @@ const handleSearch = async (query) => {
 
     <template v-if="isLoading">Loading...</template>
     <template v-else-if="errorMessage">{{ errorMessage }}</template>
+
+    <template v-else-if="noResults">
+      <p class="recipes__no-results">
+        😅 No recipes found. Please retype your search or try another search.
+      </p>
+    </template>
 
     <section class="recipes__tabs-recipes">
       <template v-if="results.length > 0">
