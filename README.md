@@ -1,41 +1,44 @@
 # Home Chef 🍳🥥
 
-**Home Chef** es una aplicación de recetas desarrollada con **Vue 3**, **Pinia** y **SCSS**, completamente **responsiva** y con **modo claro/oscuro**. Permite a los usuarios buscar recetas, explorar sus detalles, generar un **PDF con los nutrientes** y compartir recetas fácilmente por **WhatsApp**. Todo el proyecto está hecho por mí, mostrando buenas prácticas de frontend, consumo de APIs externas y diseño de experiencia de usuario optimizado.
+**Home Chef** is a recipe application built with **Vue 3**, **Pinia**, and **SCSS**, fully **responsive** and with **light/dark mode**. Users can search for recipes, explore details, generate a **PDF with nutrient information**, and easily share recipes via **WhatsApp**. The entire project was developed by me, showcasing best practices in frontend development, API integration, and optimized user experience design.
 
 ---
 
-## 🌟 Funcionalidades principales
+## 🌟 Key Features
 
-- 🔍 Buscar recetas usando la **API de Edamam**  
-- 📝 Ver detalles completos de cada receta  
-- 📄 Generar un **PDF** con la tabla de nutrientes  
-- 📱 Compartir recetas en **WhatsApp**  
-- 🌐 Interfaz totalmente **responsiva**  
-- 🌙 Soporte **modo claro/oscuro**  
+- 🔍 Search recipes using the **Edamam API**  
+- 📝 View complete details of each recipe  
+- 📄 Generate a **PDF** with the nutrient table  
+- 📱 Share recipes via **WhatsApp**  
+- 🌐 Fully **responsive** interface  
+- 🌙 Supports **light/dark mode**  
 
 ---
 
-## 🛠 Tecnologías usadas
+## 🛠 Technologies Used
 
 - **Vue 3**  
 - **Vite**  
-- **Pinia** (gestión de estado)  
-- **SCSS** (estilos y diseño responsivo)  
-- **jsPDF** (generación de PDFs)  
-- **API Edamam**  
+- **Pinia** (state management)  
+- **SCSS** (styling and responsive design)  
+- **jsPDF** (PDF generation)  
+- **Edamam API**  
 
 ---
 
-## 🚀 Instalación y ejecución
+## 🌐 Live Demo
 
-Clona el repositorio e instala dependencias:
+[Check out the Home Chef demo](https://home-chef-lemon.vercel.app/home)
+
+
+---
+
+## 🚀 Installation & Running
+
+Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/tu-usuario/home-chef.git
 cd home-chef
 npm install
 
-
-## 🌐 Demo en vivo
-
-[Visita la demo de Home Chef](https://home-chef-lemon.vercel.app/home)
