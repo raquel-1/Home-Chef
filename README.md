@@ -1,37 +1,36 @@
-# Home-Chef
+# Home Chef 🍳🥥
 
-This template should help get you started developing with Vue 3 in Vite.
+**Home Chef** es una aplicación de recetas desarrollada con **Vue 3**, **Pinia** y **SCSS**, completamente **responsiva** y con **modo claro/oscuro**. Permite a los usuarios buscar recetas, explorar sus detalles, generar un **PDF con los nutrientes** y compartir recetas fácilmente por **WhatsApp**. Todo el proyecto está hecho por mí, mostrando buenas prácticas de frontend, consumo de APIs externas y diseño de experiencia de usuario optimizado.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🌟 Funcionalidades principales
 
-## Customize configuration
+- 🔍 Buscar recetas usando la **API de Edamam**  
+- 📝 Ver detalles completos de cada receta  
+- 📄 Generar un **PDF** con la tabla de nutrientes  
+- 📱 Compartir recetas en **WhatsApp**  
+- 🌐 Interfaz totalmente **responsiva**  
+- 🌙 Soporte **modo claro/oscuro**  
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+---
 
-## Project Setup
+## 🛠 Tecnologías usadas
 
-```sh
+- **Vue 3**  
+- **Vite**  
+- **Pinia** (gestión de estado)  
+- **SCSS** (estilos y diseño responsivo)  
+- **jsPDF** (generación de PDFs)  
+- **API Edamam**  
+
+---
+
+## 🚀 Instalación y ejecución
+
+Clona el repositorio e instala dependencias:
+
+```bash
+git clone https://github.com/tu-usuario/home-chef.git
+cd home-chef
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-
-### https://prettier.io/docs/en/install
