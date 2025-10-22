@@ -34,3 +34,8 @@ Clona el repositorio e instala dependencias:
 git clone https://github.com/tu-usuario/home-chef.git
 cd home-chef
 npm install
+
+
+## 🌐 Demo en vivo
+
+[Visita la demo de Home Chef](https://home-chef-lemon.vercel.app/home)
