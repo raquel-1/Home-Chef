@@ -1,10 +1,12 @@
 <script setup>
-import { defineAsyncComponent, onMounted, ref } from 'vue'
+import { defineAsyncComponent, onMounted, ref, watch } from 'vue'
 import { useRecipesStore } from '@/stores/recipesStore'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import useSearch from '@/composables/useSearch'
 
 window.scrollTo(0, 0)
+
+const router = useRouter()
 
 const InputSearch = defineAsyncComponent(
   () => import('@/components/header/InputSearch.vue'),
@@ -27,13 +29,19 @@ onMounted(async () => {
   }
 })
 
+watch(
+  () => route.query.query,
+  async (newQuery, oldQuery) => {
+    if (newQuery && newQuery !== oldQuery) {
+      showDefaultRecipes.value = false
+      await searchRecipes(newQuery)
+    }
+  },
+)
+
 const handleSearch = async (query) => {
   showDefaultRecipes.value = false
   await searchRecipes(query)
-
-  if (results.value.length === 0 && !errorMessage.value) {
-    showDefaultRecipes.value = true
-  }
 
   router.replace({ query: { query } })
 }
