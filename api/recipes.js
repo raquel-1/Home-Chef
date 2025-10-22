@@ -2,45 +2,45 @@
 export default async function handler(req, res) {
   const appID = process.env.EDAMAM_APP_ID
   const appKey = process.env.EDAMAM_APP_KEY
-  const mealType = req.query.mealType || 'breakfast'
-  const query = req.query.q || '' // usa query solo si viene del buscador
-  const diet = req.query.diet || ''
+
+  const query = req.query.q?.trim() || 'recipe'
+  const mealType = req.query.mealType?.trim() || ''
+  const diet = req.query.diet?.trim() || ''
   const count = parseInt(req.query.count) || 30
 
-  const mealTypes =
-    mealType === 'all' ? ['breakfast', 'brunch', 'lunch', 'dinner', 'snack'] : [mealType]
-
   try {
-    const results = await Promise.all(
-      mealTypes.map(async (type) => {
-        // si hay query se usa si no, hacemos la busqueda por defecto con "recipe"
-        const searchQuery = query.trim() ? query : 'recipe'
-        const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(
-          searchQuery,
-        )}&app_id=${appID}&app_key=${appKey}&mealType=${type}&to=${count}${
-          diet ? `&diet=${diet}` : ''
-        }`
+    let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${encodeURIComponent(query)}&app_id=${appID}&app_key=${appKey}&to=${count}`
 
-        try {
-          const response = await fetch(url)
-          if (!response.ok) throw new Error(`Edamam API error: ${response.status}`)
-          const data = await response.json()
-          return data.hits || []
-        } catch (err) {
-          console.error(`Failed to fetch ${type} recipes:`, err)
-          return []
-        }
-      }),
+    if (mealType && mealType !== 'all') {
+      url += `&mealType=${encodeURIComponent(mealType)}`
+    }
+
+    if (diet) {
+      url += `&diet=${encodeURIComponent(diet)}`
+    }
+
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      console.error(`❌ Edamam error: ${response.status} ${response.statusText}`)
+      return res.status(response.status).json({
+        hits: [],
+        error: `Edamam API error: ${response.statusText}`,
+      })
+    }
+
+    const data = await response.json()
+
+    const validHits = (data.hits || []).filter(
+      (hit) => hit.recipe && hit.recipe.label && hit.recipe.image,
     )
 
-    // filtramos solo recetas validas max30
-    const allRecipes = results
-      .flat()
-      .filter((r) => r.recipe)
-      .slice(0, 30)
-    res.status(200).json({ hits: allRecipes })
+    res.status(200).json({ hits: validHits.slice(0, 30) })
   } catch (error) {
-    console.error('Error processing recipes:', error)
-    res.status(200).json({ hits: [] })
+    console.error('❌ Error fetching recipes:', error)
+    res.status(500).json({
+      hits: [],
+      error: 'Error fetching recipes. Try again later.',
+    })
   }
 }
