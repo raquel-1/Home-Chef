@@ -58,8 +58,8 @@ const handleSearch = async (query) => {
 
     <section class="recipes__tabs-recipes">
       <template v-if="results.length > 0">
-        <template v-for="recipe in results" :key="recipe.uri">
-          <Card :dataObject="{ recipe: recipe }" />
+        <template v-for="hit in results" :key="hit.recipe.uri">
+          <Card :dataObject="{ recipe: hit.recipe }" />
         </template>
       </template>
 
