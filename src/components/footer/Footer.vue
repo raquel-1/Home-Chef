@@ -1,11 +1,13 @@
-<script setup></script>
+<script setup>
+const currentYear = new Date().getFullYear()
+</script>
 
 <template>
   <footer class="footer">
-    <small class="footer__rights"
-      ><strong> Home Chef</strong
-      ><img src="../../../public/logo.ico" alt="Icono" class="ico" />
-      - &copy; 2024 - All rights reserved
+    <small class="footer__rights">
+      <strong>Home Chef</strong>
+      <img src="../../../public/logo.ico" alt="Icono" class="ico" />
+      - &copy; {{ currentYear }} - All rights reserved
     </small>
   </footer>
 </template>
